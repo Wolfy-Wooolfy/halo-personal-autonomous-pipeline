@@ -1,8 +1,11 @@
 # Scope & Success Contract (v1)
 
+# Scope & Success Contract (v1)
+
+**Document ID:** DOC-02  
 **Project:** Personal Autonomous Pipeline for HALO  
 **Document Type:** Binding Scope & Success Definition  
-**Status:** DRAFT → FOR APPROVAL  
+**Status:** FINAL — EXECUTION-BOUND  
 **Applies To:** All pipeline executions, documents, code, and verification artifacts
 
 ---
@@ -45,6 +48,29 @@ This contract overrides:
 
 Execution correctness is defined
 ONLY by adherence to this document.
+
+---
+
+### 1.1.1 Draft Has No Execution Authority (Hard)
+
+If this document is not in **FINAL — EXECUTION-BOUND** status,
+it MUST be treated as having ZERO execution authority.
+
+No pipeline stage may proceed
+based on a DRAFT scope or success contract.
+
+---
+
+### 1.2 Terminology (Binding)
+
+For execution purposes, the term **Review** in this contract means:
+
+- Read-only analysis of existing artifacts
+- No modification of documents
+- No code changes
+- No execution of commands or tests
+
+If a Review requires changing any artifact, it MUST be handled as an explicit **Edit** under an authorized stage workflow, and MUST NOT be performed implicitly.
 
 ---
 

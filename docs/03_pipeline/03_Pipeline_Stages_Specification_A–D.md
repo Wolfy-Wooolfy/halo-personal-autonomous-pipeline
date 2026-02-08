@@ -287,13 +287,13 @@ No coding, no documents, no assumptions beyond what is explicitly inferable.
 
 Stage A MUST produce the following CLOSED artifacts:
 
-- `architecture/task_plan.md` — a fully scoped execution plan containing:
+- `artifacts/stage_A/task_plan.md` — a fully scoped execution plan containing:
   - atomic task breakdown
   - explicit dependencies
   - non-overlap guarantees
   - required downstream artifacts (by name and location)
 
-- `architecture/validated_assumptions.md` — assumptions explicitly listed,
+- `artifacts/stage_A/validated_assumptions.md` — assumptions explicitly listed,
   justified,
   and either:
   - deterministically validated, OR
@@ -372,16 +372,19 @@ Documentation must be sufficient for deterministic code generation.
 
 ### 4.3 Outputs
 
-- Technical specifications
-- Data schemas
-- Interface contracts
-- Validation rules
-- Edge cases & constraints
+Stage B MUST produce the following CLOSED artifacts:
 
-All documents must be:
-- Versioned
-- Markdown-based
-- Standalone
+- `artifacts/stage_B/specifications.md` — complete technical specifications
+- `artifacts/stage_B/data_schemas.md` — all required data schemas
+- `artifacts/stage_B/interface_contracts.md` — interface definitions and contracts
+- `artifacts/stage_B/validation_rules.md` — validation logic and constraints
+- `artifacts/stage_B/edge_cases.md` — explicitly documented edge cases
+
+All artifacts:
+- MUST be Markdown
+- MUST be standalone
+- MUST be versioned
+- MUST conform to the Artifact Schema & Repository Layout Standard
 
 ---
 
@@ -490,15 +493,17 @@ No creative interpretation is allowed.
 
 ### 5.3 Outputs
 
-- Source code
-- Config files
-- Scripts
-- Inline documentation (if allowed)
+Stage C MUST produce the following artifacts:
 
-All code must be:
-- Deterministic
-- Readable
-- Mapped 1:1 to documentation
+- Source code under the approved repository structure
+- Configuration files colocated with their owning modules
+- Scripts placed under deterministic, documented paths
+- Inline documentation ONLY if explicitly allowed by Stage B specifications
+
+All code artifacts MUST:
+- Be traceable 1:1 to Stage B documents
+- Conform to repository layout rules
+- Be auditable and deterministic
 
 ---
 

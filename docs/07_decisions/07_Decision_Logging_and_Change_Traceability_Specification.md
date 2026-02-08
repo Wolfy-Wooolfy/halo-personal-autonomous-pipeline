@@ -317,22 +317,33 @@ DEC-20260206-004.md
 
 A Decision file is immutable.
 
-- Once logged, it MUST NOT be edited
+- Once created, it MUST NOT be edited
 - It MUST NOT be reinterpreted
 - It MUST NOT be overridden implicitly
 
-Decision lifecycle rules:
-- A newly captured fork resolution MUST be logged with `Status: OPEN`
-- After the selected option is applied and all decision-bound effects are completed:
-  - The Decision MUST transition to `Status: CLOSED`
-- If a different outcome is required later:
-  - A NEW Decision MUST be logged
-  - The new Decision MUST set `Status: SUPERSEDED` and reference the old Decision explicitly
+Decision lifecycle rules (binding):
 
-Silent decision reversal,
-silent edits,
-or retroactive adjustment
-are system violations.
+1) Fork detected but not yet resolved:
+   - Decision MUST be logged with `Status: OPEN`
+
+2) Human selects exactly ONE option to resolve the fork:
+   - Decision MUST transition to `Status: ACCEPTED`
+   - The selected option becomes execution-binding immediately
+
+3) If the human explicitly rejects all presented options:
+   - Decision MUST transition to `Status: REJECTED`
+   - Execution MUST follow the owning-stage enforcement path (rollback, re-entry, or abort) as contract-governed
+
+4) After the selected option is fully applied AND all decision-bound effects are completed:
+   - The Decision MUST transition to `Status: CLOSED`
+
+5) If a different outcome is required later (new fork or supersession):
+   - A NEW Decision MUST be created (new Decision ID)
+   - The OLD Decision MUST transition to `Status: SUPERSEDED`
+   - The NEW Decision MUST reference the old Decision ID explicitly in `Fork` or `Triggering Artifact`
+   - No silent reversal is permitted
+
+Silent decision reversal, silent edits, or retroactive adjustment are system violations.
 
 ---
 
@@ -517,38 +528,38 @@ stage completion.
 
 ---
 
-## 8.1 Decision Block (Execution Halt State)
+## 8.1 Decision Application Pending (Deterministic Enforcement State)
 
-A Decision Block is NOT an execution fork.
+Decision Application Pending is NOT an execution fork.
 It is NOT a Human Interrupt.
-It is a deterministic enforcement state that occurs when:
 
+It occurs when:
 - A Decision artifact exists, AND
-- The Decision status is ACCEPTED, AND
+- The Decision status is `ACCEPTED`, AND
 - One or more Decision effects are not yet fully applied
 
-In a Decision Block:
+In Decision Application Pending:
 
-- Execution MUST be BLOCKED (per the Progress Tracking Contract)
+- Execution MUST remain RUNNING (not BLOCKED)
 - No stage may close
 - No downstream stage may start
-- Progress MUST remain unchanged
+- Progress MUST remain unchanged until the decision effects are applied and the affected artifacts are closed/validated
 
-During a Decision Block:
+Status representation rules (binding):
 
-- `blocking_questions` MUST contain exactly ONE structural blocking entry that is NOT an option fork and requires no preference:
-  - "Decision effects pending application. Mandatory apply required to resume execution."
-- `next_step` MUST be an empty string
+- `blocking_questions` MUST be an empty array
+- `next_step` MUST be populated with exactly ONE deterministic action:
+  - "Apply ACCEPTED decision effects deterministically (orchestrator apply step)."
+- `issues` MAY include a non-narrative descriptor:
+  - "Decision effects pending application"
 
 Resolution:
 
 - The orchestrator MUST apply the Decision effects deterministically
-- Execution may resume ONLY after:
+- Execution may proceed ONLY after:
   - All Decision effects are fully applied, AND
-  - All affected artifacts are closed and validated
-
-A Decision Block is not a failure.
-It is an authority-bound enforcement halt.
+  - All affected artifacts are closed and validated, AND
+  - The Decision status is set to `CLOSED`
 
 ---
 

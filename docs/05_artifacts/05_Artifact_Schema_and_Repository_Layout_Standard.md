@@ -178,11 +178,16 @@ Every project or task MUST follow the directory structure below:
 │ ├── 04_autonomy/
 │ ├── 05_artifacts/
 │ ├── 06_progress/
-│ └── 07_decisions/
+│ ├── 07_decisions/
+│ ├── 08_audit/
+│ ├── 09_verify/
+│ └── 10_runtime/
 │
-├── architecture/
-│ ├── task_plan.md
-│ └── validated_assumptions.md
+├── artifacts/
+│ ├── stage_A/
+│ ├── stage_B/
+│ ├── stage_C/
+│ └── stage_D/
 │
 ├── code/
 │ ├── src/
@@ -204,6 +209,24 @@ Every project or task MUST follow the directory structure below:
 └── README.md
 
 Any deviation from this layout is a hard failure.
+
+---
+
+### Transitional Specification Folder (Non-Authoritative)
+
+The folder `docs/B_specs/` is a TEMPORARY, NON-AUTHORITATIVE location.
+
+Rules:
+- Files under `docs/B_specs/` have ZERO execution authority
+- They MUST NOT be treated as Stage B outputs
+- They MUST NOT be consumed by Stage C or Stage D
+- They exist solely as transitional drafting material
+
+Authoritative Stage B specifications MUST live exclusively under:
+- `artifacts/stage_B/`
+
+Any file remaining under `docs/B_specs/` after Stage B closure
+constitutes a repository compliance violation.
 
 ---
 

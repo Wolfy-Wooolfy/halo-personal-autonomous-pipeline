@@ -663,4 +663,23 @@ Silently adapting behavior is forbidden.
 
 ---
 
+## System Entry & Execution Boundary (Hard)
+
+All execution within HALO MUST originate from the approved Pipeline.
+
+No component, engine, module, or subsystem
+is permitted to execute independently,
+be invoked directly,
+or operate outside a resolved Pipeline stage.
+
+Direct execution, ad-hoc invocation,
+or bypassing stage gates
+constitutes a system boundary violation
+and MUST trigger immediate execution halt.
+
+System components are execution units,
+not entry points.
+
+---
+
 **End of Document**

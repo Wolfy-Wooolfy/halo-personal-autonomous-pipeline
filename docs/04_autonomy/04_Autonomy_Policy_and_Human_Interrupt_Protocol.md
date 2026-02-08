@@ -511,36 +511,6 @@ is a system fault.
 
 ---
 
-### 7.1 Maximum Silent Window (Hard Limit)
-
-The system MUST enforce a maximum silent execution window.
-
-If no artifact is produced AND
-no observable execution state change occurs
-within the configured silent window:
-
-- Silence is no longer permitted
-- A mandatory status report MUST be emitted automatically
-- The status report MUST be a direct, lossless rendering of:
-  `progress/status.json`
-
-The silent window duration:
-- MUST be explicitly configured
-- MUST be finite
-- MUST be validated at runtime startup
-- MUST NOT be inferred or adaptive
-
-Any explanation for lack of progress
-MUST exist ONLY as structured data
-inside `progress/status.json`
-as defined by the Progress Tracking & Status Report Contract (v1).
-
-Silent execution beyond the configured window
-without status emission
-is a system fault.
-
----
-
 ## 7.2 Progress Stall Escalation Rule
 
 If execution activity is ongoing
