@@ -218,6 +218,12 @@ Rollback MUST NOT:
 Rollback is corrective,
 not adaptive.
 
+Governance documents under `docs/` are permitted to contain structured prose
+as long as they do NOT:
+- get treated as live execution state
+- get parsed as executable instructions outside their declared authority scope
+- bypass schema-bound authoritative artifacts (e.g., `progress/status.json`)
+
 ---
 
 ## 3.2.1 Build Output Authority Gate
