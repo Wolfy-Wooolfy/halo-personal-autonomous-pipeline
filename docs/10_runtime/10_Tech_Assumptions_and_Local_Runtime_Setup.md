@@ -127,10 +127,11 @@ The system may resume runtime ONLY when ALL are true:
   - BLOCKED
 
 If state is BLOCKED:
-- The runtime MAY start in a paused, non-executing mode
+- The runtime MAY start in a non-executing mode
 - The pipeline MUST NOT advance any stage
 - No artifact generation is permitted
-- The only permitted action is to expose status (Doc-06) until the block is resolved via the authorized control path
+- The only permitted action is to expose status (Doc-06)
+  until the block is resolved via the authorized control path
 
 The system MUST NOT resume when execution state is:
 - ABORTED, OR

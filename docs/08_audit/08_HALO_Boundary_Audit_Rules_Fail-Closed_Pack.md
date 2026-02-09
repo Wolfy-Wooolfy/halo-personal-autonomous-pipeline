@@ -292,41 +292,47 @@ If scope ambiguity exists → **Fail-Closed**
 
 The system MUST ensure that:
 
-- No raw user text is exposed as-is
-- No LLM-generated free text is treated as truth
-- No unstructured narrative is persisted, propagated, or relied upon
+- No raw user text is exposed as-is  
+- No LLM-generated free text is treated as truth  
+- No unstructured narrative is persisted, propagated, or relied upon  
 
 Raw text includes ANY content that:
-- Preserves original phrasing
-- Preserves semantic structure
-- Preserves narrative flow
-- Can be reverse-inferred to the original wording
+- Preserves original phrasing  
+- Preserves semantic structure  
+- Preserves narrative flow  
+- Can be reverse-inferred to the original wording  
 
 This audit applies ONLY to:
-- Artifacts with execution authority, OR
-- Any output that can influence live execution state
+- Artifacts with execution authority, OR  
+- Any output that can influence live execution state  
 
 Non-authoritative archives (e.g., `progress/history/`) may contain human-readable narrative for audit purposes ONLY, and MUST remain non-authoritative and non-executable by contract.
 
+Governance documents under `docs/` are permitted to contain structured prose  
+as long as they do NOT:
+- Get treated as live execution state  
+- Get parsed as executable instructions outside their declared authority scope  
+- Bypass schema-bound authoritative artifacts (e.g., `progress/status.json`)  
+
 The following do NOT remove raw text classification:
-- Rephrasing
-- Summarization
-- Translation
-- Tone adjustment
-- Light restructuring
-- Semantic compression
+- Rephrasing  
+- Summarization  
+- Translation  
+- Tone adjustment  
+- Light restructuring  
+- Semantic compression  
 
 An output is considered NON-RAW ONLY if it is:
-- Fully reconstructed
-- Schema-bound
-- Field-addressable
-- Deterministically interpretable
-- Free of narrative continuity
+- Fully reconstructed  
+- Schema-bound  
+- Field-addressable  
+- Deterministically interpretable  
+- Free of narrative continuity  
 
-If there is uncertainty whether content is still raw text:
+If there is uncertainty whether content is still raw text:  
 → The audit MUST FAIL CLOSED.
 
-Semantic transformation does NOT grant authority.
+Semantic transformation does NOT grant authority.  
 Only structural reconstruction does.
 
 ---
@@ -540,7 +546,7 @@ Upon any Boundary Audit FAIL or Execution Abort:
    - Correct `current_stage`
    - Correct `blocking_questions` rules
    - `next_step` as an empty string when BLOCKED/ABORTED
-   - Any required progress values mandated by Doc-06 (including Abort reset rules)
+- Any required progress values mandated by Doc-06 (including the Abort progress-freeze rules)
 
 2) ONLY AFTER the Doc-06-compliant state is written:
    - Progress MUST freeze immediately
