@@ -1,13 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 45,
-  "stage_progress_percent": 0,
-  "last_completed_artifact": "artifacts/stage_B/documentation_audit.closure.md",
-  "current_task": "TASK-004A: Stage C smoke PASS — stage_transitions validator verified via verify/smoke/stage_transitions_smoke.js",
-  "issues": [
-    "Smoke PASS: verify/smoke/stage_transitions_smoke.js"
-  ],
+  "overall_progress_percent": 75,
+  "stage_progress_percent": 100,
+  "last_completed_artifact": "artifacts/stage_C/runtime_runbook.md",
+  "current_task": "TASK-012: CLI entrypoint added — deterministic runtime invocation stabilized.",
+  "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage C: Run verify/smoke/status_writer_smoke.js"
+  "next_step": "IDLE — Ready for Stage D or Autonomy by explicit directive."
 }
