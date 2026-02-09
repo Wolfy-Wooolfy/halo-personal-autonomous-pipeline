@@ -45,6 +45,17 @@ Set `next_step` to include a target stage label, e.g.:
 
 ---
 
+## Pre-Run Gate (Recommended)
+
+Before running the pipeline:
+- `node tools/pre_run_check.js`
+
+This verifies:
+- All smoke tests
+- Optional integrity lock
+
+---
+
 ## Integrity (Optional but Recommended)
 
 Generate hashes once:
