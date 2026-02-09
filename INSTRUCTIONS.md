@@ -1,14 +1,15 @@
 # HALO Personal Autonomous Pipeline — Execution Instructions
 
-## Repository Authority
+## Execution Authority
 
-This repository is the SINGLE SOURCE OF TRUTH for the project.
+The attached ZIP snapshot is the SINGLE SOURCE OF TRUTH
+for this execution session.
 
-GitHub repository:
-https://github.com/Wolfy-Wooolfy/halo-personal-autonomous-pipeline
+No external repository, link, or reference
+has any authority over execution.
 
 No execution, modification, or continuation is permitted
-outside the state recorded in this repository.
+outside the state recorded inside the ZIP snapshot.
 
 ---
 
@@ -17,18 +18,28 @@ outside the state recorded in this repository.
 Before ANY action, the assistant MUST complete ALL of the following
 and explicitly confirm completion.
 
-### 1. Repository State Reading (MANDATORY)
+### 1. Snapshot State Reading (MANDATORY)
 
 The assistant MUST:
 
-- Read the FULL repository tree
+- Read the FULL ZIP snapshot tree
+
+  Definition of READ (Binding):
+  “Read” means a complete, non-summarized, non-sampled,
+  non-inferred parsing of every file,
+  including all text, structure, metadata, and ordering.
+  Skimming, partial reading, structural scanning,
+  or assumption-based interpretation does NOT qualify as reading.
+
 - Read the FULL contents of:
   - progress/status.json
-  - progress/history/*
-  - architecture/*
+  - progress/history/* (if present)
+  - architecture/* (if present)
   - docs/** (ALL documents)
-  - code/** (existing code only)
-- Understand the CURRENT stage, task, and next_step
+  - code/** (existing code only, if present)
+
+- Derive the CURRENT stage, task, and next_step
+  STRICTLY from progress/status.json
 
 Execution is FORBIDDEN without this confirmation.
 
@@ -38,9 +49,19 @@ Execution is FORBIDDEN without this confirmation.
 
 The assistant MUST explicitly state:
 
-> "READ COMPLETE: repository state, all documents, all artifacts"
+> READ COMPLETE:
+> - ZIP snapshot
+> - progress/status.json
+> - progress/history/*
+> - architecture/*
+> - docs/**
+> - code/**
 
-If this statement is missing, execution MUST STOP.
+This statement constitutes an explicit assertion of full,
+exhaustive reading responsibility.
+
+If this statement is missing or incomplete,
+execution MUST STOP.
 
 ---
 
@@ -74,23 +95,11 @@ For ANY change:
 
 - Read the authoritative file first
 - State: READ COMPLETE: <file paths>
-- Apply the change
-- Commit to repository
+- Apply the change inside the ZIP context
 - Update progress/status.json
 - Log stage transition if applicable
 
-No uncommitted execution is allowed.
-
----
-
-### 6. ZIP Snapshots (Optional Convenience)
-
-ZIP files may be attached to external tools or chats
-ONLY as a convenience snapshot.
-
-ZIP files have NO authority over the repository.
-
-The repository always overrides ZIP contents.
+No speculative or partial execution is allowed.
 
 ---
 
