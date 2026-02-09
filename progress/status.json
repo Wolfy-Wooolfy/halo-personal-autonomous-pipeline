@@ -1,11 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 90,
+  "overall_progress_percent": 95,
   "stage_progress_percent": 100,
-  "last_completed_artifact": "artifacts/release/RELEASE_1.0.0.integrity.md",
-  "current_task": "TASK-015: Integrity tooling added — checksum generation & verification enabled.",
+  "last_completed_artifact": "README.md",
+  "current_task": "TASK-016: Quickstart README added — human-friendly entrypoint finalized.",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "IDLE — Release 1.0.0 fully hardened. Await evolution directive."
+  "next_step": "IDLE — Release 1.0.0 complete. Await evolution directive."
 }
