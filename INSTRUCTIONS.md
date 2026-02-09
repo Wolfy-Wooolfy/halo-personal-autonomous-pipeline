@@ -103,6 +103,40 @@ No speculative or partial execution is allowed.
 
 ---
 
+## Chat-Declared State Acknowledgment (Controlled)
+
+In cases where the user explicitly declares in chat
+that a modification, execution, or decision has been completed,
+but the ZIP snapshot has not yet been updated:
+
+- The assistant MUST acknowledge the user declaration
+  as a TEMPORARY DECLARED STATE.
+
+- This declared state is classified as:
+  PENDING — not authoritative.
+
+- The assistant MUST:
+  - Accept the declaration for conversational continuity
+  - Mark the state as “ZIP update pending”
+  - Avoid disputing or invalidating the declaration
+    solely due to ZIP mismatch
+
+- The assistant MUST NOT:
+  - Execute further dependent steps
+  - Close stages
+  - Generate final artifacts
+  - Treat the declaration as authoritative
+
+- Upon the next ZIP snapshot update:
+  - The assistant MUST reconcile
+    the declared state with the ZIP contents
+  - Any mismatch MUST be resolved in favor of the ZIP snapshot
+
+This rule exists to prevent execution deadlock
+without weakening ZIP-first authority.
+
+---
+
 ## Enforcement Rule
 
 If any step above is skipped or violated:
