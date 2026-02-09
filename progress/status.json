@@ -4,8 +4,8 @@
   "overall_progress_percent": 0,
   "stage_progress_percent": 0,
   "last_completed_artifact": "artifacts/release/RELEASE_1.1.0.manifest.md",
-  "current_task": "TASK-022: Evolution — add autonomy loop + Stage D verification framework (bootstrap).",
+  "current_task": "TASK-023: Controlled Autonomy Loop — opt-in, time-boxed, fail-closed.",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "IDLE — TASK-022 completed (autonomy & Stage D bootstrap scaffolding only)."
+  "next_step": "Stage C — Create TASK-023 autonomy verification stubs (non-executable)."
 }
