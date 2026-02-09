@@ -24,6 +24,10 @@ function extractTargetStage(nextStep) {
   return match[1].toUpperCase();
 }
 
+function isDryRun() {
+  return String(process.env.HALO_DRY_RUN).toLowerCase() === "true";
+}
+
 function run() {
   const status = loadStatus();
 
@@ -35,6 +39,13 @@ function run() {
   }
 
   validateTransition(fromStage, targetStage);
+
+  if (isDryRun()) {
+    console.log("[HALO DRY-RUN]");
+    console.log(`Validated transition: ${fromStage} -> ${targetStage}`);
+    console.log("No state was written.");
+    return;
+  }
 
   const updated = {
     ...status,

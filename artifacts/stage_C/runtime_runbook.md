@@ -130,4 +130,14 @@ Any mismatch MUST be treated as a release invalidation.
 
 ---
 
+## Dry-Run Mode
+
+Run the pipeline without writing any state:
+
+- `HALO_DRY_RUN=true node bin/halo-run.js`
+
+This validates transitions and logs intent only.
+
+---
+
 END
