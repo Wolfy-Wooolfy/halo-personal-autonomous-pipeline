@@ -69,7 +69,6 @@ Expected behavior:
 ## 5. Verification
 
 Available smoke tests:
-
 - `verify/smoke/stage_transitions_smoke.js`
 - `verify/smoke/status_writer_smoke.js`
 - `verify/smoke/runner_smoke.js`
@@ -106,7 +105,6 @@ Any of the following REQUIRE a new explicit directive:
 A minimal CLI entrypoint is provided for deterministic execution.
 
 From project root:
-
 - `node bin/halo-run.js`
 
 
@@ -117,12 +115,10 @@ Behavior is identical to invoking the runner directly.
 ## 9. Integrity Verification
 
 Generate checksums (one-time, freeze values):
-
 - `node tools/integrity.js generate > release_1.0.0.hashes.json`
 
 
 Verify integrity later:
-
 - `node tools/integrity.js verify release_1.0.0.hashes.json`
 
 
@@ -133,10 +129,18 @@ Any mismatch MUST be treated as a release invalidation.
 ## Dry-Run Mode
 
 Run the pipeline without writing any state:
-
 - `HALO_DRY_RUN=true node bin/halo-run.js`
 
 This validates transitions and logs intent only.
+
+---
+
+## Dry-Run Verification
+
+Smoke test:
+- `node verify/smoke/runner_dry_run_smoke.js`
+
+This confirms validation occurs without any state mutation.
 
 ---
 
