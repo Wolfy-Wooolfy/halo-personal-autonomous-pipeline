@@ -1,6 +1,6 @@
 {
   "status_type": "LIVE",
-  "current_stage": "B",
+  "current_stage": "C",
   "overall_progress_percent": 0,
   "stage_progress_percent": 0,
   "last_completed_artifact": "artifacts/release/RELEASE_1.1.0.manifest.md",
