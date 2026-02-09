@@ -1,11 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 75,
+  "overall_progress_percent": 90,
   "stage_progress_percent": 100,
-  "last_completed_artifact": "artifacts/stage_C/runtime_runbook.md",
-  "current_task": "TASK-012: CLI entrypoint added — deterministic runtime invocation stabilized.",
+  "last_completed_artifact": "artifacts/release/RELEASE_1.0.0.integrity.md",
+  "current_task": "TASK-015: Integrity tooling added — checksum generation & verification enabled.",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "IDLE — Ready for Stage D or Autonomy by explicit directive."
+  "next_step": "IDLE — Release 1.0.0 fully hardened. Await evolution directive."
 }

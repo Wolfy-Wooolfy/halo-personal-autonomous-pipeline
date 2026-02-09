@@ -107,10 +107,26 @@ A minimal CLI entrypoint is provided for deterministic execution.
 
 From project root:
 
-node bin/halo-run.js
+- `node bin/halo-run.js`
 
 
 Behavior is identical to invoking the runner directly.
+
+---
+
+## 9. Integrity Verification
+
+Generate checksums (one-time, freeze values):
+
+- `node tools/integrity.js generate > release_1.0.0.hashes.json`
+
+
+Verify integrity later:
+
+- `node tools/integrity.js verify release_1.0.0.hashes.json`
+
+
+Any mismatch MUST be treated as a release invalidation.
 
 ---
 
