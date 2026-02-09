@@ -4,8 +4,8 @@
   "overall_progress_percent": 0,
   "stage_progress_percent": 0,
   "last_completed_artifact": "artifacts/release/RELEASE_1.1.0.manifest.md",
-  "current_task": "TASK-023: Controlled Autonomy Loop — opt-in, time-boxed, fail-closed.",
+  "current_task": "TASK-025: Decision Logging Framework — record-only, no authority.",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage C — Create TASK-023 autonomy verification stubs (non-executable)."
+  "next_step": "Stage A — Define TASK-025 decision logging contract and boundaries."
 }
