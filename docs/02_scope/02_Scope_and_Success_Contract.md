@@ -1,7 +1,5 @@
 # Scope & Success Contract (v1)
 
-# Scope & Success Contract (v1)
-
 **Document ID:** DOC-02  
 **Project:** Personal Autonomous Pipeline for HALO  
 **Document Type:** Binding Scope & Success Definition  
