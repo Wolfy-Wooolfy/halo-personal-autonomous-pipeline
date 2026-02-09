@@ -4,8 +4,8 @@
   "overall_progress_percent": 0,
   "stage_progress_percent": 0,
   "last_completed_artifact": "artifacts/release/RELEASE_1.1.0.manifest.md",
-  "current_task": "TASK-025: Decision Logging Framework — record-only, no authority.",
+  "current_task": "TASK-026: Controlled Autonomy — single-step, manual trigger, fail-closed.",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "IDLE — TASK-025 completed (decision logging record-only)."
+  "next_step": "Stage C — Create TASK-026 single-step autonomy verification stubs (non-executable)."
 }
