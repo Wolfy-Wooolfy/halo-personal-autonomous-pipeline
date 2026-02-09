@@ -1,12 +1,15 @@
 {
-  "current_stage": "B",
-  "execution_state": "READY",
-  "progress_percent": 100,
-  "last_artifact": "artifacts/stage_B/documentation_audit.closure.md",
-  "current_task": "TASK-003: Stage B closed — ready to enter Stage C (Code Generation & Implementation)",
-  "blocking_questions": [],
+  "status_type": "LIVE",
+  "current_stage": "C",
+  "overall_progress_percent": 45,
+  "stage_progress_percent": 0,
+  "last_completed_artifact": "artifacts/stage_B/documentation_audit.closure.md",
+  "current_task": "TASK-004: Stage C started — implement orchestrator stage transition validator (per artifacts/stage_B/orchestrator_stage_transitions.md)",
   "issues": [
-    "Fixed stage mislabeling: docs/03_pipeline defines Stage C as Code Generation & Implementation; documentation audit belongs to Stage B."
+    "Fixed stage mislabeling: docs/03_pipeline defines Stage C as Code Generation & Implementation; documentation audit belongs to Stage B.",
+    "Stage B closure artifact was missing in repository snapshot; materialized at artifacts/stage_B/documentation_audit.closure.md to satisfy 'No artifact = no progress'.",
+    "Status report schema reconciled to docs/06_progress contract (overall_progress_percent, stage_progress_percent, status_type)."
   ],
-  "next_step": "Stage C: Code Generation & Implementation"
+  "blocking_questions": [],
+  "next_step": "Stage C: Run verify/smoke/stage_transitions_smoke.js"
 }

@@ -4,17 +4,17 @@ const path = require("path");
 const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
 
 const ALLOWED_STAGES = ["INIT", "READY", "A", "B", "C", "D"];
-const ALLOWED_EXECUTION_STATES = ["IDLE", "RUNNING", "BLOCKED", "ABORTED", "COMPLETE"];
 
 function validatePayload(payload) {
   const keys = [
+    "status_type",
     "current_stage",
-    "execution_state",
-    "progress_percent",
-    "last_artifact",
+    "overall_progress_percent",
+    "stage_progress_percent",
+    "last_completed_artifact",
     "current_task",
-    "blocking_questions",
     "issues",
+    "blocking_questions",
     "next_step"
   ];
 
@@ -30,45 +30,56 @@ function validatePayload(payload) {
     }
   }
 
+  if (payload.status_type !== "LIVE") {
+    throw new Error("Invalid status_type");
+  }
+
   if (!ALLOWED_STAGES.includes(payload.current_stage)) {
     throw new Error("Invalid current_stage");
   }
 
-  if (!ALLOWED_EXECUTION_STATES.includes(payload.execution_state)) {
-    throw new Error("Invalid execution_state");
+  if (!Number.isInteger(payload.overall_progress_percent)) {
+    throw new Error("overall_progress_percent must be integer");
   }
 
-  if (typeof payload.progress_percent !== "number") {
-    throw new Error("Invalid progress_percent");
+  if (payload.overall_progress_percent < 0 || payload.overall_progress_percent > 100) {
+    throw new Error("overall_progress_percent out of range");
   }
 
-  if (payload.progress_percent < 0 || payload.progress_percent > 100) {
-    throw new Error("progress_percent out of range");
+  if (!Number.isInteger(payload.stage_progress_percent)) {
+    throw new Error("stage_progress_percent must be integer");
   }
 
-  if (!Array.isArray(payload.blocking_questions)) {
-    throw new Error("blocking_questions must be array");
+  if (payload.stage_progress_percent < 0 || payload.stage_progress_percent > 100) {
+    throw new Error("stage_progress_percent out of range");
+  }
+
+  if (typeof payload.last_completed_artifact !== "string") {
+    throw new Error("last_completed_artifact must be string");
+  }
+
+  if (typeof payload.current_task !== "string") {
+    throw new Error("current_task must be string");
   }
 
   if (!Array.isArray(payload.issues)) {
     throw new Error("issues must be array");
   }
 
-  if (payload.execution_state === "BLOCKED") {
-    if (payload.blocking_questions.length !== 1) {
-      throw new Error("BLOCKED requires exactly one blocking question");
+  if (!Array.isArray(payload.blocking_questions)) {
+    throw new Error("blocking_questions must be array");
+  }
+
+  if (payload.blocking_questions.length > 1) {
+    throw new Error("blocking_questions must contain 0 or 1 item");
+  }
+
+  if (payload.blocking_questions.length === 1) {
+    if (typeof payload.blocking_questions[0] !== "string" || payload.blocking_questions[0].trim() === "") {
+      throw new Error("blocking_questions[0] must be a non-empty string");
     }
     if (payload.next_step !== "") {
       throw new Error("BLOCKED requires empty next_step");
-    }
-  }
-
-  if (payload.execution_state === "ABORTED") {
-    if (payload.blocking_questions.length !== 0) {
-      throw new Error("ABORTED requires empty blocking_questions");
-    }
-    if (payload.next_step !== "") {
-      throw new Error("ABORTED requires empty next_step");
     }
   }
 }

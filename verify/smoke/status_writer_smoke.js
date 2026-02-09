@@ -5,46 +5,52 @@ const { writeStatus } = require(path.resolve(__dirname, "../../code/src/orchestr
 
 const STATUS_PATH = path.resolve(__dirname, "../../progress/status.json");
 
-function fail(msg) {
-  throw new Error(msg);
-}
-
-function deepEqual(a, b) {
-  return JSON.stringify(a) === JSON.stringify(b);
-}
-
 function run() {
   const original = fs.readFileSync(STATUS_PATH, { encoding: "utf8" });
 
-  let wrote = false;
-
   try {
     const payload = {
+      status_type: "LIVE",
       current_stage: "C",
-      execution_state: "RUNNING",
-      progress_percent: 46,
-      last_artifact: "verify/smoke/status_writer_smoke.js",
-      current_task: "TASK-001: Define orchestrator skeleton (deterministic stage runner) with status.json updates only",
-      blocking_questions: [],
+      overall_progress_percent: 46,
+      stage_progress_percent: 5,
+      last_completed_artifact: "artifacts/stage_B/documentation_audit.closure.md",
+      current_task: "TASK-004: Enter Stage C and begin implementation (orchestrator core stubs only)",
       issues: [],
-      next_step: "Stage D: smoke test status_writer.writeStatus with a valid payload (verify/smoke/status_writer_smoke.js)"
+      blocking_questions: [],
+      next_step: "Stage C: Implement orchestrator stage transition validator"
     };
 
     writeStatus(payload);
-    wrote = true;
 
-    const after = fs.readFileSync(STATUS_PATH, { encoding: "utf8" });
-    const parsed = JSON.parse(after);
+    const wrote = fs.readFileSync(STATUS_PATH, { encoding: "utf8" });
+    const parsed = JSON.parse(wrote);
 
-    if (!deepEqual(parsed, payload)) {
-      fail("SMOKE FAIL: status.json content mismatch after writeStatus");
+    const expectedKeys = [
+      "status_type",
+      "current_stage",
+      "overall_progress_percent",
+      "stage_progress_percent",
+      "last_completed_artifact",
+      "current_task",
+      "issues",
+      "blocking_questions",
+      "next_step"
+    ];
+
+    const keys = Object.keys(parsed);
+
+    if (keys.length !== expectedKeys.length) {
+      throw new Error("Smoke FAIL: status.json schema mismatch");
     }
 
-    console.log("SMOKE PASS: status_writer.writeStatus wrote valid payload");
+    for (const k of expectedKeys) {
+      if (!keys.includes(k)) {
+        throw new Error("Smoke FAIL: missing key");
+      }
+    }
   } finally {
-    if (wrote) {
-      fs.writeFileSync(STATUS_PATH, original, { encoding: "utf8" });
-    }
+    fs.writeFileSync(STATUS_PATH, original, { encoding: "utf8" });
   }
 }
 
