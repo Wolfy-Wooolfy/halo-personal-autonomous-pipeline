@@ -1,5 +1,5 @@
+const fs = require("fs");
 const { execSync } = require("child_process");
-const path = require("path");
 
 function run(cmd) {
   execSync(cmd, { stdio: "inherit" });
@@ -14,15 +14,22 @@ function main() {
 
   console.log("Smoke tests: PASS");
 
-  // Integrity verification is optional; only run if hashes file exists
-  try {
-    run("node tools/integrity.js verify release_1.0.0.hashes.json");
-    console.log("Integrity: PASS");
-  } catch (_) {
+  const hashesPath = process.argv[2] || "release_1.0.0.hashes.json";
+
+  if (!fs.existsSync(hashesPath)) {
     console.log("Integrity: SKIPPED (no hashes file)");
+    console.log("Pre-Run Check: OK");
+    return;
   }
 
-  console.log("Pre-Run Check: OK");
+  try {
+    run(`node tools/integrity.js verify ${hashesPath}`);
+    console.log("Integrity: PASS");
+    console.log("Pre-Run Check: OK");
+  } catch (e) {
+    console.log("Integrity: FAIL");
+    process.exit(1);
+  }
 }
 
 main();

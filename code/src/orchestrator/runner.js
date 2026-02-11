@@ -38,6 +38,24 @@ function run() {
     return;
   }
 
+  if (fromStage === targetStage) {
+    if (isDryRun()) {
+      console.log("[HALO DRY-RUN]");
+      console.log(`Acknowledged internal step in Stage ${fromStage}`);
+      console.log("No state was written.");
+      return;
+    }
+
+    const updated = {
+      ...status,
+      stage_progress_percent: 100
+    };
+
+    writeStatus(updated);
+    console.log(`[HALO] Internal step acknowledged in Stage ${fromStage}`);
+    return;
+  }
+
   validateTransition(fromStage, targetStage);
 
   if (isDryRun()) {
