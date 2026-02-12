@@ -1,3 +1,9 @@
+const fs = require("fs");
+const path = require("path");
+
+const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
+const TASKS_PATH = path.resolve(__dirname, "../../..", "artifacts", "tasks");
+
 const registry = Object.freeze({
   "TASK-031: Self-Validation": (context) => {
     if (!context || !context.status) {
@@ -21,6 +27,33 @@ const registry = Object.freeze({
     console.log(
       `[HALO] TASK-031 progressed stage to ${updatedProgress}%`
     );
+
+    if (updatedProgress === 100) {
+      const closureFile = path.join(
+        TASKS_PATH,
+        "TASK-031.execution.closure.md"
+      );
+
+      const content = `# TASK-031 — Execution Closure
+
+Status: COMPLETE
+
+Stage: ${status.current_stage}
+
+Final Progress: 100%
+
+This artifact confirms deterministic completion of TASK-031.
+`;
+
+      fs.writeFileSync(closureFile, content, { encoding: "utf8" });
+
+      status.last_completed_artifact =
+        "artifacts/tasks/TASK-031.execution.closure.md";
+
+      status.current_task = "";
+
+      console.log("[HALO] TASK-031 execution closure artifact created.");
+    }
 
     return true;
   }
