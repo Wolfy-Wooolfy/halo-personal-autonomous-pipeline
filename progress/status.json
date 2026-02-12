@@ -2,9 +2,9 @@
   "status_type": "LIVE",
   "current_stage": "C",
   "overall_progress_percent": 0,
-  "stage_progress_percent": 100,
+  "stage_progress_percent": 10,
   "last_completed_artifact": "artifacts/tasks/TASK-028.stageC.verify.md",
-  "current_task": "TASK-028: Runtime Hardening — COMPLETE",
+  "current_task": "TASK-031: Self-Validation",
   "issues": [],
   "blocking_questions": [],
   "next_step": "Stage C: Code Generation & Implementation"
