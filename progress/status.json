@@ -3,8 +3,8 @@
   "current_stage": "C",
   "overall_progress_percent": 0,
   "stage_progress_percent": 100,
-  "last_completed_artifact": "artifacts/release/RELEASE_1.1.1.manifest.md",
-  "current_task": "TASK-003: Stage B closed — ready to enter Stage C (Code Generation & Implementation)",
+  "last_completed_artifact": "artifacts/tasks/TASK-028.stageC.verify.md",
+  "current_task": "TASK-028: Runtime Hardening — COMPLETE",
   "issues": [],
   "blocking_questions": [],
   "next_step": "Stage C: Code Generation & Implementation"
