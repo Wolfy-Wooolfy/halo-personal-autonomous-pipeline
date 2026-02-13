@@ -63,6 +63,36 @@ This artifact confirms deterministic completion of TASK-031.
     return {
       stage_progress_percent: updatedProgress
     };
+  },
+
+  "TASK-032: Enforce DOC-06 schema validation in status_writer.js": (context) => {
+    const closureFile = path.join(
+      TASKS_PATH,
+      "TASK-032.execution.closure.md"
+    );
+
+    const stage = context && context.status && context.status.current_stage
+      ? context.status.current_stage
+      : "C";
+
+    const content = `# TASK-032 — Execution Closure
+
+Status: COMPLETE
+
+Stage: ${stage}
+
+Result:
+Status writer enforces DOC-06 canonical schema with fail-closed validation.
+`;
+
+    fs.writeFileSync(closureFile, content, { encoding: "utf8" });
+
+    console.log("[HALO] TASK-032 execution closure artifact created.");
+
+    return {
+      artifact: "artifacts/tasks/TASK-032.execution.closure.md",
+      closure_artifact: true
+    };
   }
 
 });

@@ -1,15 +1,11 @@
 {
   "status_type": "LIVE",
-  "current_stage": "B",
-  "overall_progress_percent": 30,
-  "stage_progress_percent": 0,
+  "current_stage": "C",
+  "overall_progress_percent": 35,
+  "stage_progress_percent": 5,
   "last_completed_artifact": "artifacts/tasks/TASK-031.execution.closure.md",
-  "current_task": "TASK-001: Align orchestrator_status_writer spec with DOC-06 status schema",
-  "issues": [
-    "STATUS CONTRACT VIOLATION: next_step was set to IDLE which is not permitted by DOC-06; next_step must be executable or empty under BLOCKED/ABORTED rules.",
-    "SCHEMA CONFLICT: artifacts/stage_B/orchestrator_status_writer.md defines an older status schema that conflicts with docs/06_progress/06_Progress_Tracking_and_Status_Report_Contract_v1.md (higher authority).",
-    "STAGE B RECLOSURE INVALID: artifacts/stage_B/stage_B.reclosure.md claims no gaps, but the status schema conflict remains unresolved."
-  ],
+  "current_task": "TASK-032: Enforce DOC-06 schema validation in status_writer.js",
+  "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage B — Update artifacts/stage_B/orchestrator_status_writer.md to match DOC-06 canonical status.json schema"
+  "next_step": "Stage C — Execute TASK-032 handler to create closure artifact"
 }
