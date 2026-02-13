@@ -95,6 +95,47 @@ Status writer enforces DOC-06 canonical schema with fail-closed validation.
       artifact: relArtifact,
       closure_artifact: true
     };
+  },
+
+  "TASK-030: Deterministic Task Execution Engine": (context) => {
+    const relArtifact = "artifacts/tasks/TASK-030.execution.closure.md";
+    const closureFile = path.join(TASKS_PATH, "TASK-030.execution.closure.md");
+
+    const stage = context && context.status && context.status.current_stage
+      ? context.status.current_stage
+      : "C";
+
+    const currentProgress =
+      context && context.status && typeof context.status.stage_progress_percent === "number"
+        ? context.status.stage_progress_percent
+        : 0;
+
+    const updatedProgress = Math.min(100, currentProgress + 10);
+
+    const content = `# TASK-030 — Execution Closure
+
+Status: COMPLETE
+
+Stage: ${stage}
+
+Result:
+Deterministic execution engine behaviors are in place:
+- Static registry-based handler resolution
+- Fail-closed execution
+- No recursion
+- No implicit execution
+- No autonomy expansion
+`;
+
+    fs.writeFileSync(closureFile, content, { encoding: "utf8" });
+
+    console.log("[HALO] TASK-030 execution closure artifact created.");
+
+    return {
+      stage_progress_percent: updatedProgress,
+      artifact: relArtifact,
+      closure_artifact: true
+    };
   }
 
 });

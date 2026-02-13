@@ -1,11 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 35,
+  "overall_progress_percent": 40,
   "stage_progress_percent": 5,
   "last_completed_artifact": "artifacts/tasks/TASK-032.execution.closure.md",
-  "current_task": "TASK-032: Enforce DOC-06 schema validation in status_writer.js",
+  "current_task": "TASK-030: Deterministic Task Execution Engine",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-032 handler to create closure artifact"
+  "next_step": "Stage C — Execute TASK-030 handler to create closure artifact"
 }
