@@ -1,10 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 
-const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
 const TASKS_PATH = path.resolve(__dirname, "../../..", "artifacts", "tasks");
 
 const registry = Object.freeze({
+
+  "SMOKE: prepare transition B -> C": (context) => {
+    return {
+      stage_progress_percent: 0
+    };
+  },
+
   "TASK-031: Self-Validation": (context) => {
     if (!context || !context.status) {
       throw new Error("Invalid execution context");
@@ -21,8 +27,6 @@ const registry = Object.freeze({
       100,
       status.stage_progress_percent + increment
     );
-
-    status.stage_progress_percent = updatedProgress;
 
     console.log(
       `[HALO] TASK-031 progressed stage to ${updatedProgress}%`
@@ -47,16 +51,20 @@ This artifact confirms deterministic completion of TASK-031.
 
       fs.writeFileSync(closureFile, content, { encoding: "utf8" });
 
-      status.last_completed_artifact =
-        "artifacts/tasks/TASK-031.execution.closure.md";
-
-      status.current_task = "";
-
       console.log("[HALO] TASK-031 execution closure artifact created.");
+
+      return {
+        stage_progress_percent: 100,
+        artifact: "artifacts/tasks/TASK-031.execution.closure.md",
+        closure_artifact: true
+      };
     }
 
-    return true;
+    return {
+      stage_progress_percent: updatedProgress
+    };
   }
+
 });
 
 function getHandler(taskName) {

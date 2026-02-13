@@ -3,6 +3,7 @@ const path = require("path");
 
 const { validateTransition } = require("./stage_transitions");
 const { writeStatus } = require("./status_writer");
+const { executeTask } = require("../execution/task_executor");
 
 const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
 
@@ -28,18 +29,11 @@ function isDryRun() {
   return String(process.env.HALO_DRY_RUN).toLowerCase() === "true";
 }
 
-function assertNoRegression(oldPercent, newPercent) {
-  if (typeof oldPercent === "number" && typeof newPercent === "number") {
-    if (newPercent < oldPercent) {
-      throw new Error("Stage progress regression detected");
-    }
-  }
-}
-
 function assertIdempotency(status) {
   if (
     status.stage_progress_percent === 100 &&
-    typeof status.current_task === "string"
+    typeof status.current_task === "string" &&
+    status.current_task.trim() !== ""
   ) {
     throw new Error("Task already completed (idempotency guard)");
   }
@@ -48,52 +42,56 @@ function assertIdempotency(status) {
 function run() {
   const status = loadStatus();
 
-  const fromStage = status.current_stage;
-  const targetStage = extractTargetStage(status.next_step);
+  if (typeof status.current_task !== "string") {
+    throw new Error("current_task must be string");
+  }
 
-  if (!targetStage) {
+  if (status.current_task.trim() === "") {
+    console.log("[HALO] No task to execute.");
     return;
   }
 
-  if (fromStage === targetStage) {
-    assertIdempotency(status);
-
-    if (isDryRun()) {
-      console.log("[HALO DRY-RUN]");
-      console.log(`Acknowledged internal step in Stage ${fromStage}`);
-      console.log("No state was written.");
-      return;
-    }
-
-    const newPercent = 100;
-    assertNoRegression(status.stage_progress_percent, newPercent);
-
-    const updated = {
-      ...status,
-      stage_progress_percent: newPercent
-    };
-
-    writeStatus(updated);
-    console.log(`[HALO] Internal step acknowledged in Stage ${fromStage}`);
-    return;
-  }
-
-  validateTransition(fromStage, targetStage);
+  assertIdempotency(status);
 
   if (isDryRun()) {
     console.log("[HALO DRY-RUN]");
-    console.log(`Validated transition: ${fromStage} -> ${targetStage}`);
+    console.log(`Would execute task: ${status.current_task}`);
     console.log("No state was written.");
     return;
   }
 
+  const result = executeTask(status.current_task, status);
+
+  if (!result || typeof result !== "object") {
+    throw new Error("Task handler must return execution result object");
+  }
+
   const updated = {
     ...status,
-    current_stage: targetStage,
-    stage_progress_percent: 0
+    stage_progress_percent: result.stage_progress_percent,
+    last_completed_artifact: result.artifact || status.last_completed_artifact
   };
 
   writeStatus(updated);
+
+  console.log(`[HALO] ${status.current_task} progressed stage to ${result.stage_progress_percent}%`);
+
+  if (result.closure_artifact) {
+    console.log(`[HALO] ${status.current_task} execution closure artifact created.`);
+  }
+
+  const targetStage = extractTargetStage(status.next_step);
+  if (targetStage && targetStage !== status.current_stage) {
+    validateTransition(status.current_stage, targetStage);
+
+    const stageUpdated = {
+      ...updated,
+      current_stage: targetStage,
+      stage_progress_percent: 0
+    };
+
+    writeStatus(stageUpdated);
+  }
 }
 
 module.exports = {
