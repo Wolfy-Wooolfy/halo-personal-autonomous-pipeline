@@ -33,10 +33,8 @@ const registry = Object.freeze({
     );
 
     if (updatedProgress === 100) {
-      const closureFile = path.join(
-        TASKS_PATH,
-        "TASK-031.execution.closure.md"
-      );
+      const relArtifact = "artifacts/tasks/TASK-031.execution.closure.md";
+      const closureFile = path.join(TASKS_PATH, "TASK-031.execution.closure.md");
 
       const content = `# TASK-031 — Execution Closure
 
@@ -55,7 +53,7 @@ This artifact confirms deterministic completion of TASK-031.
 
       return {
         stage_progress_percent: 100,
-        artifact: "artifacts/tasks/TASK-031.execution.closure.md",
+        artifact: relArtifact,
         closure_artifact: true
       };
     }
@@ -66,14 +64,17 @@ This artifact confirms deterministic completion of TASK-031.
   },
 
   "TASK-032: Enforce DOC-06 schema validation in status_writer.js": (context) => {
-    const closureFile = path.join(
-      TASKS_PATH,
-      "TASK-032.execution.closure.md"
-    );
+    const relArtifact = "artifacts/tasks/TASK-032.execution.closure.md";
+    const closureFile = path.join(TASKS_PATH, "TASK-032.execution.closure.md");
 
     const stage = context && context.status && context.status.current_stage
       ? context.status.current_stage
       : "C";
+
+    const currentProgress =
+      context && context.status && typeof context.status.stage_progress_percent === "number"
+        ? context.status.stage_progress_percent
+        : 0;
 
     const content = `# TASK-032 — Execution Closure
 
@@ -90,7 +91,8 @@ Status writer enforces DOC-06 canonical schema with fail-closed validation.
     console.log("[HALO] TASK-032 execution closure artifact created.");
 
     return {
-      artifact: "artifacts/tasks/TASK-032.execution.closure.md",
+      stage_progress_percent: currentProgress,
+      artifact: relArtifact,
       closure_artifact: true
     };
   }

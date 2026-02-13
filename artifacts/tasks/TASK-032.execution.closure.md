@@ -1,11 +1,8 @@
-# TASK-032 Execution Closure
+# TASK-032 — Execution Closure
 
-Stage: C  
-Status: CLOSED  
+Status: COMPLETE
 
-Description:
-Implemented strict DOC-06 canonical schema validation
-inside status_writer.js with fail-closed enforcement.
+Stage: C
 
 Result:
-Status writing is now contract-bound and deterministic.
+Status writer enforces DOC-06 canonical schema with fail-closed validation.

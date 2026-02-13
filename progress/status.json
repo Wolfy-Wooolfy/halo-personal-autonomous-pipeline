@@ -3,7 +3,7 @@
   "current_stage": "C",
   "overall_progress_percent": 35,
   "stage_progress_percent": 5,
-  "last_completed_artifact": "artifacts/tasks/TASK-031.execution.closure.md",
+  "last_completed_artifact": "artifacts/tasks/TASK-032.execution.closure.md",
   "current_task": "TASK-032: Enforce DOC-06 schema validation in status_writer.js",
   "issues": [],
   "blocking_questions": [],

@@ -66,6 +66,14 @@ function run() {
     throw new Error("Task handler must return execution result object");
   }
 
+  if (typeof status.stage_progress_percent !== "number") {
+    throw new Error("stage_progress_percent must be number in status");
+  }
+
+  if (result.stage_progress_percent < status.stage_progress_percent) {
+    throw new Error("Monotonicity violation: stage_progress_percent cannot decrease");
+  }
+
   const updated = {
     ...status,
     stage_progress_percent: result.stage_progress_percent,
