@@ -1,11 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 40,
-  "stage_progress_percent": 5,
-  "last_completed_artifact": "artifacts/tasks/TASK-032.execution.closure.md",
-  "current_task": "TASK-030: Deterministic Task Execution Engine",
+  "overall_progress_percent": 45,
+  "stage_progress_percent": 15,
+  "last_completed_artifact": "artifacts/tasks/TASK-030.execution.closure.md",
+  "current_task": "TASK-029: Multi-step execution contract",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-030 handler to create closure artifact"
+  "next_step": "Stage C — Execute TASK-029 handler to create closure artifact"
 }

@@ -37,7 +37,6 @@ function enforceTaskContract(taskName) {
 
   const taskPrefix = taskName.split(":")[0];
   const files = fs.readdirSync(TASKS_DIR);
-
   const matchingFile = files.find(file => file.startsWith(taskPrefix));
 
   if (!matchingFile) {
@@ -45,19 +44,15 @@ function enforceTaskContract(taskName) {
   }
 }
 
+function expectedClosureArtifact(taskName) {
+  const taskPrefix = taskName.split(":")[0];
+  return `artifacts/tasks/${taskPrefix}.execution.closure.md`;
+}
+
 function findExistingClosureFile(taskName) {
   const taskPrefix = taskName.split(":")[0];
-  const files = fs.readdirSync(TASKS_DIR);
-
-  const closure = files.find(f =>
-    f === `${taskPrefix}.execution.closure.md`
-  );
-
-  if (!closure) {
-    return null;
-  }
-
-  return path.join(TASKS_DIR, closure);
+  const closurePath = path.join(TASKS_DIR, `${taskPrefix}.execution.closure.md`);
+  return fs.existsSync(closurePath) ? closurePath : null;
 }
 
 function executeTask(taskName, context) {
@@ -93,18 +88,14 @@ function executeTask(taskName, context) {
   validateExecutionResult(result);
 
   if (result.closure_artifact === true) {
+    const expected = expectedClosureArtifact(taskName);
+
     if (!result.artifact || typeof result.artifact !== "string") {
       throw new Error("closure_artifact requires artifact path");
     }
 
-    if (!result.artifact.startsWith("artifacts/tasks/")) {
-      throw new Error("closure_artifact artifact path must be under artifacts/tasks/");
-    }
-
-    const artifactAbs = path.resolve(__dirname, "../../..", result.artifact);
-
-    if (fs.existsSync(artifactAbs)) {
-      throw new Error("Artifact write protection: closure artifact already exists (no overwrite allowed)");
+    if (result.artifact !== expected) {
+      throw new Error("closure_artifact artifact path must match deterministic expected path");
     }
   }
 
