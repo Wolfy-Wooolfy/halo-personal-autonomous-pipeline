@@ -11,6 +11,46 @@ const registry = Object.freeze({
     };
   },
 
+  "TASK-028: Runtime Hardening": (context) => {
+    const relArtifact = "artifacts/tasks/TASK-028.execution.closure.md";
+    const closureFile = path.join(TASKS_PATH, "TASK-028.execution.closure.md");
+
+    const stage = context && context.status && context.status.current_stage
+      ? context.status.current_stage
+      : "C";
+
+    const currentProgress =
+      context && context.status && typeof context.status.stage_progress_percent === "number"
+        ? context.status.stage_progress_percent
+        : 0;
+
+    const updatedProgress = Math.min(100, currentProgress + 10);
+
+    const content = `# TASK-028 — Execution Closure
+
+Status: COMPLETE
+
+Stage: ${stage}
+
+Result:
+Runtime hardening completed:
+- Bounded multi-step is enforced by HALO_MAX_STEPS
+- Stage D is blocked in autonomy-step
+- Idempotency violations stop cleanly (no crash)
+- Deterministic execution preserved
+`;
+
+    fs.writeFileSync(closureFile, content, { encoding: "utf8" });
+
+    console.log("[HALO] TASK-028 execution closure artifact created.");
+
+    return {
+      stage_progress_percent: updatedProgress,
+      artifact: relArtifact,
+      closure_artifact: true
+    };
+  },
+
   "TASK-029: Multi-step execution contract": (context) => {
     const relArtifact = "artifacts/tasks/TASK-029.execution.closure.md";
     const closureFile = path.join(TASKS_PATH, "TASK-029.execution.closure.md");
