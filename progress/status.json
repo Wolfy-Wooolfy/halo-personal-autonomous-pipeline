@@ -1,11 +1,10 @@
 {
-  "status_type": "LIVE",
   "current_stage": "C",
+  "current_task": "TASK-XXX: Generate Trace Matrix (Loop 3 Initialization)",
+  "stage_progress_percent": 0,
   "overall_progress_percent": 50,
-  "stage_progress_percent": 35,
-  "last_completed_artifact": "artifacts/tasks/TASK-028.execution.closure.md",
-  "current_task": "TASK-028: Runtime Hardening",
-  "issues": [],
+  "last_completed_artifact": "artifacts/stage_B/stage_B_closure.md",
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-028 handler to create closure artifact"
+  "issues": [],
+  "next_step": "Generate Trace Matrix artifact per SCHEMA-03"
 }
