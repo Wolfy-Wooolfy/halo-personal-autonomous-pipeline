@@ -1,6 +1,6 @@
 # 📄 Document 9 — Build & Verify Playbook (Local)
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Status:** MANDATORY  
 **Scope:** Local execution only  
 **Applies To:** All HALO autonomous pipelines  
@@ -99,6 +99,16 @@ Verification MUST operate on explicit targets only.
 
 A verification run MUST declare its target set deterministically as one of:
 
+- Stage B verification target set (Cognitive Layer — Docs Engines):
+  - `artifacts/stage_B/spec_pack_manifest.md`
+  - `artifacts/stage_B/specifications.md`
+  - `artifacts/stage_B/data_schemas.md`
+  - `artifacts/stage_B/interface_contracts.md`
+  - `artifacts/stage_B/validation_rules.md`
+  - `artifacts/stage_B/edge_cases.md`
+  - `artifacts/stage_B/docs_gap_report.md`
+  - `artifacts/stage_B/docs_coverage_matrix.md`
+
 - Stage C verification target set:
   - `/code/src/*`
   - `/code/tests/*`
@@ -112,6 +122,48 @@ A verification run MUST declare its target set deterministically as one of:
   - verification logs and outputs under `/verify/*` as required by this document
 
 If a verification run cannot declare a deterministic target set:
+- Verification MUST FAIL CLOSED
+- Execution MUST halt
+
+---
+
+## 2.1.1 Cognitive Layer Verification Types (Stage B Only)
+
+Stage B verification MUST include the following verification types, as declared in the live verification report:
+
+- `STRUCTURAL_B_DOCS_PACK`
+- `CONTRACT_B_DOCS_PACK`
+- `CONSISTENCY_B_DOCS_PACK`
+
+These types have no authority by themselves.
+They exist only to bind deterministic checks to Stage B gating.
+
+If these checks cannot be executed deterministically:
+- Verification MUST FAIL CLOSED
+- Execution MUST halt
+
+---
+
+## 2.1.2 Stage B Verification Minimum Deterministic Checks (Hard)
+
+When the verification target set is Stage B:
+
+Structural checks MUST ensure:
+- all target artifacts exist
+- paths match repository standard
+- file format is Markdown for `.md`
+- `artifacts/stage_B/spec_pack_manifest.md` contains a deterministic list of Stage B artifacts by path
+
+Contract checks MUST ensure:
+- `artifacts/stage_B/docs_gap_report.md` indicates ZERO unresolved MUST-level gaps
+- `artifacts/stage_B/docs_coverage_matrix.md` indicates 100% coverage of MUST-level requirements
+- `artifacts/stage_B/spec_pack_manifest.md` is consistent with produced artifact paths
+
+Consistency checks MUST ensure:
+- Stage B artifact set contains no duplicate responsibility claims across docs
+- Stage B artifacts do not introduce scope beyond Stage A frozen intent, if Stage A artifacts exist in the repository snapshot
+
+If any required check is impossible to evaluate deterministically from present artifacts:
 - Verification MUST FAIL CLOSED
 - Execution MUST halt
 
@@ -148,7 +200,7 @@ Rules:
 
 Minimum required fields per entry:
 - timestamp_utc
-- stage ("C" | "D")
+- stage ("B" | "C" | "D")
 - working_directory
 - command (string)
 - exit_code (integer)
@@ -280,7 +332,7 @@ If any condition fails → **BUILD FAILED**
 
 ---
 
-## 4. Retry Handling
+## 4. Verification Handling
 
 Retries are governed strictly by the Autonomy Policy & Human Interrupt Protocol (Doc-04)
 and are NOT discretionary.
@@ -400,6 +452,12 @@ Rules:
 - It MUST declare PASS/FAIL consistent with the live report
 
 Required paths:
+
+- If verifying Stage B outputs:
+  - `artifacts/stage_B/verification_evidence.md` MUST exist and MUST reference:
+    - `verify/unit/verification_report.json`
+    - `verify/smoke/local_command_log.jsonl`
+    - relevant stdout/stderr output file paths under `verify/smoke/command_output/`
 
 - If verifying Stage C outputs:
   - `artifacts/stage_C/test_evidence.md` MUST exist and MUST reference:
@@ -859,6 +917,7 @@ This playbook is considered satisfied for a given local execution attempt ONLY w
 - Verification passes and `verify/unit/verification_report.json` exists with result "PASS"
 - Any required audit logs and failure artifacts (if applicable) are written under `verify/audit/`
 - The stage-scoped closure artifact required by Section 4.1.2 exists:
+  - Stage B: `artifacts/stage_B/verification_evidence.md`
   - Stage C: `artifacts/stage_C/test_evidence.md`
   - Stage D: `artifacts/stage_D/verification_report.md`
 - No blocking condition remains unresolved in the governing execution state
