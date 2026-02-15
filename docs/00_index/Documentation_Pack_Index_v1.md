@@ -46,7 +46,7 @@ All conflicts MUST be resolved by DOC-11.
 - docs/01_system/01_System_Overview_and_Operating_Model.md
 - docs/01_system/02_Vision_and_Cognitive_Layer_Reference.md
 - docs/02_scope/02_Scope_and_Success_Contract.md
-- docs/03_pipeline/03_Pipeline_Stages_Specification_A–D.md
+- docs/03_pipeline/03_Pipeline_Stages_Specification_A-D.md
 - docs/03_pipeline/03_Cognitive_Layer_Engines_Execution_Contracts.md
 - docs/03_pipeline/11_Idea_Evaluation_and_Finalization_Contract.md
 - docs/03_pipeline/12_Documentation_Gap_Detection_and_Refinement_Loop_Contract.md
@@ -86,6 +86,7 @@ All conflicts MUST be resolved by DOC-11.
 
 ### Artifact Schema (v2)
 - docs/05_artifacts/Artifact_Schema_Revision_v2.md (DOC-17)
+- docs/05_artifacts/Artifact_Serialization_and_Embedded_JSON_Rule.md (DOC-21)
 
 ### Progress Contract (v2)
 - docs/06_progress/Progress_Contract_Revision_v2.md (DOC-18)
@@ -99,6 +100,9 @@ All conflicts MUST be resolved by DOC-11.
 
 ### Task Artifacts
 - docs/05_artifacts/task_artifact_schema_v1.json (SCHEMA-02)
+
+### Stage Closure
+- docs/05_artifacts/stage_closure_schema_v1.json (SCHEMA-06)
 
 ### Stage C Verification
 - docs/09_verify/trace_matrix_schema_v1.json (SCHEMA-03)
@@ -125,15 +129,6 @@ v1 documents remain binding.
 
 Canonical filenames MUST be ASCII-safe.
 Non-ASCII punctuation is prohibited in canonical filenames.
-
-Current violation present in this repo:
-- docs/03_pipeline/03_Pipeline_Stages_Specification_A–D.md
-
-This MUST be renamed to:
-- docs/03_pipeline/03_Pipeline_Stages_Specification_A-D.md
-
-After rename:
-- any references must use the new path.
 
 ---
 
