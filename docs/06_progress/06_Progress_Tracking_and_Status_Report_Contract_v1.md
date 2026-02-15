@@ -32,13 +32,13 @@ This contract eliminates:
 
 ## 2. Core Principles (Non-Negotiable)
 
-1. Progress is computable ONLY from closed, validated artifacts
-2. Progress reporting is strictly read-only for humans
-3. No human approval is required to advance execution
-4. The pipeline MUST NOT stall silently
-5. Every reported percentage MUST be derivable and auditable
-6. Status is derived from artifacts and gates, not narration
-7. Execution activity has ZERO progress value
+1. Progress is computable ONLY from closed, validated artifacts  
+2. Progress reporting is strictly read-only for humans  
+3. No human approval is required to advance execution  
+4. The pipeline MUST NOT stall silently  
+5. Every reported percentage MUST be derivable and auditable  
+6. Status is derived from artifacts and gates, not narration  
+7. Execution activity has ZERO progress value  
 
 ---
 
@@ -151,7 +151,7 @@ Any value other than "LIVE" is INVALID and MUST Fail-Closed.
   "blocking_questions": [],
   "next_step": ""
 }
-```
+````
 
 ---
 
@@ -164,15 +164,17 @@ by the contents of:
 `progress/status.json`
 
 There is NO distinction between:
-- A “status report”
-- The live execution state file
+
+* A “status report”
+* The live execution state file
 
 They are the SAME artifact.
 
 Any status report:
-- Emitted verbally
-- Returned via API
-- Displayed to a human
+
+* Emitted verbally
+* Returned via API
+* Displayed to a human
 
 MUST be a direct, lossless rendering
 of the current contents of `progress/status.json`.
@@ -185,9 +187,9 @@ are permitted.
 If a reported status differs in ANY way
 from `progress/status.json`:
 
-- The report is INVALID
-- Execution MUST halt
-- A corrected status MUST be re-emitted
+* The report is INVALID
+* Execution MUST halt
+* A corrected status MUST be re-emitted
 
 ---
 
@@ -198,19 +200,20 @@ from the status report fields.
 
 Exactly ONE execution state MUST apply:
 
-- RUNNING
-- BLOCKED
-- ABORTED
-- COMPLETED
+* RUNNING
+* BLOCKED
+* ABORTED
+* COMPLETED
 
 State derivation rules (in strict priority order):
 
 1. If execution is under Execution Abort handling rules → ABORTED
 2. Else if `blocking_questions` is non-empty → BLOCKED
 3. Else if `overall_progress_percent` = 100:
-   - `next_step` MUST be an empty string
-   - `blocking_questions` MUST be an empty array
-   → COMPLETED
+
+   * `next_step` MUST be an empty string
+   * `blocking_questions` MUST be an empty array
+     → COMPLETED
 4. Otherwise → RUNNING
 
 No other state inference is allowed.
@@ -227,10 +230,10 @@ is invalid.
 
 MUST be EXACTLY one of the following canonical stage IDs:
 
-- "A"
-- "B"
-- "C"
-- "D"
+* "A"
+* "B"
+* "C"
+* "D"
 
 These values are authoritative and machine-stable.
 
@@ -245,9 +248,9 @@ are STRICTLY FORBIDDEN.
 If the value does not match
 one of the above strings EXACTLY:
 
-- Status report is INVALID
-- Progress calculation MUST FAIL CLOSED
-- Execution MUST halt
+* Status report is INVALID
+* Progress calculation MUST FAIL CLOSED
+* Execution MUST halt
 
 ---
 
@@ -270,43 +273,47 @@ fixed, predefined stage weights.
 Unless explicitly overridden by a versioned contract,
 the default stage weights are:
 
-- Stage A — Architecture: 20%
-- Stage B — Documentation: 25%
-- Stage C — Implementation: 30%
-- Stage D — Verification & Decision: 25%
+* Stage A — Architecture: 20%
+* Stage B — Documentation: 25%
+* Stage C — Implementation: 30%
+* Stage D — Verification & Decision: 25%
 
 Stage weights are immutable during execution.
 
 Any change to stage weights requires:
-- A new version of this contract
-- Recalculation from zero
-- Explicit human approval
+
+* A new version of this contract
+* Recalculation from zero
+* Explicit human approval
 
 ---
 
 ### 4.2.2 No Estimated Progress Rule (Hard)
 
 Progress percentages MUST NOT be:
-- Estimated
-- Rounded
-- Approximated
-- Inferred from effort
+
+* Estimated
+* Rounded
+* Approximated
+* Inferred from effort
 
 If progress cannot be calculated
 deterministically from closed artifacts and validation gates:
 
-- The status report is INVALID
-- Execution MUST Fail-Closed
-- `blocking_questions` MUST include exactly one structural question:
-  - "Progress calculation failed deterministically. Fix required in orchestrator calculation rules. Continue? (YES/NO)"
-- `next_step` MUST be an empty string
+* The status report is INVALID
+* Execution MUST Fail-Closed
+* `blocking_questions` MUST include exactly one structural question:
+
+  * "Progress calculation failed deterministically. Fix required in orchestrator calculation rules. Continue? (YES/NO)"
+* `next_step` MUST be an empty string
 
 Under no circumstances may:
-- `overall_progress_percent` be reset to 0
-- or modified
-unless triggered by:
-- explicit rollback / invalidation, OR
-- Execution Abort handling rules
+
+* `overall_progress_percent` be reset to 0
+* or modified
+  unless triggered by:
+* explicit rollback / invalidation, OR
+* Execution Abort handling rules
 
 ---
 
@@ -316,17 +323,19 @@ Stage progress represents verified completion
 inside the current stage.
 
 Calculation MUST be based ONLY on:
-- Artifacts that are CLOSED
-- Artifacts that passed validation gates
+
+* Artifacts that are CLOSED
+* Artifacts that passed validation gates
 
 Formula:
 
 (closed_and_verified_artifacts / total_required_artifacts) * 100
 
 Artifacts that are:
-- Draft
-- Pending verification
-- Rolled back
+
+* Draft
+* Pending verification
+* Rolled back
 
 MUST be counted as 0%.
 
@@ -404,16 +413,16 @@ or a bounded, selectable decision fork.
 
 Each blocking question MUST:
 
-- Be binary or option-bounded
-- Be answerable by the human
-- Explicitly unblock execution
-- Be strictly minimal (no narrative)
+* Be binary or option-bounded
+* Be answerable by the human
+* Explicitly unblock execution
+* Be strictly minimal (no narrative)
 
 If this array is non-empty:
 
-- Execution state MUST be BLOCKED
-- `next_step` MUST be an empty string
-- The reason MUST be structural, not preference-based
+* Execution state MUST be BLOCKED
+* `next_step` MUST be an empty string
+* The reason MUST be structural, not preference-based
 
 `blocking_questions` MUST NOT be used
 to represent deterministic impossibility.
@@ -421,9 +430,9 @@ to represent deterministic impossibility.
 If execution is deterministically impossible
 and no valid fork exists:
 
-- Execution MUST be classified as ABORTED
-- `blocking_questions` MUST be empty
-- Progress freeze rules apply
+* Execution MUST be classified as ABORTED
+* `blocking_questions` MUST be empty
+* Progress freeze rules apply
 
 ---
 
@@ -434,21 +443,24 @@ ONE and ONLY ONE
 immediately executable action.
 
 Rules:
-- It MUST be deterministic
-- It MUST NOT require human input
-- It MUST map directly to an artifact lifecycle step
-- It MUST be executable without clarification
+
+* It MUST be deterministic
+* It MUST NOT require human input
+* It MUST map directly to an artifact lifecycle step
+* It MUST be executable without clarification
 
 The next_step MUST NOT:
-- Describe intent
-- Describe planning
-- Describe future reasoning
-- Contain conditional language
+
+* Describe intent
+* Describe planning
+* Describe future reasoning
+* Contain conditional language
 
 If no executable action exists:
-- Execution MUST be BLOCKED or ABORTED
-- next_step MUST be empty
-- The blocking reason MUST be explicit
+
+* Execution MUST be BLOCKED or ABORTED
+* next_step MUST be empty
+* The blocking reason MUST be explicit
 
 ---
 
@@ -458,14 +470,15 @@ The `next_step` field MUST be populated
 ONLY when execution state is RUNNING.
 
 If execution state is:
-- BLOCKED
-- ABORTED
-- COMPLETED
+
+* BLOCKED
+* ABORTED
+* COMPLETED
 
 Then:
 
-- `next_step` MUST be an empty string
-- No implied or suggested action is allowed
+* `next_step` MUST be an empty string
+* No implied or suggested action is allowed
 
 Any non-empty `next_step`
 outside RUNNING state
@@ -498,14 +511,16 @@ is a contract violation.
 ### 6.1 Allowed Sources (Exclusive)
 
 Progress percentages MAY ONLY be derived from:
-- Count of CLOSED artifacts
-- Passed validation gates
-- Completed stage exits
+
+* Count of CLOSED artifacts
+* Passed validation gates
+* Completed stage exits
 
 The pipeline MUST NOT:
-- Inflate progress using optional artifacts
-- Advance progress based on activity
-- Include non-mandatory outputs in calculations
+
+* Inflate progress using optional artifacts
+* Advance progress based on activity
+* Include non-mandatory outputs in calculations
 
 If artifact requirements are unclear,
 progress calculation MUST FAIL CLOSED
@@ -517,14 +532,15 @@ and default to 0%.
 
 If progress cannot be calculated deterministically:
 
-- The status report is INVALID
-- Execution MUST Fail-Closed
-- `overall_progress_percent` MUST remain unchanged
+* The status report is INVALID
+* Execution MUST Fail-Closed
+* `overall_progress_percent` MUST remain unchanged
   unless a rollback/invalidation or Execution Abort rule applies
-- `stage_progress_percent` MUST be set to `0`
-- `blocking_questions` MUST include exactly one structural question:
-  - "Progress calculation failed deterministically. Fix required in orchestrator calculation rules. Continue? (YES/NO)"
-- `next_step` MUST be an empty string
+* `stage_progress_percent` MUST be set to `0`
+* `blocking_questions` MUST include exactly one structural question:
+
+  * "Progress calculation failed deterministically. Fix required in orchestrator calculation rules. Continue? (YES/NO)"
+* `next_step` MUST be an empty string
 
 Execution MUST transition to BLOCKED until the calculation rules are corrected.
 
@@ -535,11 +551,11 @@ Execution MUST transition to BLOCKED until the calculation rules are corrected.
 Once the execution state is deterministically derived as COMPLETED
 per Section 3.1:
 
-- `overall_progress_percent` MUST be set to `100`
-- Progress MUST become immutable
-- No further updates are permitted
-- No regression is allowed
-- No new artifacts may affect progress
+* `overall_progress_percent` MUST be set to `100`
+* Progress MUST become immutable
+* No further updates are permitted
+* No regression is allowed
+* No new artifacts may affect progress
 
 Any attempt to modify progress
 after COMPLETED state is reached
@@ -551,14 +567,15 @@ is a system violation.
 
 Progress percentage MAY decrease ONLY when:
 
-- A rollback is executed
-- A previously closed artifact is invalidated
-- A stage is explicitly reopened by decision
+* A rollback is executed
+* A previously closed artifact is invalidated
+* A stage is explicitly reopened by decision
 
 Any progress decrease MUST:
-- Be explainable deterministically
-- Be reflected immediately in status.json
-- Reference the triggering decision or rollback
+
+* Be explainable deterministically
+* Be reflected immediately in status.json
+* Reference the triggering decision or rollback
 
 Silent or unexplained regression
 is a contract violation.
@@ -572,19 +589,20 @@ a terminal enforcement state.
 
 Upon Execution Abort:
 
-- `current_stage` MUST reflect the aborting stage
-- `next_step` MUST be an empty string
-- `blocking_questions` MUST be an empty array
-- `issues` MAY include deterministic fault descriptors (non-narrative, non-persuasive)
-- `status.json` MUST be frozen immediately after writing the ABORTED state
+* `current_stage` MUST reflect the aborting stage
+* `next_step` MUST be an empty string
+* `blocking_questions` MUST be an empty array
+* `issues` MAY include deterministic fault descriptors (non-narrative, non-persuasive)
+* `status.json` MUST be frozen immediately after writing the ABORTED state
 
 Progress percentages MUST remain artifact-derived.
 They MUST NOT be force-reset to 0 as a semantic signal.
 
 Rules:
-- `overall_progress_percent` MUST remain the last deterministically calculated value
+
+* `overall_progress_percent` MUST remain the last deterministically calculated value
   derived from CLOSED artifacts prior to the abort
-- `stage_progress_percent` MUST remain the last deterministically calculated value
+* `stage_progress_percent` MUST remain the last deterministically calculated value
   for the current stage prior to the abort
 
 No partial success is implied by non-zero progress.
@@ -596,10 +614,10 @@ ABORTED is NOT SUCCESSFUL regardless of percentage.
 
 After an Execution Abort:
 
-- No component may update progress
-- No percentage recalculation is allowed
-- No inferred recovery progress may be reported
-- No re-entry, retry, rollback, or continuation may be authorized
+* No component may update progress
+* No percentage recalculation is allowed
+* No inferred recovery progress may be reported
+* No re-entry, retry, rollback, or continuation may be authorized
 
 Progress remains frozen
 until a new task is explicitly initiated.
@@ -613,19 +631,19 @@ is a system violation.
 
 The human authority may ask at any time:
 
-- “Status?”
-- “Progress?”
-- “Where are we?”
+* “Status?”
+* “Progress?”
+* “Where are we?”
 
 The system MUST respond with:
 
-- A full status report
-- A direct, lossless rendering of `progress/status.json`
-- NO additional text
-- NO commentary
-- NO explanation
-- NO suggestions
-- NO interpretation
+* A full status report
+* A direct, lossless rendering of `progress/status.json`
+* NO additional text
+* NO commentary
+* NO explanation
+* NO suggestions
+* NO interpretation
 
 The response MUST NOT include
 any content that is not present
@@ -655,24 +673,27 @@ The following are strictly prohibited:
 
 Any agent or pipeline component that violates this contract:
 
-- MUST halt execution immediately (Fail-Closed)
-- MUST preserve all artifacts and current state for audit
-- MUST invalidate any non-authoritative or unauthorized status mutation
-- MUST return control to the owning-stage enforcement path as governed EXCLUSIVELY by:
-  - Pipeline Stages Specification (A→D)
-  - Autonomy Policy & Human Interrupt Protocol
-  - Build & Verify Playbook (Local)
+* MUST halt execution immediately (Fail-Closed)
+* MUST preserve all artifacts and current state for audit
+* MUST invalidate any non-authoritative or unauthorized status mutation
+* MUST return control to the owning-stage enforcement path as governed EXCLUSIVELY by:
+
+  * Pipeline Stages Specification (A→D)
+  * Autonomy Policy & Human Interrupt Protocol
+  * Build & Verify Playbook (Local)
 
 If a contract-compliant owning-stage recovery path exists:
-- Execution MUST return to the owning stage
-- All downstream artifacts MUST be invalidated deterministically
+
+* Execution MUST return to the owning stage
+* All downstream artifacts MUST be invalidated deterministically
 
 If NO contract-compliant recovery path exists:
-- Execution MUST transition to Execution Abort
-- Progress freeze rules apply
-- Human visibility MUST occur ONLY via the live execution state
+
+* Execution MUST transition to Execution Abort
+* Progress freeze rules apply
+* Human visibility MUST occur ONLY via the live execution state
   in `progress/status.json` (lossless rendering)
-- No narrative notification, summary, or extra text is permitted
+* No narrative notification, summary, or extra text is permitted
 
 ---
 
@@ -683,10 +704,11 @@ may create or modify `progress/status.json`.
 
 Agents, sub-agents, tools, or scripts
 MUST NOT:
-- Patch status fields
-- Correct percentages
-- Rewrite blocking questions
-- Override execution state
+
+* Patch status fields
+* Correct percentages
+* Rewrite blocking questions
+* Override execution state
 
 Any unauthorized status mutation
 is a critical system fault

@@ -1,6 +1,6 @@
 # 📄 Artifact Schema & Repository Layout Standard
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Applies To:** All autonomous and semi-autonomous executions within the HALO Personal Autonomous Pipeline  
 **Enforcement:** Mandatory (Fail-Closed)
 
@@ -273,9 +273,8 @@ Rules:
 - No experimental code outside scope
 
 Structure:
-
-/code/src
-/code/tests
+- `/code/src`
+- `/code/tests`
 
 ---
 
@@ -323,7 +322,7 @@ and are governed by strict isolation and authority rules.
 Progress artifacts are divided into TWO
 and ONLY TWO layers:
 
-1. Live Execution State (Authoritative)
+1. Live Execution State (Authoritative)  
 2. Historical Records (Non-Authoritative)
 
 No other progress representation is permitted.
@@ -367,7 +366,7 @@ and MUST be treated as a system defect.
 
 ---
 
-#### 4.5.2 Historical Snapshots (`progress/history/`)
+## 4.5.2 Historical Snapshots (`progress/history/`)
 
 Purpose:
 - Preserve immutable execution history
@@ -439,7 +438,7 @@ History rotation exists for storage control ONLY and has ZERO execution authorit
 
 ---
 
-### 4.5.3 Historical Artifacts Non-Authority Rule (Hard)
+## 4.5.3 Historical Artifacts Non-Authority Rule (Hard)
 
 Artifacts under `progress/history/`:
 
@@ -458,25 +457,98 @@ is a system violation.
 
 ---
 
-## 5. Required Artifact Schema per Stage
+## 5. Required Artifact Schema per Stage (Execution Artifacts)
 
-Each pipeline stage MUST produce artifacts as follows:
+This section defines the **task-scoped execution artifacts** that MUST exist
+under `artifacts/` for each stage to claim progress.
 
-| Stage | Required Artifacts |
-|------|--------------------|
-| A – Architect | architecture/task_plan.md, architecture/validated_assumptions.md |
-| B – Docs Writer | docs/02_scope/*, docs/03_pipeline/* |
-| C – Builder | code/src/*, code/tests/* |
-| D – Verify | verify/* |
-| D – Decision (if applicable) | decisions/* |
-| D – Report | progress/status.json |
+Governance documents under `docs/` are NOT stage outputs.
+Stage outputs are emitted ONLY under `artifacts/stage_<X>/`.
 
-Notes:
-- `docs/01_system/*`, `docs/04_autonomy/*`, `docs/05_artifacts/*`, `docs/06_progress/*`, and `docs/07_decisions/*`
-  are governance documents and remain stable system-wide.
-- Stage outputs listed above refer to task-scoped execution artifacts, not global governance documentation.
+Missing required execution artifacts = stage failure.
 
-Missing artifacts = stage failure.
+---
+
+### 5.1 Stage A — Required Artifacts (`artifacts/stage_A/`)
+
+Stage A MUST produce the following CLOSED artifacts:
+
+- `artifacts/stage_A/task_plan.md`
+- `artifacts/stage_A/validated_assumptions.md`
+- `artifacts/stage_A/idea_evaluation.md`
+- `artifacts/stage_A/idea_final_spec.md`
+- `artifacts/stage_A/idea_approval_record.md`
+
+No Stage B execution is permitted unless:
+- `idea_final_spec.md` exists, AND
+- `idea_approval_record.md` exists and indicates APPROVE.
+
+---
+
+### 5.2 Stage B — Required Artifacts (`artifacts/stage_B/`)
+
+Stage B MUST produce the following CLOSED artifacts:
+
+- `artifacts/stage_B/specifications.md`
+- `artifacts/stage_B/data_schemas.md`
+- `artifacts/stage_B/interface_contracts.md`
+- `artifacts/stage_B/validation_rules.md`
+- `artifacts/stage_B/edge_cases.md`
+
+Stage B MUST also produce the following CLOSED artifacts:
+
+- `artifacts/stage_B/docs_gap_report.md`
+- `artifacts/stage_B/docs_coverage_matrix.md`
+- `artifacts/stage_B/spec_pack_manifest.md`
+
+No Stage C execution is permitted unless:
+- `docs_gap_report.md` indicates ZERO unresolved MUST-level gaps, AND
+- `docs_coverage_matrix.md` indicates 100% MUST-level coverage, AND
+- `spec_pack_manifest.md` exists and is consistent with the produced Stage B artifacts.
+
+---
+
+### 5.3 Stage C — Required Artifacts (`artifacts/stage_C/` + code)
+
+Stage C MUST produce code under:
+- `/code/src/*`
+- `/code/tests/*`
+
+Stage C MUST also produce the following CLOSED artifacts:
+
+- `artifacts/stage_C/code_trace_matrix.md`
+- `artifacts/stage_C/code_mismatch_report.md`
+- `artifacts/stage_C/test_evidence.md`
+
+No Stage D execution is permitted unless:
+- `code_mismatch_report.md` indicates ZERO unresolved mismatches, AND
+- `code_trace_matrix.md` indicates 100% MUST-level coverage, AND
+- `test_evidence.md` exists and indicates required tests PASS (as applicable).
+
+---
+
+### 5.4 Stage D — Required Artifacts (`artifacts/stage_D/` + verify)
+
+Stage D MUST produce CLOSED verification artifacts as required by:
+- Build & Verify Playbook (Local)
+
+At minimum, Stage D MUST produce:
+
+- `artifacts/stage_D/verification_report.md`
+
+If tests are executed within Stage D (per playbook), Stage D MUST also produce:
+
+- `artifacts/stage_D/test_results.md` (or deterministic equivalent required by the playbook)
+
+Stage D MUST NOT require, assume, or depend on a Decision artifact.
+
+Decision artifacts may exist ONLY if:
+- a selectable execution fork exists, AND
+- a human-issued decision is required by contract, AND
+- the decision is captured and logged by the orchestrator.
+
+If applicable, Decision artifacts MUST live ONLY under:
+- `/decisions/`
 
 ---
 
@@ -492,7 +564,7 @@ Rules:
 Bad:
 ```
 
-Final Doc.md
+final doc.md
 test!!!.js
 
 ```
@@ -504,6 +576,22 @@ Good:
 user_validation.test.js
 
 ```
+
+---
+
+## 6.1 Stage Artifact Filename Constraints (Hard)
+
+Within `artifacts/stage_A/`, `artifacts/stage_B/`, `artifacts/stage_C/`, `artifacts/stage_D/`:
+
+- Filenames MUST be deterministic and stable
+- Filenames MUST match the required artifacts list for the stage
+- Additional files are allowed ONLY if:
+  - they are explicitly required by a higher-authority contract, OR
+  - they are explicitly required by the owning stage contract
+
+Any extra artifact not permitted by contract:
+- MUST be treated as a repository compliance violation
+- MUST cause Fail-Closed unless it is proven non-authoritative AND ignored deterministically by execution logic
 
 ---
 
@@ -549,7 +637,7 @@ it MUST NOT exist.
 
 ---
 
-### 7.2 Artifact Mutation Detection Rule (Hard)
+## 7.2 Artifact Mutation Detection Rule (Hard)
 
 Any mutation of an immutable artifact
 MUST be treated as a critical fault.
@@ -570,7 +658,7 @@ is equivalent to silent scope modification.
 
 ---
 
-### 7.3 Artifact Deletion Prohibition (Hard)
+## 7.3 Artifact Deletion Prohibition (Hard)
 
 Artifacts MUST NOT be deleted
 once created.

@@ -1,7 +1,7 @@
 # 📄 Document 3 — Pipeline Stages Specification (A → D)
 
 **Project:** Personal Autonomous Pipeline for HALO  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** CORE – NON-NEGOTIABLE  
 **Audience:** Autonomous Agents, Orchestrator, Human Owner (Khaled)
 
@@ -264,11 +264,51 @@ and MUST NOT produce a Decision artifact.
 
 ---
 
-## 3. Stage A — Architecture & Task Decomposition
+## 2.5 Iterative Loop Rule (Hard, Cross-Stage)
+
+The pipeline supports iterative execution ONLY as contract-defined cycles within a stage.
+
+A loop iteration is permitted ONLY if:
+- The stage contract declares iteration as a valid action, AND
+- The iteration outcome is recorded as an artifact, AND
+- Stage closure criteria are evaluated deterministically after each iteration
+
+Loops MUST NOT:
+- Be open-ended without deterministic termination criteria
+- Depend on subjective quality judgment
+- Be driven by “improve further” reasoning
+
+If termination criteria cannot be met deterministically:
+- Execution MUST classify as BLOCKED (selectable fork) or ABORTED (no path),
+  per the Autonomy Policy & Human Interrupt Protocol and Execution Abort Handling.
+
+---
+
+## 2.6 Mandatory Human Approval Gate for Idea Finalization (Hard)
+
+The pipeline MUST obtain an explicit Human Approval ONLY for:
+- Final acceptance of the Stage A “Idea Final Spec” prior to Stage B initiation
+
+This approval gate:
+- Does NOT apply to documentation or implementation quality judgment
+- Exists ONLY to freeze intent and scope before specification generation
+
+If approval is required and not available:
+- Execution MUST enter BLOCKED
+- The block MUST be represented in `progress/status.json`
+- No downstream stage may begin
+
+Approval MUST be captured as a CLOSED artifact.
+No implicit approval is allowed.
+
+---
+
+## 3. Stage A — Architecture & Task Decomposition (Idea Finalization)
 
 ### 3.1 Objective
 
-Transform a raw idea, request, or instruction into a **fully scoped execution plan**.
+Transform a raw idea, request, or instruction into a **fully scoped execution plan**
+AND produce a **frozen, approval-bound final idea specification**.
 
 No coding, no documents, no assumptions beyond what is explicitly inferable.
 
@@ -299,9 +339,30 @@ Stage A MUST produce the following CLOSED artifacts:
   - deterministically validated, OR
   - explicitly marked as requiring human decision
 
+- `artifacts/stage_A/idea_evaluation.md` — deterministic evaluation of the idea containing:
+  - scope boundaries (in-scope / out-of-scope)
+  - constraints and non-negotiables
+  - risks and failure modes (classified, non-subjective)
+  - unresolved ambiguities (if any) and their class
+
+- `artifacts/stage_A/idea_final_spec.md` — the final, frozen idea specification containing:
+  - intent statement
+  - frozen scope
+  - success contract summary (must map to docs in Stage B)
+  - explicit glossary (only if required by intent)
+  - explicit exclusions
+
+- `artifacts/stage_A/idea_approval_record.md` — explicit human approval outcome containing:
+  - APPROVE / REJECT / REQUEST_CHANGES
+  - immutable timestamp
+  - link to the approved `idea_final_spec.md` version
+
 Unvalidated assumptions have ZERO execution authority
 and MUST block stage closure
 unless resolved or escalated.
+
+Stage A MUST NOT be marked CLOSED
+without `idea_approval_record.md` indicating APPROVE.
 
 ---
 
@@ -312,6 +373,8 @@ Stage A **passes only if**:
 - All tasks are atomic and non-overlapping
 - Dependencies are explicit
 - Assumptions are listed and justified
+- `idea_final_spec.md` exists and is internally consistent with `task_plan.md`
+- `idea_approval_record.md` exists and indicates APPROVE
 
 ---
 
@@ -330,6 +393,7 @@ Human input is required ONLY if:
 - Multiple valid architectural options exist
 - A core assumption cannot be validated deterministically
 - A boundary or authority risk is detected
+- Stage A approval is required (mandatory approval gate)
 
 Human input MUST NOT be requested for:
 - Preference confirmation
@@ -337,7 +401,8 @@ Human input MUST NOT be requested for:
 - “Best practice” selection
 - Confidence or reassurance
 
-Human interruption exists to resolve ambiguity,
+Human interruption exists to resolve ambiguity
+or freeze intent via approval,
 not to improve outcomes.
 
 Otherwise, execution continues automatically.
@@ -348,23 +413,24 @@ Otherwise, execution continues automatically.
 
 - Primary: AI (Architect Agent)
 - Authority: System Rules
-- Human Role: Decision only if interrupted
+- Human Role: Decision only if interrupted + Stage A approval gate
 
 ---
 
-## 4. Stage B — Documentation & Specification
+## 4. Stage B — Documentation & Specification (Documentation Refinement Loop)
 
 ### 4.1 Objective
 
-Convert architecture into **execution-grade documentation**.
+Convert Stage A frozen intent into **execution-grade documentation**.
 
 Documentation must be sufficient for deterministic code generation.
+Stage B includes a deterministic refinement loop to eliminate specification gaps.
 
 ---
 
 ### 4.2 Inputs
 
-- All Stage A artifacts
+- All Stage A artifacts (especially `idea_final_spec.md`)
 - HALO governance rules
 - Existing standards and templates (if allowed)
 
@@ -380,6 +446,23 @@ Stage B MUST produce the following CLOSED artifacts:
 - `artifacts/stage_B/validation_rules.md` — validation logic and constraints
 - `artifacts/stage_B/edge_cases.md` — explicitly documented edge cases
 
+Stage B MUST also produce the following CLOSED artifacts:
+
+- `artifacts/stage_B/docs_gap_report.md` — deterministic gap/contradiction report containing:
+  - missing MUST-level requirements (by reference)
+  - contradictions between documents (by clause reference)
+  - underspecified behaviors (by clause reference)
+  - authority violations (e.g., scope expansion signals)
+
+- `artifacts/stage_B/docs_coverage_matrix.md` — coverage mapping containing:
+  - Stage A frozen requirements → Stage B document sections
+  - coverage status: COVERED / MISSING / CONFLICT
+
+- `artifacts/stage_B/spec_pack_manifest.md` — explicit manifest of Stage B outputs containing:
+  - artifact list with paths
+  - version identifiers
+  - dependency ordering (consumption order for Stage C)
+
 All artifacts:
 - MUST be Markdown
 - MUST be standalone
@@ -391,10 +474,13 @@ All artifacts:
 ### 4.4 Validation Gates
 
 Stage B **passes only if**:
-- No ambiguity remains
-- All behaviors are specified
+- No ambiguity remains for MUST-level behaviors
+- All behaviors are specified deterministically
 - Inputs and outputs are deterministic
 - No missing sections exist
+- `docs_gap_report.md` indicates ZERO unresolved MUST-level gaps
+- `docs_coverage_matrix.md` indicates 100% coverage of MUST-level requirements
+- `spec_pack_manifest.md` is complete and consistent with produced artifacts
 
 ---
 
@@ -440,6 +526,25 @@ and MUST cause Stage B to fail.
 
 ---
 
+### 4.4.3 Documentation Refinement Loop Termination Criteria (Hard)
+
+Stage B refinement iterations are permitted ONLY until all are true:
+- `docs_gap_report.md` contains ZERO MUST-level gaps
+- `docs_gap_report.md` contains ZERO contradictions
+- `docs_coverage_matrix.md` indicates 100% coverage of MUST-level requirements
+- No authority violations are present
+
+If these criteria cannot be met deterministically due to:
+- missing upstream intent
+- multiple equally valid interpretations
+- external constraints missing
+
+Execution MUST return to Stage A
+or enter Human Interrupt per the Autonomy Policy & Human Interrupt Protocol,
+as determined by failure classification rules.
+
+---
+
 ### 4.5 Failure Handling
 
 If Stage B fails, the pipeline MUST determine
@@ -473,11 +578,17 @@ Human input is required **only if**:
 
 ---
 
-## 5. Stage C — Code Generation & Implementation
+## 5. Stage C — Code Generation & Implementation (Code Compliance Loop)
 
 ### 5.1 Objective
 
 Generate **production-aligned code** strictly from documentation.
+
+Stage C includes a deterministic compliance loop:
+- detect mismatches
+- stop
+- return upstream when required
+- and only proceed when compliance is proven
 
 No creative interpretation is allowed.
 
@@ -485,7 +596,7 @@ No creative interpretation is allowed.
 
 ### 5.2 Inputs
 
-- All Stage B documents
+- All Stage B documents (as listed in `spec_pack_manifest.md`)
 - Repository structure rules
 - Existing codebase (if any)
 
@@ -499,6 +610,24 @@ Stage C MUST produce the following artifacts:
 - Configuration files colocated with their owning modules
 - Scripts placed under deterministic, documented paths
 - Inline documentation ONLY if explicitly allowed by Stage B specifications
+
+Stage C MUST also produce the following CLOSED artifacts:
+
+- `artifacts/stage_C/code_trace_matrix.md` — mapping containing:
+  - Stage B requirement clause → file path → symbol/section → justification
+  - MUST-level clause coverage status
+
+- `artifacts/stage_C/code_mismatch_report.md` — deterministic mismatch report containing:
+  - undocumented behaviors found in code (by file/section)
+  - missing behaviors required by specs (by clause)
+  - interface mismatches (by contract reference)
+  - data schema mismatches (by schema reference)
+
+- `artifacts/stage_C/test_evidence.md` — test evidence containing:
+  - executed test commands
+  - deterministic output references (paths to logs)
+  - PASS/FAIL declaration per test suite
+  - build/run evidence if applicable
 
 All code artifacts MUST:
 - Be traceable 1:1 to Stage B documents
@@ -530,6 +659,9 @@ Stage C **passes only if**:
 - Code matches specs exactly
 - No undocumented behavior exists
 - Build succeeds (if applicable)
+- `code_trace_matrix.md` indicates 100% coverage of MUST-level requirements
+- `code_mismatch_report.md` indicates ZERO unresolved mismatches
+- `test_evidence.md` indicates required tests PASS (as applicable)
 
 ---
 
@@ -563,6 +695,24 @@ the pipeline MUST:
 
 Execution correctness has absolute priority
 over elegance or quality improvements.
+
+---
+
+### 5.4.3 Code Compliance Loop Termination Criteria (Hard)
+
+Stage C compliance iterations are permitted ONLY until all are true:
+- `code_mismatch_report.md` contains ZERO unresolved mismatches
+- `code_trace_matrix.md` indicates 100% MUST-level coverage
+- required tests PASS (as applicable)
+
+If compliance cannot be achieved because specs are insufficient:
+- Stage C MUST stop
+- Execution MUST return to Stage B
+- No local workaround is permitted
+
+If compliance cannot be achieved due to missing external inputs
+(credentials, keys, non-derivable parameters):
+- Execution MUST enter Human Interrupt per contract
 
 ---
 

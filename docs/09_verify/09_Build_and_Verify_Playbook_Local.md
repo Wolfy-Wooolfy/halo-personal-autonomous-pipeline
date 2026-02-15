@@ -1,6 +1,6 @@
 # 📄 Document 9 — Build & Verify Playbook (Local)
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** MANDATORY  
 **Scope:** Local execution only  
 **Applies To:** All HALO autonomous pipelines  
@@ -90,6 +90,30 @@ Acceptance authority exists ONLY
 in Stage D of the pipeline
 and ONLY under the conditions
 defined in Pipeline Stages Specification.
+
+---
+
+## 2.1 Verification Targets (Hard)
+
+Verification MUST operate on explicit targets only.
+
+A verification run MUST declare its target set deterministically as one of:
+
+- Stage C verification target set:
+  - `/code/src/*`
+  - `/code/tests/*`
+  - `artifacts/stage_C/code_trace_matrix.md`
+  - `artifacts/stage_C/code_mismatch_report.md`
+  - `artifacts/stage_C/test_evidence.md`
+
+- Stage D verification target set:
+  - `artifacts/stage_D/verification_report.md`
+  - any additional Stage D verification artifacts required by the Build & Verify Playbook itself
+  - verification logs and outputs under `/verify/*` as required by this document
+
+If a verification run cannot declare a deterministic target set:
+- Verification MUST FAIL CLOSED
+- Execution MUST halt
 
 ---
 
@@ -279,7 +303,7 @@ If a retry does not change the execution outcome deterministically:
 - Retries MUST stop immediately
 - The system MUST classify the condition deterministically as ONE of:
   - Execution Abort (if no selectable fork exists), OR
-  - Human Interrupt / BLOCKED (ONLY if a selectable execution fork exists)
+  - Human Interrupt / BLOCKED (ONLY if a selectable fork exists)
 
 In all cases:
 - Execution MUST halt
@@ -356,6 +380,42 @@ Minimum required fields:
 - short_reason (required only if FAIL, factual, non-narrative)
 
 If this artifact is missing → VERIFICATION FAILED.
+
+---
+
+### 4.1.2 Stage Verification Closure Artifact (Hard)
+
+In addition to the live report (`verify/unit/verification_report.json`),
+the pipeline MUST emit a CLOSED, stage-scoped verification closure artifact under `artifacts/`.
+
+This artifact exists to:
+- bind verification results to stage closure rules
+- provide an immutable, reviewable pointer to deterministic evidence
+- prevent chat-based or implicit verification claims
+
+Rules:
+- This closure artifact MUST NOT duplicate the live report schema
+- It MUST reference the live report by path
+- It MUST reference the relevant command log entries by timestamp range or explicit file references
+- It MUST declare PASS/FAIL consistent with the live report
+
+Required paths:
+
+- If verifying Stage C outputs:
+  - `artifacts/stage_C/test_evidence.md` MUST exist and MUST reference:
+    - `verify/unit/verification_report.json`
+    - `verify/smoke/local_command_log.jsonl`
+    - relevant stdout/stderr output file paths under `verify/smoke/command_output/`
+
+- If verifying Stage D outputs:
+  - `artifacts/stage_D/verification_report.md` MUST exist and MUST reference:
+    - `verify/unit/verification_report.json`
+    - `verify/smoke/local_command_log.jsonl`
+    - relevant stdout/stderr output file paths under `verify/smoke/command_output/`
+
+If the stage-scoped closure artifact is missing when required:
+- Verification MUST FAIL CLOSED
+- Execution MUST halt
 
 ---
 
@@ -798,6 +858,9 @@ This playbook is considered satisfied for a given local execution attempt ONLY w
 - Build completes successfully per Section 3.3
 - Verification passes and `verify/unit/verification_report.json` exists with result "PASS"
 - Any required audit logs and failure artifacts (if applicable) are written under `verify/audit/`
+- The stage-scoped closure artifact required by Section 4.1.2 exists:
+  - Stage C: `artifacts/stage_C/test_evidence.md`
+  - Stage D: `artifacts/stage_D/verification_report.md`
 - No blocking condition remains unresolved in the governing execution state
 - Progress handling is performed ONLY by the orchestrator per Doc-06
 
