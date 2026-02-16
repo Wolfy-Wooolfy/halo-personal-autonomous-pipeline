@@ -723,6 +723,73 @@ const registry = Object.freeze({
     };
   },
 
+    "TASK-039: Stage C Closure (Gate PASS + Freeze)": (context) => {
+      const tracePath = path.resolve(__dirname, "../../..", "artifacts", "stage_C", "code_trace_matrix.md");
+      const mismatchPath = path.resolve(__dirname, "../../..", "artifacts", "stage_C", "code_mismatch_report.md");
+      const evidencePath = path.resolve(__dirname, "../../..", "artifacts", "stage_C", "test_evidence.md");
+
+      if (!fs.existsSync(tracePath)) throw new Error("Missing required artifact: artifacts/stage_C/code_trace_matrix.md");
+      if (!fs.existsSync(mismatchPath)) throw new Error("Missing required artifact: artifacts/stage_C/code_mismatch_report.md");
+      if (!fs.existsSync(evidencePath)) throw new Error("Missing required artifact: artifacts/stage_C/test_evidence.md");
+
+      const traceJson = extractEmbeddedJson(fs.readFileSync(tracePath, "utf-8"));
+      const mismatchJson = extractEmbeddedJson(fs.readFileSync(mismatchPath, "utf-8"));
+      const evidenceJson = extractEmbeddedJson(fs.readFileSync(evidencePath, "utf-8"));
+
+      const mustPct = traceJson && traceJson.coverage_summary ? traceJson.coverage_summary.must_coverage_percent : null;
+      if (mustPct !== 100) throw new Error("Stage C gate failed: code_trace_matrix.md MUST coverage is not 100");
+
+      const unresolved = mismatchJson && mismatchJson.summary ? mismatchJson.summary.unresolved_total : null;
+      if (unresolved !== 0) throw new Error("Stage C gate failed: code_mismatch_report.md unresolved_total is not 0");
+
+      const evStatus = evidenceJson && evidenceJson.status ? evidenceJson.status : null;
+      if (evStatus !== "PASSED") throw new Error("Stage C gate failed: test_evidence.md status is not PASSED");
+
+      const relStageClosure = "artifacts/stage_C/stage_C.closure.md";
+      const stageClosureAbs = path.resolve(__dirname, "../../..", "artifacts", "stage_C", "stage_C.closure.md");
+
+      const stageClosure = `# Stage C — Closure
+
+  - stage: C
+  - status: CLOSED
+  - gate: PASS
+  - closed_at: ${new Date().toISOString()}
+
+  ## Evidence
+  - artifacts/stage_C/code_trace_matrix.md
+  - artifacts/stage_C/code_mismatch_report.md
+  - artifacts/stage_C/test_evidence.md
+  `;
+
+      fs.mkdirSync(path.dirname(stageClosureAbs), { recursive: true });
+      fs.writeFileSync(stageClosureAbs, stageClosure, "utf-8");
+
+      const relTaskClosure = "artifacts/tasks/TASK-039.execution.closure.md";
+      const taskClosureAbs = path.join(TASKS_PATH, "TASK-039.execution.closure.md");
+
+      const taskClosure = `# TASK-039 — Execution Closure
+
+  ## Task
+  - Task ID: TASK-039
+  - Stage Binding: C
+  - Closure Type: EXECUTION
+
+  ## Status
+  - stage_progress_percent: 100
+  - closure_artifact: true
+
+  ## Artifact
+  - ${relStageClosure}
+  `;
+
+      fs.writeFileSync(taskClosureAbs, taskClosure, "utf-8");
+
+      return {
+        stage_progress_percent: 100,
+        closure_artifact: true,
+        artifact: relTaskClosure
+      };
+    },
 });
 
 function renderMarkdownWithEmbeddedJson(title, jsonObj) {

@@ -1,11 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 65,
-  "stage_progress_percent": 65,
-  "last_completed_artifact": "artifacts/tasks/TASK-038.execution.closure.md",
-  "current_task": "TASK-039: Stage C Closure (Gate PASS + Freeze)",
+  "overall_progress_percent": 100,
+  "stage_progress_percent": 100,
+  "last_completed_artifact": "artifacts/tasks/TASK-039.execution.closure.md",
+  "current_task": "TASK-040: Stage C Encoding Normalization (Corrective Artifact)",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-039 to emit stage_C.closure.md and mark Stage C as CLOSED (encoding-safe artifacts only)."
+  "next_step": "Stage C — Execute TASK-040 to emit stage_C.closure.v2.md (encoding-normalized) and record v1 encoding anomaly."
 }
