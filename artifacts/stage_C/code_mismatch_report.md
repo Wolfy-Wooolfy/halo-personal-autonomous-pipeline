@@ -4,7 +4,7 @@
 {
   "mismatch_report_id": "MISMATCH_REPORT_STAGE_C_v1",
   "stage": "C",
-  "generated_at": "2026-02-16T15:10:37.249Z",
+  "generated_at": "2026-02-16T15:43:57.128Z",
   "items": [
     {
       "mismatch_id": "MM-TRACE-001",
@@ -25,7 +25,7 @@
         }
       ],
       "status": "RESOLVED",
-      "notes": "Clause-level mapping for Stage C MUST clauses added by TASK-035."
+      "notes": "Clause-level mapping rows added by TASK-038: 23"
     }
   ],
   "summary": {
@@ -36,6 +36,7 @@
     "unresolved_total": 0,
     "blocking": false
   },
-  "reconstruction_note": "TASK-035 fallback: existing mismatch report had no embedded JSON; reconstructed baseline."
+  "reconstruction_note": "TASK-035 fallback: existing mismatch report had no embedded JSON; reconstructed baseline.",
+  "clause_level_rows_added": 23
 }
 ~~~

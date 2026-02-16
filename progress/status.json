@@ -1,14 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 50,
-  "stage_progress_percent": 55,
-  "last_completed_artifact": "artifacts/tasks/TASK-035.execution.closure.md",
-  "current_task": "TASK-038: Rebuild Stage C Clause-Level Trace Rows",
-  "issues": [
-    "Stage C trace matrix exists but is not yet clause-level mapped to Stage C MUST clauses extracted from docs/03_pipeline/03_Pipeline_Stages_Specification_A-D.md.",
-    "MM-TRACE-001 is expected to be resolved by TASK-035."
-  ],
+  "overall_progress_percent": 65,
+  "stage_progress_percent": 65,
+  "last_completed_artifact": "artifacts/tasks/TASK-038.execution.closure.md",
+  "current_task": "TASK-039: Stage C Closure (Gate PASS + Freeze)",
+  "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-038 handler to rebuild clause-level trace rows and ensure MM-TRACE-001 is RESOLVED."
+  "next_step": "Stage C — Execute TASK-039 to emit stage_C.closure.md and mark Stage C as CLOSED (encoding-safe artifacts only)."
 }

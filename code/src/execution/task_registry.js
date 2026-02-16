@@ -517,19 +517,29 @@ const registry = Object.freeze({
       const stageCText = stageDEnd === -1 ? pipelineText.slice(stageCStart) : pipelineText.slice(stageCStart, stageDEnd);
 
       const mustClauses = [];
-      const patterns = [
-        /\*\*MUST\*\*\s*:\s*(.+)/g,
-        /(^|\n)\s*-\s*MUST\s*:\s*(.+?)(\n|$)/g,
-        /(^|\n)\s*-\s*\*\*MUST\*\*\s*:\s*(.+?)(\n|$)/g
-      ];
 
-      for (const rx of patterns) {
-        let m;
-        while ((m = rx.exec(stageCText)) !== null) {
-          const txt = String(m[2] || m[1] || "").trim();
-          if (txt) {
-            mustClauses.push(txt);
-          }
+      const lines = stageCText.split(/\r?\n/).map((l) => String(l || "").trim()).filter(Boolean);
+
+      for (const line of lines) {
+        if (!line.includes("MUST")) continue;
+
+        const cleaned = line
+          .replace(/^[\-\*\u2022]+\s*/, "")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        if (!cleaned) continue;
+
+        const idx = cleaned.indexOf("MUST");
+        if (idx === -1) continue;
+
+        const after = cleaned.slice(idx + 4).trim();
+        const clause = after.startsWith(":") ? after.slice(1).trim() : after;
+
+        if (clause) {
+          mustClauses.push(clause);
+        } else {
+          mustClauses.push(cleaned);
         }
       }
 
