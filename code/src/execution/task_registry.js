@@ -309,6 +309,60 @@ const registry = Object.freeze({
       artifact: relClosure
     };
   },
+
+  "TASK-034: Execute deterministic verification & finalize Stage C evidence": (context) => {
+    const { execSync } = require("child_process");
+
+    const relClosure = "artifacts/tasks/TASK-034.execution.closure.md";
+    const closureFile = path.join(TASKS_PATH, "TASK-034.execution.closure.md");
+
+    const stageCPath = path.resolve(__dirname, "../../..", "artifacts", "stage_C");
+    const evidencePath = path.join(stageCPath, "test_evidence.md");
+
+    const baseline = "release_local.hashes.json";
+    let output = "";
+    try {
+      output = execSync(`node tools/pre_run_check.js ${baseline}`, { cwd: path.resolve(__dirname, "../../..") }).toString();
+    } catch (err) {
+      throw new Error("Verification failed during pre_run_check execution.");
+    }
+
+    const generatedAt = new Date().toISOString();
+
+    const verificationJson = {
+      verification_id: "VERIFICATION_EVIDENCE_STAGE_C_v2",
+      generated_at: generatedAt,
+      environment: {
+        os: `${process.platform} ${process.arch}`,
+        node_version: process.version,
+        working_directory: process.cwd()
+      },
+      commands: [
+        { cwd: ".", command: "node", args: ["tools/pre_run_check.js", baseline] }
+      ],
+      results: {
+        pre_run_check: { ran: true, passed: true }
+      },
+      artifacts: [
+        "artifacts/stage_C/test_evidence.md",
+        relClosure
+      ],
+      status: "PASSED",
+      notes: output
+    };
+
+    const md = renderMarkdownWithEmbeddedJson("Stage C — Test Evidence (Finalized)", verificationJson);
+    fs.writeFileSync(evidencePath, md, "utf-8");
+
+    const closure = `# TASK-034 — Execution Closure\n\n## Status\n\n- verification: PASSED\n- stage_progress_percent: 40\n`;
+    fs.writeFileSync(closureFile, closure, "utf-8");
+
+    return {
+      stage_progress_percent: 40,
+      closure_artifact: true,
+      artifact: relClosure
+    };
+  },
 });
 
 function renderMarkdownWithEmbeddedJson(title, jsonObj) {
