@@ -19,6 +19,7 @@ It aligns artifact governance with:
 - DOC-12 (Cognitive Layer)
 - DOC-13 (Loop Enforcement)
 - DOC-14 (Stage Contracts Revision)
+- DOC-21 (Artifact Serialization & Embedded JSON Rule)
 
 ---
 
@@ -57,14 +58,14 @@ artifacts/
 │   ├── vision_coverage_matrix.md
 │   └── vision_gap_report.md
 │
-├── verification/
-│   ├── trace_matrix.md
-│   ├── mismatch_report.json
-│   └── test_evidence.md
-│
 └── release/
     ├── deployment_record.md
     └── runtime_validation.md
+
+Stage C required verification artifacts are Stage Artifacts
+and MUST live under:
+
+- artifacts/stage_C/
 
 Deviation from this layout:
 → Governance violation.
@@ -78,30 +79,24 @@ A Task Artifact MUST:
 - Declare Task ID
 - Declare Stage Binding
 - Declare Contract Clauses Satisfied
-- Declare Artifact Outputs
-- Declare Closure Condition
-- Declare Execution Result
+- Declare Deterministic Inputs
+- Declare Deterministic Outputs
+- Declare Verification Binding (schema + evidence)
 
-Task Artifact types:
-
-- Execution Artifact
-- Validation Artifact
-- Closure Artifact
-
-A Task is NOT closed without a Closure Artifact.
+Task artifacts are mandatory for any multi-step task.
 
 ---
 
-## 5. Stage Artifact Definition
+## 5. Stage Closure Artifact Definition
 
-Stage Artifacts MUST include:
+A Stage Closure Artifact MUST:
 
-- Stage Closure Artifact
-- Mandatory Loop Artifacts (per DOC-13)
-- Verification linkage (if Stage C)
+- Reference the last valid Stage Artifact outputs
+- Reference all verification evidence
+- Declare closure status (PASS/FAIL)
+- Contain zero narrative authority
 
-Stage cannot close based solely on Task artifacts.
-Stage closure requires explicit Stage artifact.
+Closure artifacts are pointers, not arguments.
 
 ---
 
@@ -119,13 +114,24 @@ If missing:
 
 ## 7. Verification Artifacts (Stage C)
 
-Verification folder MUST contain:
+Stage C MUST produce verification artifacts as Stage Artifacts under:
 
-- Trace Matrix (Docs → Code)
-- Mismatch Report (structured)
-- Test Evidence
+- artifacts/stage_C/
+
+Required artifacts and canonical paths:
+
+- artifacts/stage_C/code_trace_matrix.md  
+  - Embedded JSON MUST conform to SCHEMA-03: docs/09_verify/trace_matrix_schema_v1.json
+
+- artifacts/stage_C/code_mismatch_report.md  
+  - Embedded JSON MUST conform to SCHEMA-04: docs/09_verify/mismatch_report_schema_v1.json
+
+- artifacts/stage_C/test_evidence.md  
+  - Embedded JSON MUST conform to SCHEMA-05: docs/09_verify/verification_evidence_schema_v1.json
 
 Stage C cannot close without these.
+
+All verification artifacts MUST comply with DOC-21 (Markdown container + embedded JSON).
 
 ---
 
@@ -158,13 +164,9 @@ Any artifact:
 
 - Missing required fields
 - Outside defined categories
-- Closing Stage without loop compliance
+- Violating DOC-21 container rule
+- Violating schema binding (where required)
 
-→ Invalidates progress
-→ Triggers BLOCKED state
-
-Authority hierarchy per DOC-11 applies.
-
----
+→ SYSTEM FAILURE (Fail-Closed).
 
 **END OF DOCUMENT**

@@ -7,6 +7,27 @@
 
 ---
 
+## 0. Canonical Artifact & Schema Binding (DOC-21)
+
+The Vision Coverage Matrix MUST be emitted as:
+
+- artifacts/coverage/vision_coverage_matrix.md
+
+It MUST:
+
+- Be a Markdown container (.md)
+- Embed a single canonical JSON block
+- Conform strictly to:
+
+  docs/09_verify/vision_coverage_matrix_schema_v1.json
+
+Raw .json artifact files are forbidden.
+
+Violation of container or schema binding:
+→ FAIL CLOSED.
+
+---
+
 ## 1. Purpose
 
 This document formalizes the requirement to create

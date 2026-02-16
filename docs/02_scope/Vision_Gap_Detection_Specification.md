@@ -7,6 +7,30 @@
 
 ---
 
+## 0. Canonical Artifact & Schema Binding (DOC-21)
+
+The Vision Gap Report MUST be emitted as:
+
+- artifacts/coverage/vision_gap_report.md
+
+It MUST:
+
+- Be a Markdown container (.md)
+- Embed a single canonical JSON block
+- Conform strictly to:
+
+  docs/09_verify/vision_gap_report_schema_v1.json
+
+Raw .json artifact files are forbidden.
+
+If result = "FAIL":
+→ Stage B cannot be considered closed.
+
+Violation of container or schema binding:
+→ FAIL CLOSED.
+
+---
+
 ## 1. Purpose
 
 This document defines how Vision-level gaps are detected,
