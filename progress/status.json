@@ -4,12 +4,12 @@
   "overall_progress_percent": 50,
   "stage_progress_percent": 40,
   "last_completed_artifact": "artifacts/tasks/TASK-034.execution.closure.md",
-  "current_task": "TASK-034: Execute deterministic verification & finalize Stage C evidence",
+  "current_task": "TASK-035: Full Clause-Level Trace Mapping for Stage C",
   "issues": [
     "Stage C trace engine not yet implemented.",
     "Trace Matrix task handler not registered.",
     "System renamed to Forge — Identity Contract added (DOC-00)."
   ],
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-034 handler to finalize Stage C test evidence (deterministic verification)."
+  "next_step": "Stage C — Execute TASK-035 handler to implement full clause-level trace mapping."
 }
