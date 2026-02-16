@@ -3,7 +3,7 @@
 ~~~json
 {
   "trace_matrix_id": "TRACE_MATRIX_STAGE_C_v1",
-  "generated_at": "2026-02-16T12:20:27.526Z",
+  "generated_at": "2026-02-16T15:10:37.243Z",
   "source_docs": [
     "docs/03_pipeline/03_Pipeline_Stages_Specification_A-D.md",
     "docs/05_artifacts/Artifact_Schema_Revision_v2.md",
