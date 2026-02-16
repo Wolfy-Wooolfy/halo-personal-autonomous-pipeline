@@ -11,5 +11,5 @@
     "System renamed to Forge — Identity Contract added (DOC-00)."
   ],
   "blocking_questions": [],
-  "next_step": "Implement deterministic Trace Engine task handler for SCHEMA-03/04/05 artifact generation."
+  "next_step": "Stage C — Execute TASK-033 handler to create Stage C verification artifacts (SCHEMA-03/04/05)."
 }
