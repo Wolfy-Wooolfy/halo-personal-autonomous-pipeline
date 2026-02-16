@@ -3,14 +3,14 @@
 ~~~json
 {
   "mismatch_report_id": "MISMATCH_REPORT_STAGE_C_v1",
-  "generated_at": "2026-02-16T12:20:27.526Z",
+  "generated_at": "2026-02-16T10:00:00Z",
   "trace_matrix_ref": "TRACE_MATRIX_STAGE_C_v1",
   "summary": {
     "must_missing_count": 0,
     "must_undocumented_count": 0,
     "should_missing_count": 0,
     "should_undocumented_count": 0,
-    "unresolved_total": 2,
+    "unresolved_total": 1,
     "blocking": true
   },
   "mismatches": [
@@ -48,7 +48,7 @@
       "doc_refs": [
         {
           "path": "docs/03_pipeline/03_Pipeline_Stages_Specification_A-D.md",
-          "anchor": "test_evidence.md — test evidence containing"
+          "anchor": "test_evidence.md \u2014 test evidence containing"
         }
       ],
       "code_refs": [
@@ -61,8 +61,8 @@
           }
         }
       ],
-      "status": "OPEN",
-      "notes": "Add deterministic verify runner that executes commands and captures logs under artifacts/verify/."
+      "status": "RESOLVED",
+      "notes": "Resolved by TASK-034: artifacts/stage_C/test_evidence.md shows pre_run_check ran=true passed=true with captured output."
     }
   ]
 }
