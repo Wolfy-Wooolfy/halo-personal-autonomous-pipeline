@@ -1,14 +1,15 @@
 {
+  "status_type": "LIVE",
   "current_stage": "C",
-  "execution_state": "READY",
-  "progress_percent": 0,
+  "overall_progress_percent": 50,
+  "stage_progress_percent": 0,
   "last_completed_artifact": "artifacts/stage_B/stage_B.reclosure.md",
-  "current_task": null,
-  "blocking_questions": [],
+  "current_task": "TASK-033: Implement deterministic Trace Engine for SCHEMA-03/04/05 artifact generation",
   "issues": [
     "Stage C trace engine not yet implemented.",
     "Trace Matrix task handler not registered.",
     "System renamed to Forge — Identity Contract added (DOC-00)."
   ],
+  "blocking_questions": [],
   "next_step": "Implement deterministic Trace Engine task handler for SCHEMA-03/04/05 artifact generation."
 }
