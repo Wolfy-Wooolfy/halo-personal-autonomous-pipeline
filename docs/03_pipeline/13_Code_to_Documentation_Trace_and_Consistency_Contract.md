@@ -3,14 +3,14 @@
 **Document ID:** HALO-DOC-13  
 **Stage:** C  
 **Status:** BINDING – EXECUTION CONTRACT  
-**Applies To:** Stage C – Implementation Engine  
+**Applies To:** Stage C – Code Generation & Implementation  
 **Enforcement:** Fail-Closed  
 
 ---
 
 ## 1. Purpose
 
-This contract defines the deterministic enforcement rules that bind:
+This contract defines deterministic enforcement rules that bind:
 
 - Source code
 - Documentation contracts
@@ -25,237 +25,148 @@ Stage C MUST ensure that:
 - No documented requirement lacks implementation.
 - Verification evidence is structurally provable.
 
-Stage C is not coding.
-It is contract-bound implementation.
+Stage C is contract-bound implementation.
 
 ---
 
-## 2. Authoritative Inputs
+## 2. Authoritative Inputs (Fail-Closed)
 
 Stage C accepts ONLY:
 
-- Fully closed Stage B documentation pack
-- `artifacts/stage_B/documentation_refinement_closure.md`
+1) The fully closed Stage B documentation pack under `docs/`
+2) Stage B closure evidence:
 
-If Stage B closure artifact is missing:
+- `artifacts/stage_B/stage_B.reclosure.md`
+
+If the Stage B closure artifact is missing:
 → Execution MUST FAIL CLOSED.
 
 No external narrative input permitted.
 
 ---
 
-## 3. Trace Matrix Requirement
+## 3. Canonical Artifact Container Rule (DOC-21)
 
-Stage C MUST produce a deterministic Trace Matrix.
+All Stage C verification artifacts MUST be Markdown containers (`.md`) that embed a single canonical JSON block.
+
+- The embedded JSON MUST conform to the referenced schema under `docs/09_verify/*`.
+- The Markdown wrapper MAY contain minimal headers, but MUST NOT contain narrative interpretation.
+
+If artifact container format is violated:
+→ Execution MUST FAIL CLOSED.
+
+Reference:
+- `docs/05_artifacts/Artifact_Serialization_and_Embedded_JSON_Rule.md` (DOC-21)
+
+---
+
+## 4. Trace Matrix Artifact (SCHEMA-03)
+
+Stage C MUST produce a deterministic Trace Matrix artifact.
 
 Path:
-```
+- `artifacts/stage_C/code_trace_matrix.md`
 
-artifacts/stage_C/code_trace_matrix.json
-
-```
+Embedded JSON MUST conform to:
+- `docs/09_verify/trace_matrix_schema_v1.json` (SCHEMA-03)
 
 Rules:
-- JSON ONLY
-- Immutable once written
-- No narrative
-- Schema-bound
+- Embedded JSON ONLY (schema-bound)
+- Deterministic
+- Immutable once written for a given task execution
+- No narrative fields
+- `additionalProperties` MUST NOT be introduced beyond the schema
 
-Minimum required fields:
+If any required schema field is missing:
+→ FAIL CLOSED.
 
-- timestamp_utc
-- documented_requirements_count
-- implemented_units_count
-- uncovered_requirements (array)
-- undocumented_code_units (array)
-- mapping (array of objects)
+If any MUST-level documented requirement has no implementation mapping:
+→ FAIL CLOSED.
 
-Each mapping object MUST contain:
-
-- requirement_id
-- source_document
-- code_path
-- test_reference
-- verification_reference
-
-If any requirement has no implementation:
-→ FAIL
-
-If any code unit has no requirement mapping:
-→ FAIL
+If any code unit has no authoritative requirement mapping:
+→ FAIL CLOSED.
 
 Partial trace is forbidden.
 
 ---
 
-## 4. Code Mismatch Report
+## 5. Mismatch Report Artifact (SCHEMA-04)
 
-Stage C MUST produce:
+Stage C MUST produce a deterministic mismatch report.
 
-```
+Path:
+- `artifacts/stage_C/code_mismatch_report.md`
 
-artifacts/stage_C/code_mismatch_report.json
-
-```
+Embedded JSON MUST conform to:
+- `docs/09_verify/mismatch_report_schema_v1.json` (SCHEMA-04)
 
 Rules:
-- JSON ONLY
+- Embedded JSON ONLY (schema-bound)
 - Deterministic
-- Non-narrative
+- No narrative
+- Must include a reference to the trace matrix artifact via schema fields
 
-Minimum required fields:
-
-- timestamp_utc
-- mismatched_contracts_count
-- contract_mismatches (array)
-- undocumented_behaviors_count
-- incomplete_implementations_count
-- result ("PASS" | "FAIL")
-
-If result = "FAIL":
-→ Refinement loop MUST begin.
+If the mismatch report indicates unresolved mismatches:
+→ Stage C MUST NOT close.
 
 ---
 
-## 5. Deterministic Code Rules
+## 6. Verification Evidence Artifact (SCHEMA-05)
+
+Stage C MUST produce verification evidence.
+
+Path:
+- `artifacts/stage_C/test_evidence.md`
+
+Embedded JSON MUST conform to:
+- `docs/09_verify/verification_evidence_schema_v1.json` (SCHEMA-05)
+
+Rules:
+- Evidence MUST be reproducible
+- Evidence MUST reference concrete test execution outputs and files
+- No narrative interpretation
+
+If evidence is missing or non-verifiable:
+→ FAIL CLOSED.
+
+---
+
+## 7. Deterministic Code Rules (Fail-Closed)
 
 Stage C MUST enforce:
 
-1. No function without documented authority.
-2. No undocumented API endpoint.
-3. No undocumented configuration behavior.
-4. No silent fallback logic.
-5. No TODO or placeholder logic.
-6. No unreachable code.
-7. No duplicated responsibility across modules.
+1) No function without documented authority.
+2) No undocumented API endpoint.
+3) No undocumented configuration behavior.
+4) No silent fallback logic.
+5) No TODO or placeholder logic in execution paths.
+6) No unreachable code.
+7) No duplicated responsibility across modules.
 
 Violations → FAIL CLOSED.
 
 ---
 
-## 6. Implementation Refinement Loop
+## 8. Stage C Closure Condition (Scope-Limited)
 
-If:
+Stage C MAY be considered closure-eligible ONLY if:
 
-- uncovered_requirements ≠ empty
-- undocumented_code_units ≠ empty
-- mismatched_contracts_count > 0
-- incomplete_implementations_count > 0
+- `artifacts/stage_C/code_trace_matrix.md` exists and conforms to SCHEMA-03
+- `artifacts/stage_C/code_mismatch_report.md` exists and conforms to SCHEMA-04
+- `artifacts/stage_C/test_evidence.md` exists and conforms to SCHEMA-05
+- The mismatch report indicates zero unresolved mismatches
 
-Stage C MUST:
-
-1. Modify only affected code.
-2. Regenerate trace matrix.
-3. Regenerate mismatch report.
-4. Re-run verification.
-5. Repeat until fully resolved.
-
-No downgrade of rules allowed.
+If any of the above is not satisfied:
+→ Stage C MUST remain open.
 
 ---
 
-## 7. Test Evidence Requirement
+## 9. Non-Authority Clause
 
-Stage C MUST produce:
+This document is an execution contract.
+It MUST NOT be overridden by:
+- chat-declared state
+- external repositories
+- narrative explanations
 
-```
-
-artifacts/stage_C/test_evidence.md
-
-```
-
-This artifact MUST reference:
-
-- verify/unit/verification_report.json
-- verify/smoke/local_command_log.jsonl
-- specific stdout/stderr files
-- command timestamps
-
-Test Evidence MUST NOT:
-
-- Describe subjective interpretation
-- Summarize results narratively
-- Replace verification report
-
-It is a pointer artifact only.
-
----
-
-## 8. Stage C Closure Criteria
-
-Stage C may close ONLY if:
-
-- code_trace_matrix.json shows zero uncovered requirements
-- code_mismatch_report.json result = "PASS"
-- verification_report.json result = "PASS"
-- test_evidence.md exists
-- All required command logs exist
-- No boundary violations detected
-
-Closure artifact:
-
-```
-
-artifacts/stage_C/code_stage_closure.md
-
-```
-
-Must reference:
-
-- trace matrix
-- mismatch report
-- verification report
-- test evidence
-- audit logs (if any)
-
-Closure artifact has ZERO narrative authority.
-
----
-
-## 9. Prohibited Behaviors
-
-Stage C MUST NOT:
-
-- Write code without documentation authority
-- Close with partial trace
-- Suppress mismatch report
-- Skip verification
-- Advance to Stage D without PASS
-
-Any violation → SYSTEM FAILURE.
-
----
-
-## 10. Fail-Closed Enforcement
-
-If trace matrix:
-
-- Cannot be generated deterministically
-- Produces inconsistent mapping counts
-- Contains ambiguous references
-
-→ Execution MUST FAIL CLOSED.
-
-If verification cannot prove contract compliance:
-→ Execution MUST Abort.
-
-No workaround permitted.
-
----
-
-## 11. Authority Clarification
-
-Trace and consistency enforcement does NOT:
-
-- Judge performance
-- Optimize architecture
-- Improve style
-- Infer missing design intent
-
-It enforces structural, contractual alignment only.
-
-Acceptance authority remains exclusively in Stage D.
-
----
-
-**END OF CONTRACT**
+Only artifacts and contracts inside this repository are authoritative.
