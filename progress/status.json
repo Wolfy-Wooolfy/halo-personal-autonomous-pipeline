@@ -2,8 +2,8 @@
   "status_type": "LIVE",
   "current_stage": "C",
   "overall_progress_percent": 50,
-  "stage_progress_percent": 0,
-  "last_completed_artifact": "artifacts/stage_B/stage_B.reclosure.md",
+  "stage_progress_percent": 10,
+  "last_completed_artifact": "artifacts/tasks/TASK-033.execution.closure.md",
   "current_task": "TASK-033: Implement deterministic Trace Engine for SCHEMA-03/04/05 artifact generation",
   "issues": [
     "Stage C trace engine not yet implemented.",
