@@ -6,10 +6,9 @@
   "last_completed_artifact": "artifacts/tasks/TASK-034.execution.closure.md",
   "current_task": "TASK-035: Full Clause-Level Trace Mapping for Stage C",
   "issues": [
-    "Stage C trace engine not yet implemented.",
-    "Trace Matrix task handler not registered.",
-    "System renamed to Forge — Identity Contract added (DOC-00)."
+    "Stage C trace matrix exists but is not yet clause-level mapped to Stage B requirements.",
+    "MM-TRACE-001 remains OPEN until clause-level mapping is completed."
   ],
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-035 handler to implement full clause-level trace mapping."
+  "next_step": "Stage C — Execute TASK-035 handler to extend trace matrix to clause-level and resolve MM-TRACE-001."
 }
