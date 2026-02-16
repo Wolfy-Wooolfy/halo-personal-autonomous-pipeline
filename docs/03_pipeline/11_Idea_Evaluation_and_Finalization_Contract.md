@@ -1,5 +1,12 @@
 # 📄 Document — Idea Evaluation & Finalization Contract
 
+> **Precondition Notice:**  
+> This contract operates only after a valid Admission-Ready Project Definition
+> has been produced per DOC-01 (Idea Structuring & Admission Layer Contract).
+>
+> This contract does not replace the Admission Layer
+> and must not be used as an entry point into the pipeline.
+
 **Document ID:** HALO-DOC-11
 **Status:** BINDING — EXECUTION CONTRACT
 **Applies To:** Stage A — Idea Engine

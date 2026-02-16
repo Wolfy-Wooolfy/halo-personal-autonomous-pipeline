@@ -307,6 +307,13 @@ No implicit approval is allowed.
 
 ### 3.1 Objective
 
+> **Admission Gate Notice:**  
+> Stage A may only initialize after a valid Admission-Ready Project Definition exists
+> per the Idea Structuring & Admission Layer Contract (DOC-01).
+>
+> Direct entry into Stage A without a compliant admission artifact
+> constitutes a Contract Violation.
+
 Transform a raw idea, request, or instruction into a **fully scoped execution plan**
 AND produce a **frozen, approval-bound final idea specification**.
 

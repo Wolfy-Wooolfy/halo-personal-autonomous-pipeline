@@ -1,6 +1,6 @@
 # Idea Structuring & Admission Layer Contract
 
-**Document ID:** DOC-00  
+**Document ID:** DOC-01  
 **Status:** FINAL — PRE-STAGE GOVERNANCE  
 **Scope:** Idea Maturation Before Stage A  
 **Applies To:** All Projects Entering the Autonomous Project Engine  
@@ -76,11 +76,15 @@ Project remains in Idea Structuring Layer.
 
 ## 5. Output Artifact
 
-The only allowed output is:
+The only allowed output of this layer is:
 
 `artifacts/admission/project_admission_definition.md`
 
-This document must include:
+This artifact must conform to:
+
+`docs/09_verify/project_admission_definition_schema_v1.json`
+
+The artifact must include:
 
 - Project Name
 - Problem Definition
@@ -89,8 +93,11 @@ This document must include:
 - Scope Boundaries
 - Initial Risk Assessment
 
-Only after this document exists
-may Stage A initialize.
+Admission is considered valid only if:
+
+- The artifact exists.
+- The artifact structurally conforms to the official schema.
+- No required field is missing.
 
 ---
 

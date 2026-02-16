@@ -1,4 +1,12 @@
 # 📄 Loop Enforcement Specification
+
+> **Global Admission Rule:**  
+> No cognitive loop may begin unless a valid Admission-Ready Project Definition
+> exists per DOC-01 (Idea Structuring & Admission Layer Contract).
+>
+> Any attempt to start Loop 1, Loop 2, or Loop 3 without Admission
+> constitutes a Governance Violation.
+
 **Document ID:** DOC-13  
 **Status:** EXECUTION-BOUND  
 **Scope:** Stage A/B/C Loop Enforcement  

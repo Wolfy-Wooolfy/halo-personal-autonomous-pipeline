@@ -184,6 +184,7 @@ Every project or task MUST follow the directory structure below:
 │ └── 10_runtime/
 │
 ├── artifacts/
+│ ├── admission/
 │ ├── stage_A/
 │ ├── stage_B/
 │ ├── stage_C/

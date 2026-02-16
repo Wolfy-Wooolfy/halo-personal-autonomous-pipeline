@@ -35,55 +35,82 @@ If any conflict occurs:
 
 ## 2. The Target System (What We Are Building)
 
-The target system is a **deterministic, fail-closed, artifact-governed autonomous pipeline**
-that can operate for hours or days without human feedback by default.
+Forge is a **deterministic, fail-closed, artifact-governed autonomous project engine**
+capable of transforming raw ideas into fully verified, traceable, and executable project implementations.
 
-It must support three “intelligence loops” on top of the existing strict pipeline engine:
+Forge is designed to operate for hours or days without human feedback by default,
+within strictly enforced contractual boundaries.
 
-### 2.1 Loop 1 — Idea → Evaluation → Final Spec (with approval)
+Forge is not a brainstorming assistant.
+Forge is not a conversational AI.
+Forge is not a loose automation tool.
 
-The system must be able to:
-- Take a raw idea/task request
-- Produce an evaluated, structured version
-- Output an “Idea Final Spec”
-- Require explicit approval ONLY where the stage contract mandates it
+Forge is a structured project manufacturing engine.
+
+It operates through three controlled intelligence loops layered on top of a strict stage-governed pipeline.
+
+---
+
+### 2.1 Loop 1 — Idea → Evaluation → Admission-Ready Specification
+
+Forge must be able to:
+
+- Take a raw idea or project concept
+- Structurally evaluate clarity and feasibility
+- Produce an Admission-Ready Project Definition
+- Require explicit approval ONLY where mandated by contract
 - Never infer approval
 
 Output expectation:
-- A final, frozen idea specification
-- A deterministic evaluation report
-- Minimal blocking questions ONLY if required by contract
 
-### 2.2 Loop 2 — Idea Final Spec → Full Documentation Pack (Auto-refinement)
+- A frozen Admission-Ready Specification
+- A deterministic evaluation summary
+- Minimal blocking questions ONLY if contractually required
 
-The system must be able to:
-- Generate all required documentation artifacts
-- Detect gaps between documents
-- Detect contradictions
-- Iteratively refine docs until the pack reaches a deterministic “ideal state”
+This loop formalizes ideas without prematurely entering stage execution.
+
+---
+
+### 2.2 Loop 2 — Admission-Ready Specification → Full Documentation Pack
+
+Forge must be able to:
+
+- Generate all required stage documentation artifacts
+- Detect structural gaps between documents
+- Detect contradictions or scope drift
+- Iteratively refine documentation until a deterministic “ideal state” is reached
 - Stop and escalate ONLY when:
   - multiple valid interpretations exist, OR
   - mandatory external inputs are missing, OR
   - deterministic completion is impossible
 
 Output expectation:
-- A complete spec pack
-- A docs gap report that reaches zero MUST-level gaps
-- A coverage matrix that reaches 100% for MUST-level requirements
 
-### 2.3 Loop 3 — Docs Pack → Code Implementation (Trace + Verification Loop)
+- A complete documentation pack
+- A documentation gap report reaching zero MUST-level gaps
+- A coverage matrix reaching 100% for MUST-level requirements
 
-The system must be able to:
-- Generate or modify code strictly from documentation
-- Produce a trace matrix (Docs → Code) deterministically
-- Detect mismatches (missing behavior / undocumented behavior)
-- Run local verification per the Build & Verify Playbook (Local)
-- Stop, rollback, or return upstream when required
+This loop ensures the project is contractually executable before code begins.
+
+---
+
+### 2.3 Loop 3 — Documentation Pack → Code Implementation & Verification
+
+Forge must be able to:
+
+- Generate or modify code strictly from approved documentation
+- Produce a deterministic trace matrix (Docs → Code)
+- Detect mismatches (missing behavior or undocumented behavior)
+- Execute local verification per the Build & Verify Playbook
+- Stop, rollback, or return upstream when required by contract
 
 Output expectation:
+
 - A full trace matrix proving 1:1 mapping of MUST requirements
-- A mismatch report that reaches zero unresolved mismatches
-- Test evidence and verification artifacts per contracts
+- A mismatch report reaching zero unresolved mismatches
+- Test evidence and verification artifacts per governing contracts
+
+This loop enforces that no implementation exists without documentation authority.
 
 ---
 
@@ -94,6 +121,8 @@ Output expectation:
 - Stage separation A/B/C/D
 - Artifact closure, idempotency, deterministic progression
 - Fail-Closed behavior with explicit status tracking
+
+---
 
 ### 3.2 What It is NOT (Unless Implemented Explicitly)
 - Not an autonomous “engineering brain” by itself

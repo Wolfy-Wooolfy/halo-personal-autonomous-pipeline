@@ -40,6 +40,37 @@ No artifact may exceed its classification.
 
 ---
 
+# ADMISSION (PRE-STAGE) ARTIFACTS
+
+---
+
+## P0 — project_admission_definition.md
+
+Path:
+artifacts/admission/project_admission_definition.md
+
+Type:
+Verification Artifact (gating authority)
+
+Purpose:
+Admission-ready project definition produced before Stage A initialization.
+
+Schema Binding:
+docs/09_verify/project_admission_definition_schema_v1.json
+
+Mandatory Content:
+- Project Name
+- Problem Definition
+- Intended Final State
+- Success Metrics
+- Scope Boundaries
+- Initial Risk Assessment
+
+Rule:
+Without this artifact → Stage A MUST NOT initialize.
+
+---
+
 # STAGE A ARTIFACTS
 
 ---
