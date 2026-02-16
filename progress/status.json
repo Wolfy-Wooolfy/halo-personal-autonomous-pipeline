@@ -7,7 +7,8 @@
   "blocking_questions": [],
   "issues": [
     "Stage C trace engine not yet implemented.",
-    "Trace Matrix task handler not registered."
+    "Trace Matrix task handler not registered.",
+    "System renamed to Forge — Identity Contract added (DOC-00)."
   ],
   "next_step": "Implement deterministic Trace Engine task handler for SCHEMA-03/04/05 artifact generation."
 }
