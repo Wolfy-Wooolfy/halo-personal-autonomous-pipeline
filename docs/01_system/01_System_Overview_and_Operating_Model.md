@@ -1,5 +1,5 @@
 # System Overview & Operating Model
-## Personal Autonomous Pipeline for HALO (PAPH)
+## Forge
 
 **Status:** Authoritative – v1  
 **Scope:** Personal / Non-Commercial  
@@ -10,7 +10,7 @@
 
 ## 1. Purpose of This System
 
-The Personal Autonomous Pipeline for HALO (PAPH) is a **self-operating execution system** designed to transform any HALO-related task into a **fully completed, verified, and traceable outcome** with minimal human intervention.
+Forge is a **self-operating execution system** designed to transform any task into a **fully completed, verified, and traceable outcome** with minimal human intervention.
 
 The system exists to eliminate:
 - Fragmentation between ideas, documents, code, and verification
@@ -18,27 +18,27 @@ The system exists to eliminate:
 - Execution stalls caused by continuous human approval
 - Loss of progress visibility
 
-PAPH is **not a decision assistant**, **not a reasoning authority**, and **not a conversational agent**.
+Forge is **not a decision assistant**, **not a reasoning authority**, and **not a conversational agent**.
 
 It does NOT:
 - Decide what HALO should be
 - Judge correctness beyond explicit contracts
 - Resolve subjective or strategic questions
 
-All “decisions” inside PAPH are strictly:
+All “decisions” inside Forge are strictly:
 - Binary
 - Contract-driven
 - Logged
 - Escalated when non-deterministic
 
 Any action requiring judgment, preference, or interpretation
-is explicitly outside PAPH authority.
+is explicitly outside Forge authority.
 
 ---
 
 ### 1.1 Execution Authority Clarification
 
-This document defines the operating model and authority boundaries of PAPH.
+This document defines the operating model and authority boundaries of Forge.
 
 It does NOT perform task work.
 It does NOT produce artifacts.
@@ -208,7 +208,7 @@ While calling the human **only when strictly required**.
 
 ## 2.1 Definition of an Accepted Task
 
-An accepted task within PAPH MUST:
+An accepted task within Forge MUST:
 
 - Be executable, not exploratory
 - Have a clear end-state or deliverable
@@ -246,7 +246,7 @@ If task intent cannot be determined deterministically → Fail-Closed and escala
 
 ## 4. Operating Model Overview
 
-PAPH operates as a **stage-linear, state-aware execution pipeline**.
+Forge operates as a **stage-linear, state-aware execution pipeline**.
 
 “Linear” refers strictly to **stage ordering authority**, not execution flow rigidity.
 
@@ -287,7 +287,7 @@ Human involvement is treated as an **exception**, not a requirement.
 
 ### 5.1 Autonomy Does NOT Imply Authority
 
-Autonomous execution within PAPH does NOT grant the system
+Autonomous execution within Forge does NOT grant the system
 any authority to reinterpret intent, redefine success,
 or alter HALO governance rules.
 
@@ -403,7 +403,7 @@ If any ambiguity exists regarding progress:
 
 ## 9. Authority & Boundaries
 
-PAPH operates under strict authority limits:
+Forge operates under strict authority limits:
 
 - HALO documentation is authoritative
 - Existing HALO rules are immutable unless explicitly updated by the owner
@@ -452,7 +452,7 @@ MUST be justified ONLY by the lower-level execution contracts.
 
 ## 10.1 Mandatory Boundary Audit Coupling
 
-All execution within PAPH is **strictly coupled** to the HALO Boundary Audit Rules.
+All execution within Forge is **strictly coupled** to the HALO Boundary Audit Rules.
 
 This means:
 
@@ -510,7 +510,7 @@ and MUST be treated as a critical system fault.
 
 ## 11. Relationship to HALO
 
-PAPH is a **pure execution layer** that operates in service of HALO.
+Forge is a **pure execution layer** that operates in service of HALO.
 
 It is NOT part of:
 - HALO’s cognitive runtime
@@ -518,14 +518,14 @@ It is NOT part of:
 - HALO’s memory or vault architecture
 - HALO’s reasoning or intelligence logic
 
-PAPH does not think, reason, or decide.
+Forge does not think, reason, or decide.
 
 It executes tasks **about HALO**, not **inside HALO**.
 
 Any attempt to:
-- Embed PAPH into HALO cognition
-- Treat PAPH output as HALO truth
-- Allow PAPH to influence HALO identity or memory
+- Embed Forge into HALO cognition
+- Treat Forge output as HALO truth
+- Allow Forge to influence HALO identity or memory
 
 is a system violation.
 
@@ -547,7 +547,7 @@ This system is considered successful when:
 
 This document defines the authoritative interpretation of:
 
-- What PAPH is
+- What Forge is
 - How it operates
 - When human involvement is allowed
 
@@ -634,7 +634,7 @@ and MUST trigger status emission or halt.
 ## 14. Authority Conflict Resolution (Hard Rule)
 
 In the event of any conflict between governing documents of the
-Personal Autonomous Pipeline for HALO, authority is resolved strictly
+Forge, authority is resolved strictly
 in the following order:
 
 1. HALO Core Rules & Boundary Contracts  

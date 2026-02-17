@@ -3,14 +3,14 @@
 **Document ID:** DOC-10  
 **Status:** FINAL — EXECUTION-BOUND  
 **Scope:** Engineering Foundations & Local Execution  
-**Applies To:** Personal Autonomous Pipeline for HALO  
+**Applies To:** Forge
 **Enforcement Level:** Hard (Fail-Closed)
 
 ---
 
 ## 1. Purpose
 
-This document defines the **non-negotiable technical assumptions** and the **local runtime setup** required to execute the Personal Autonomous Pipeline for HALO.
+This document defines the **non-negotiable technical assumptions** and the **local runtime setup** required to execute Forge.
 
 Its purpose is to:
 - Eliminate ambiguity in environment setup

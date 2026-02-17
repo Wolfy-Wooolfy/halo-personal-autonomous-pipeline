@@ -26,12 +26,17 @@ function extractTargetStage(nextStep) {
 }
 
 function fail(msg) {
-  console.error(`[HALO AUTONOMY STEP] ABORT: ${msg}`);
+  console.error(`[FORGE AUTONOMY STEP] ABORT: ${msg}`);
   process.exit(1);
 }
 
 function parseMaxSteps() {
-  const raw = String(process.env.HALO_MAX_STEPS || "").trim();
+  const v =
+    process.env.FORGE_MAX_STEPS !== undefined
+      ? process.env.FORGE_MAX_STEPS
+      : process.env.HALO_MAX_STEPS;
+
+  const raw = String(v || "").trim();
 
   if (raw === "") {
     return 1;
@@ -40,7 +45,7 @@ function parseMaxSteps() {
   const n = Number(raw);
 
   if (!Number.isInteger(n) || n < 1) {
-    fail("HALO_MAX_STEPS must be an integer >= 1");
+    fail("FORGE_MAX_STEPS (or HALO_MAX_STEPS) must be an integer >= 1");
   }
 
   return n;
@@ -92,34 +97,39 @@ function isIdempotencyViolation(err) {
 }
 
 function main() {
-  if (String(process.env.HALO_AUTONOMY) !== "1") {
-    fail("HALO_AUTONOMY=1 is required");
+  const autonomy =
+    process.env.FORGE_AUTONOMY !== undefined
+      ? process.env.FORGE_AUTONOMY
+      : process.env.HALO_AUTONOMY;
+
+  if (String(autonomy) !== "1") {
+    fail("FORGE_AUTONOMY=1 (or HALO_AUTONOMY=1) is required");
   }
 
   const maxSteps = parseMaxSteps();
 
-  console.log("[HALO AUTONOMY STEP] START");
-  console.log(`[HALO AUTONOMY STEP] max_steps=${maxSteps}`);
+  console.log("[FORGE AUTONOMY STEP] START");
+  console.log(`[FORGE AUTONOMY STEP] max_steps=${maxSteps}`);
 
   for (let i = 1; i <= maxSteps; i++) {
     const status = loadStatus();
 
     const stopReason = mustStop(status);
     if (stopReason) {
-      console.log(`[HALO AUTONOMY STEP] STOP at step ${i}: ${stopReason}`);
-      console.log("[HALO AUTONOMY STEP] DONE (bounded multi-step)");
+      console.log(`[FORGE AUTONOMY STEP] STOP at step ${i}: ${stopReason}`);
+      console.log("[FORGE AUTONOMY STEP] DONE (bounded multi-step)");
       process.exit(0);
     }
 
-    console.log(`[HALO AUTONOMY STEP] step=${i}`);
-    console.log(`[HALO AUTONOMY STEP] next_step="${status.next_step}"`);
+    console.log(`[FORGE AUTONOMY STEP] step=${i}`);
+    console.log(`[FORGE AUTONOMY STEP] next_step="${status.next_step}"`);
 
     try {
       run();
     } catch (err) {
       if (isIdempotencyViolation(err)) {
-        console.log(`[HALO AUTONOMY STEP] STOP at step ${i}: ${String(err.message || err)}`);
-        console.log("[HALO AUTONOMY STEP] DONE (bounded multi-step)");
+        console.log(`[FORGE AUTONOMY STEP] STOP at step ${i}: ${String(err.message || err)}`);
+        console.log("[FORGE AUTONOMY STEP] DONE (bounded multi-step)");
         process.exit(0);
       }
 
@@ -127,7 +137,7 @@ function main() {
     }
   }
 
-  console.log("[HALO AUTONOMY STEP] DONE (bounded multi-step)");
+  console.log("[FORGE AUTONOMY STEP] DONE (bounded multi-step)");
   process.exit(0);
 }
 

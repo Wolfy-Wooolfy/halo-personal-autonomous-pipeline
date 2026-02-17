@@ -1,6 +1,6 @@
 # 📘 Decision Logging & Change Traceability Specification
 
-**System:** Personal Autonomous Pipeline for HALO  
+**System:** Forge  
 **Document Type:** Governance / Audit / Control  
 **Status:** BINDING (Governance Core)  
 **Applies To:** All pipeline stages (A → D)  

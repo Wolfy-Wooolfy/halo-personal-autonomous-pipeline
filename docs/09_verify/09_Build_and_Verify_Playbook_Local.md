@@ -3,7 +3,7 @@
 **Version:** 1.2  
 **Status:** MANDATORY  
 **Scope:** Local execution only  
-**Applies To:** All HALO autonomous pipelines  
+**Applies To:** Forge
 **Enforcement:** Fail-Closed
 
 ---
@@ -11,7 +11,7 @@
 ## 1. Purpose
 
 This document defines the **mandatory local build, verification, retry, and rollback rules**
-used by the HALO Autonomous Pipeline.
+used by Forge.
 
 Its goal is to ensure that:
 
@@ -875,7 +875,7 @@ constitutes an authority violation.
 
 ## 8. Human Interrupt Conditions
 
-HALO MUST interrupt the human authority ONLY when execution is BLOCKED due to:
+Forge MUST interrupt the human authority ONLY when execution is BLOCKED due to:
 
 1. Multiple valid contract-compliant implementation options exist (selectable fork)
 2. Required external inputs or secrets are missing
@@ -891,7 +891,7 @@ All interrupt behavior is governed EXCLUSIVELY by:
 - Autonomy Policy & Human Interrupt Protocol (Doc-04)
 - Progress Tracking & Status Report Contract (Doc-06)
 
-In all other cases, HALO proceeds autonomously.
+In all other cases, Forge proceeds autonomously.
 
 ---
 

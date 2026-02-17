@@ -1,8 +1,8 @@
-# 📄 Project Vision Reference — Personal Autonomous Pipeline for HALO
+# 📄 Project Vision Reference — Forge
 
 > **Naming Notice:**  
 > This document refers to the system now officially named **Forge**.  
-> Any historical reference to "Personal Autonomous Pipeline for HALO"  
+> Any historical reference to "Forge"  
 > is considered deprecated and superseded by the Project Identity Contract (DOC-00).
 
 **Document Type:** Non-Executable Vision Baseline (Reference Only)  

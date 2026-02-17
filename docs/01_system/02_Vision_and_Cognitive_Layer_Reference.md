@@ -1,7 +1,7 @@
 # Vision & Cognitive Layer Reference (v1)
 
 **Status:** REFERENCE — NON-EXECUTABLE (Vision Baseline)  
-**Applies To:** Personal Autonomous Pipeline for HALO (PAPH)  
+**Applies To:** Forge (Forge)  
 **Owner:** Human Authority (Khaled)  
 **Enforcement:** None (This document is NOT an execution contract)
 

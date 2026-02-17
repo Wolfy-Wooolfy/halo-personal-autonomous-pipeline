@@ -1,4 +1,4 @@
-# HALO Personal Autonomous Pipeline — Quickstart
+# Forge — Quickstart
 
 **Release:** 1.0.0  
 **Mode:** Deterministic (Non-Autonomous)
@@ -13,7 +13,7 @@
 - Smoke-tested core
 - Integrity-locked release
 
-No autonomy. No decisions. No background loops.
+Autonomy is optional (disabled by default). No decisions. No background loops.
 
 ---
 

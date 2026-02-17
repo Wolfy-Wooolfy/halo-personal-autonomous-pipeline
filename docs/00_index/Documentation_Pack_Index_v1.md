@@ -2,7 +2,7 @@
 **Document ID:** DOC-19  
 **Status:** EXECUTION-BOUND  
 **Scope:** Canonical Documentation Registry  
-**Applies To:** Entire Personal Autonomous Pipeline  
+**Applies To:** Forge
 **Enforcement Level:** HARD (Fail-Closed)
 
 ---
@@ -60,7 +60,7 @@ All conflicts MUST be resolved by DOC-11.
 - docs/05_artifacts/16_Cognitive_Artifacts_Definition_Specification.md
 - docs/06_progress/06_Progress_Tracking_and_Status_Report_Contract_v1.md
 - docs/07_decisions/07_Decision_Logging_and_Change_Traceability_Specification.md
-- docs/08_audit/08_HALO_Boundary_Audit_Rules_Fail-Closed_Pack.md
+- docs/08_audit/08_Forge_Boundary_Audit_Rules_Fail-Closed_Pack.md
 - docs/08_audit/vision_alignment_contract.md
 - docs/09_verify/09_Build_and_Verify_Playbook_Local.md
 - docs/09_verify/17_Cross_Document_Consistency_Review_Contract.md

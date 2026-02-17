@@ -1,7 +1,7 @@
 # 📄 Artifact Schema & Repository Layout Standard
 
 **Version:** 1.2  
-**Applies To:** All autonomous and semi-autonomous executions within the HALO Personal Autonomous Pipeline  
+**Applies To:** All autonomous and semi-autonomous executions within Forge  
 **Enforcement:** Mandatory (Fail-Closed)
 
 ---
@@ -9,7 +9,7 @@
 ## 1. Purpose
 
 This document defines the **mandatory artifact structure, naming conventions, and repository layout**
-used by the HALO Personal Autonomous Pipeline.
+used by Forge.
 
 Its purpose is to ensure that:
 
@@ -715,11 +715,11 @@ according to the global pipeline authority hierarchy.
 
 Authority precedence is as follows:
 
-1. HALO Core Rules & Boundary Contracts  
+1. Forge Core Rules & Boundary Contracts  
 2. Scope & Success Contract  
 3. Autonomy Policy & Human Interrupt Protocol  
 4. Pipeline Stages Specification  
-5. HALO Boundary Audit Rules (Fail-Closed Pack)  
+5. Forge Boundary Audit Rules (Fail-Closed Pack)  
 6. Progress Tracking & Status Report Contract (v1)  
 7. Build & Verify Playbook (Local)  
 8. Decision Logging & Change Traceability Specification  

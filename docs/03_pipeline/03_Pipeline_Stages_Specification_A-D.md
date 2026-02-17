@@ -1,6 +1,6 @@
 # 📄 Document 3 — Pipeline Stages Specification (A → D)
 
-**Project:** Personal Autonomous Pipeline for HALO  
+**Project:** Forge  
 **Version:** 1.1  
 **Status:** CORE – NON-NEGOTIABLE  
 **Audience:** Autonomous Agents, Orchestrator, Human Owner (Khaled)

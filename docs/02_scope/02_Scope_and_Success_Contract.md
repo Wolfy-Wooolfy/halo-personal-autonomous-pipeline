@@ -1,7 +1,7 @@
 # Scope & Success Contract (v1)
 
 **Document ID:** DOC-02  
-**Project:** Personal Autonomous Pipeline for HALO  
+**Project:** Forge  
 **Document Type:** Binding Scope & Success Definition  
 **Status:** FINAL — EXECUTION-BOUND  
 **Applies To:** All pipeline executions, documents, code, and verification artifacts
@@ -11,7 +11,7 @@
 ## 1. Purpose of This Document
 
 This document defines the **explicit scope boundaries**, **success criteria**, and **completion rules**
-for the Personal Autonomous Pipeline for HALO.
+for the Forge.
 
 Its purpose is to:
 - Prevent scope creep

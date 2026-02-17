@@ -26,7 +26,12 @@ function extractTargetStage(nextStep) {
 }
 
 function isDryRun() {
-  return String(process.env.HALO_DRY_RUN).toLowerCase() === "true";
+  const v =
+    process.env.FORGE_DRY_RUN !== undefined
+      ? process.env.FORGE_DRY_RUN
+      : process.env.HALO_DRY_RUN;
+
+  return String(v || "").toLowerCase() === "true";
 }
 
 function allowPostStageCompletion(status) {
@@ -57,14 +62,14 @@ function run() {
   }
 
   if (status.current_task.trim() === "") {
-    console.log("[HALO] No task to execute.");
+    console.log("[FORGE] No task to execute.");
     return;
   }
 
   assertIdempotency(status);
 
   if (isDryRun()) {
-    console.log("[HALO DRY-RUN]");
+    console.log("[FORGE DRY-RUN]");
     console.log(`Would execute task: ${status.current_task}`);
     console.log("No state was written.");
     return;
@@ -92,10 +97,10 @@ function run() {
 
   writeStatus(updated);
 
-  console.log(`[HALO] ${status.current_task} progressed stage to ${result.stage_progress_percent}%`);
+  console.log(`[FORGE] ${status.current_task} progressed stage to ${result.stage_progress_percent}%`);
 
   if (result.closure_artifact) {
-    console.log(`[HALO] ${status.current_task} execution closure artifact created.`);
+    console.log(`[FORGE] ${status.current_task} execution closure artifact created.`);
   }
 
   const targetStage = extractTargetStage(status.next_step);

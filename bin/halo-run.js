@@ -53,7 +53,7 @@ try {
   process.exit(0);
 
 } catch (err) {
-  console.error("HALO RUN ERROR:");
+  console.error("FORGE RUN ERROR:");
   console.error(err.message);
   process.exit(1);
 }

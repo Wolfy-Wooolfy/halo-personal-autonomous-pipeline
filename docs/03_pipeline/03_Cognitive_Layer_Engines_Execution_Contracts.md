@@ -1,6 +1,6 @@
 # 📄 Document 11 — Cognitive Layer Engines Execution Contracts (v1)
 
-**Project:** Personal Autonomous Pipeline for HALO  
+**Project:** Forge  
 **Version:** 1.0  
 **Status:** BINDING – NON-NEGOTIABLE  
 **Applies To:** Stage A, Stage B, Stage C execution loops and their validators  
