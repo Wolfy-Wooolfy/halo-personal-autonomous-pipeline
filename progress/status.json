@@ -1,11 +1,11 @@
 {
   "status_type": "LIVE",
-  "current_stage": "C",
+  "current_stage": "D",
   "overall_progress_percent": 75,
-  "stage_progress_percent": 100,
+  "stage_progress_percent": 0,
   "last_completed_artifact": "artifacts/tasks/TASK-040.execution.closure.md",
-  "current_task": "",
+  "current_task": "Stage D initialization — Begin full verification pass (Docs ↔ Code ↔ Artifacts)",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage D — Verification & Decision (await explicit request to enter Stage D)"
+  "next_step": "Run full-system verification matrix (System → Scope → Pipeline → Autonomy → Artifacts → Progress → Decisions → Audit → Verify → Runtime)"
 }
