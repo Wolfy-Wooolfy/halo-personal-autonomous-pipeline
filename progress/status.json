@@ -1,11 +1,11 @@
 {
   "status_type": "LIVE",
   "current_stage": "C",
-  "overall_progress_percent": 100,
+  "overall_progress_percent": 75,
   "stage_progress_percent": 100,
   "last_completed_artifact": "artifacts/tasks/TASK-040.execution.closure.md",
   "current_task": "",
   "issues": [],
   "blocking_questions": [],
-  "next_step": ""
+  "next_step": "Stage D — Verification & Decision (await explicit request to enter Stage D)"
 }
