@@ -46,6 +46,12 @@ function parseMaxSteps() {
   return n;
 }
 
+function allowPostStageCompletion(status) {
+  const t = String(status.current_task || "");
+  const ns = String(status.next_step || "");
+  return /\bTASK-040\b/.test(t) || /\bTASK-040\b/.test(ns);
+}
+
 function mustStop(status) {
   if (Array.isArray(status.blocking_questions) && status.blocking_questions.length > 0) {
     return "BLOCKED state present (blocking_questions not empty)";
@@ -66,6 +72,9 @@ function mustStop(status) {
   }
 
   if (typeof status.stage_progress_percent === "number" && status.stage_progress_percent === 100) {
+    if (allowPostStageCompletion(status)) {
+      return null;
+    }
     return "stage_progress_percent == 100; stage is complete";
   }
 

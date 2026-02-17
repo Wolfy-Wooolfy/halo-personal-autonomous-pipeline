@@ -3,9 +3,9 @@
   "current_stage": "C",
   "overall_progress_percent": 100,
   "stage_progress_percent": 100,
-  "last_completed_artifact": "artifacts/tasks/TASK-039.execution.closure.md",
-  "current_task": "TASK-040: Stage C Encoding Normalization (Corrective Artifact)",
+  "last_completed_artifact": "artifacts/tasks/TASK-040.execution.closure.md",
+  "current_task": "",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "Stage C — Execute TASK-040 to emit stage_C.closure.v2.md (encoding-normalized) and record v1 encoding anomaly."
+  "next_step": ""
 }

@@ -790,6 +790,59 @@ const registry = Object.freeze({
         artifact: relTaskClosure
       };
     },
+
+    "TASK-040: Stage C Encoding Normalization (Corrective Artifact)": (context) => {
+      const v1Path = path.resolve(__dirname, "../../..", "artifacts", "stage_C", "stage_C.closure.md");
+      if (!fs.existsSync(v1Path)) {
+        throw new Error("Missing required artifact: artifacts/stage_C/stage_C.closure.md");
+      }
+
+      const v1Text = fs.readFileSync(v1Path, "utf-8");
+
+      const normalized = v1Text
+        .replace(/^#\s*Stage C.*Closure.*$/m, "# Stage C — Closure")
+        .trim();
+
+      const v2Path = path.resolve(__dirname, "../../..", "artifacts", "stage_C", "stage_C.closure.v2.md");
+
+      const v2Content = `${normalized}
+
+  ---
+
+  ## Encoding Note
+  - v1 artifact contained UTF-8 encoding anomaly in title.
+  - This v2 artifact preserves content but normalizes encoding.
+  - Original artifact remains immutable per closure rules.
+  `;
+
+      fs.writeFileSync(v2Path, v2Content, "utf-8");
+
+      const relTaskClosure = "artifacts/tasks/TASK-040.execution.closure.md";
+      const taskClosureAbs = path.join(TASKS_PATH, "TASK-040.execution.closure.md");
+
+      const taskClosure = `# TASK-040 — Execution Closure
+
+  ## Task
+  - Task ID: TASK-040
+  - Stage Binding: C
+  - Closure Type: EXECUTION
+
+  ## Status
+  - stage_progress_percent: 100
+  - closure_artifact: true
+
+  ## Artifact
+  - artifacts/stage_C/stage_C.closure.v2.md
+  `;
+
+      fs.writeFileSync(taskClosureAbs, taskClosure, "utf-8");
+
+      return {
+        stage_progress_percent: 100,
+        closure_artifact: true,
+        artifact: relTaskClosure
+      };
+    },
 });
 
 function renderMarkdownWithEmbeddedJson(title, jsonObj) {

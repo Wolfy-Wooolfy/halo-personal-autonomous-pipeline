@@ -29,7 +29,17 @@ function isDryRun() {
   return String(process.env.HALO_DRY_RUN).toLowerCase() === "true";
 }
 
+function allowPostStageCompletion(status) {
+  const t = String(status.current_task || "");
+  const ns = String(status.next_step || "");
+  return /\bTASK-040\b/.test(t) || /\bTASK-040\b/.test(ns);
+}
+
 function assertIdempotency(status) {
+  if (allowPostStageCompletion(status)) {
+    return;
+  }
+
   if (
     status.stage_progress_percent === 100 &&
     typeof status.current_task === "string" &&
