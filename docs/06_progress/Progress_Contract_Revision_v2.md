@@ -96,6 +96,23 @@ If mismatch:
 
 ---
 
+### Execution Semantics: current_task
+
+`current_task` is execution-bound.
+
+- If `current_task` is non-empty, it MUST be a valid executable task name.
+  Allowed namespaces:
+  - `TASK-`
+  - `SMOKE:`
+
+- If there is no executable task to run, `current_task` MUST be an empty string (`""`).
+
+Stage descriptions, phase narration, or governance guidance MUST be placed in `next_step`, not `current_task`.
+
+Violations MUST fail-closed at runtime.
+
+---
+
 ## 7. Loop Enforcement Binding
 
 Stage cannot close unless:
