@@ -29,7 +29,7 @@ If this index is missing, incomplete, or outdated:
 
 Authority hierarchy is defined in:
 
-- docs/04_autonomy/Artifact_Authority_Hierarchy_Specification.md (DOC-11)
+- docs/04_autonomy/05_Artifact_Authority_Hierarchy_Specification.md (DOC-11)
 
 All conflicts MUST be resolved by DOC-11.
 
@@ -37,35 +37,36 @@ All conflicts MUST be resolved by DOC-11.
 
 ## 3. Reference-Only (No Execution Authority)
 
-- docs/01_system/01_project_vision_reference.md (DOC-01)
+- docs/01_system/03_Project_Vision_Reference.md (DOC-01)
 
 ---
 
 ## 4. Core Execution-Bound Pack (v1, binding unless superseded)
 
-- docs/01_system/01_System_Overview_and_Operating_Model.md
-- docs/01_system/02_Vision_and_Cognitive_Layer_Reference.md
+- docs/01_system/00_Project_Identity_Contract.md
+- docs/01_system/02_System_Overview_and_Operating_Model.md
+- docs/01_system/04_Vision_and_Cognitive_Layer_Reference.md
 - docs/02_scope/02_Scope_and_Success_Contract.md
 - docs/03_pipeline/03_Pipeline_Stages_Specification_A-D.md
 - docs/03_pipeline/03_Cognitive_Layer_Engines_Execution_Contracts.md
-- docs/03_pipeline/11_Idea_Evaluation_and_Finalization_Contract.md
-- docs/03_pipeline/12_Documentation_Gap_Detection_and_Refinement_Loop_Contract.md
-- docs/03_pipeline/13_Code_to_Documentation_Trace_and_Consistency_Contract.md
-- docs/03_pipeline/14_Final_Acceptance_and_Release_Gate_Contract.md
-- docs/03_pipeline/15_Cognitive_Lifecycle_Orchestration_Specification.md
-- docs/03_pipeline/20_AI_Cognitive_Loop_Execution_Contract.md
-- docs/03_pipeline/21_Candidate_Transformation_and_Authority_Separation_Contract.md
+- docs/03_pipeline/03_11_Idea_Evaluation_and_Finalization_Contract.md
+- docs/03_pipeline/03_12_Documentation_Gap_Detection_and_Refinement_Loop_Contract.md
+- docs/03_pipeline/03_13_Code_to_Documentation_Trace_and_Consistency_Contract.md
+- docs/03_pipeline/03_14_Final_Acceptance_and_Release_Gate_Contract.md
+- docs/03_pipeline/03_15_Cognitive_Lifecycle_Orchestration_Specification.md
+- docs/03_pipeline/03_20_AI_Cognitive_Loop_Execution_Contract.md
+- docs/03_pipeline/03_21_Candidate_Transformation_and_Authority_Separation_Contract.md
 - docs/04_autonomy/04_Autonomy_Policy_and_Human_Interrupt_Protocol.md
 - docs/05_artifacts/05_Artifact_Schema_and_Repository_Layout_Standard.md
-- docs/05_artifacts/16_Cognitive_Artifacts_Definition_Specification.md
+- docs/05_artifacts/05_16_Cognitive_Artifacts_Definition_Specification.md
 - docs/06_progress/06_Progress_Tracking_and_Status_Report_Contract_v1.md
 - docs/07_decisions/07_Decision_Logging_and_Change_Traceability_Specification.md
 - docs/08_audit/08_Forge_Boundary_Audit_Rules_Fail-Closed_Pack.md
-- docs/08_audit/vision_alignment_contract.md
+- docs/08_audit/09_Vision_Alignment_Contract.md
 - docs/09_verify/09_Build_and_Verify_Playbook_Local.md
-- docs/09_verify/17_Cross_Document_Consistency_Review_Contract.md
-- docs/09_verify/18_Code_to_Spec_Trace_Validator_Contract.md
-- docs/09_verify/19_Docs_Gap_Analyzer_Validator_Contract.md
+- docs/09_verify/09_17_Cross_Document_Consistency_Review_Contract.md
+- docs/09_verify/09_18_Code_to_Spec_Trace_Validator_Contract.md
+- docs/09_verify/09_19_Docs_Gap_Analyzer_Validator_Contract.md
 - docs/10_runtime/10_Tech_Assumptions_and_Local_Runtime_Setup.md
 
 ---
@@ -73,23 +74,23 @@ All conflicts MUST be resolved by DOC-11.
 ## 5. v2 Canonical Addendum (Execution-Bound)
 
 ### Governance & Cognitive Layer
-- docs/04_autonomy/Artifact_Authority_Hierarchy_Specification.md (DOC-11)
-- docs/04_autonomy/Cognitive_Layer_Contract.md (DOC-12)
+- docs/04_autonomy/05_Artifact_Authority_Hierarchy_Specification.md (DOC-11)
+- docs/04_autonomy/06_Cognitive_Layer_Contract.md (DOC-12)
 
 ### Loop & Stage Rebinding
-- docs/03_pipeline/Loop_Enforcement_Specification.md (DOC-13)
-- docs/03_pipeline/Stage_Contracts_Revision_v2.md (DOC-14)
+- docs/03_pipeline/03_16_Loop_Enforcement_Specification.md (DOC-13)
+- docs/03_pipeline/03_17_Stage_Contracts_Revision_v2.md (DOC-14)
 
 ### Vision Compliance Enforcement
-- docs/02_scope/Vision_Coverage_Matrix_Contract.md (DOC-15)
-- docs/02_scope/Vision_Gap_Detection_Specification.md (DOC-16)
+- docs/02_scope/03_Vision_Coverage_Matrix_Contract.md (DOC-15)
+- docs/02_scope/04_Vision_Gap_Detection_Specification.md (DOC-16)
 
 ### Artifact Schema (v2)
-- docs/05_artifacts/Artifact_Schema_Revision_v2.md (DOC-17)
-- docs/05_artifacts/Artifact_Serialization_and_Embedded_JSON_Rule.md (DOC-21)
+- docs/05_artifacts/05_17_Artifact_Schema_Revision_v2.md (DOC-17)
+- docs/05_artifacts/05_18_Artifact_Serialization_and_Embedded_JSON_Rule.md (DOC-21)
 
 ### Progress Contract (v2)
-- docs/06_progress/Progress_Contract_Revision_v2.md (DOC-18)
+- docs/06_progress/06_Progress_Contract_Revision_v2.md (DOC-18)
 
 ---
 
