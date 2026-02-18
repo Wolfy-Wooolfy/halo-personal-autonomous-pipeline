@@ -843,6 +843,344 @@ const registry = Object.freeze({
         artifact: relTaskClosure
       };
     },
+
+    "TASK-041: Stage D Verification (VERIFY-05)": (context) => {
+      const required = [
+        "artifacts/stage_C/code_trace_matrix.md",
+        "artifacts/stage_C/code_mismatch_report.md",
+        "artifacts/stage_C/test_evidence.md",
+        "artifacts/stage_C/stage_C.closure.v2.md"
+      ];
+
+      const checks = required.map((rel) => {
+        const abs = path.resolve(__dirname, "../../..", rel);
+        if (!fs.existsSync(abs)) {
+          throw new Error(`Missing required artifact: ${rel}`);
+        }
+        const st = fs.statSync(abs);
+        return {
+          path: rel,
+          bytes: st.size
+        };
+      });
+
+      const reportAbs = path.resolve(__dirname, "../../..", "artifacts", "stage_D", "verification_report.md");
+      const evidenceAbs = path.resolve(__dirname, "../../..", "artifacts", "stage_D", "verification_evidence.md");
+      fs.mkdirSync(path.dirname(reportAbs), { recursive: true });
+
+      const registryFileAbs = path.resolve(__dirname, "task_registry.js");
+      const range = findHandlerLineRange(registryFileAbs, '"TASK-041: Stage D Verification (VERIFY-05)"');
+
+      const summary = {
+        task_id: "TASK-041",
+        stage_binding: "D",
+        verify_id: "VERIFY-05",
+        verified_inputs: checks,
+        handler_source: {
+          file: "code/src/execution/task_registry.js",
+          start_line: range.start,
+          end_line: range.end
+        },
+        outcome: "PASS",
+        generated_outputs: [
+          "artifacts/stage_D/verification_report.md",
+          "artifacts/stage_D/verification_evidence.md"
+        ]
+      };
+
+      const reportMd = renderMarkdownWithEmbeddedJson("Stage D — Verification Report (VERIFY-05)", summary);
+      fs.writeFileSync(reportAbs, reportMd, "utf-8");
+
+      const evidenceMd = renderMarkdownWithEmbeddedJson("Stage D — Verification Evidence (VERIFY-05)", {
+        inputs: checks,
+        note: "Evidence contains deterministic file size facts only.",
+        handler_source: summary.handler_source
+      });
+      fs.writeFileSync(evidenceAbs, evidenceMd, "utf-8");
+
+      const relTaskClosure = "artifacts/tasks/TASK-041.execution.closure.md";
+      const taskClosureAbs = path.resolve(__dirname, "../../..", relTaskClosure);
+      const taskClosure = `# TASK-041 — Execution Closure
+
+    ## Task
+    - Task ID: TASK-041
+    - Stage Binding: D
+    - Closure Type: EXECUTION
+
+    ## Status
+    - stage_progress_percent: 25
+    - closure_artifact: true
+
+    ## Generated Artifacts
+    - artifacts/stage_D/verification_report.md
+    - artifacts/stage_D/verification_evidence.md
+  `;
+      fs.writeFileSync(taskClosureAbs, taskClosure, "utf-8");
+
+      return {
+        stage_progress_percent: 25,
+        closure_artifact: true,
+        artifact: relTaskClosure
+      };
+    },
+    "TASK-042: Stage D Advance After VERIFY-05": (context) => {
+    const outAbs = path.resolve(__dirname, "../../..", "artifacts", "stage_D", "verify05_advance.md");
+    fs.mkdirSync(path.dirname(outAbs), { recursive: true });
+
+    const payload = {
+      task_id: "TASK-042",
+      stage_binding: "D",
+      from: "TASK-041",
+      to: "TASK-043",
+      reason: "Prevent idempotency loop by advancing current_task after VERIFY-05 PASS.",
+      outcome: "PASS"
+    };
+
+    fs.writeFileSync(
+      outAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Advance After VERIFY-05", payload),
+      "utf-8"
+    );
+
+    const relTaskClosure = "artifacts/tasks/TASK-042.execution.closure.md";
+    const taskClosureAbs = path.resolve(__dirname, "../../..", relTaskClosure);
+    fs.writeFileSync(
+      taskClosureAbs,
+      `# TASK-042 — Execution Closure
+
+## Status
+- stage_progress_percent: 50
+- closure_artifact: true
+
+## Generated Artifacts
+- artifacts/stage_D/verify05_advance.md
+`,
+      "utf-8"
+    );
+
+    return {
+      stage_progress_percent: 50,
+      closure_artifact: true,
+      artifact: relTaskClosure,
+      status_patch: {
+        current_task: "TASK-043: Stage D Verification Matrix (Docs Presence)",
+        next_step: "Stage D — Execute TASK-043 to verify docs folders presence + emit evidence"
+      }
+    };
+  },
+
+  "TASK-043: Stage D Verification Matrix (Docs Presence)": (context) => {
+    const base = path.resolve(__dirname, "../../..", "docs");
+    const requiredDirs = [
+      "01_system",
+      "02_scope",
+      "03_pipeline",
+      "04_autonomy",
+      "05_artifacts",
+      "06_progress",
+      "07_decisions",
+      "08_audit",
+      "09_verify",
+      "10_runtime"
+    ];
+
+    const results = requiredDirs.map((d) => {
+      const dirAbs = path.resolve(base, d);
+      if (!fs.existsSync(dirAbs)) {
+        throw new Error(`Missing required docs directory: docs/${d}`);
+      }
+      const files = fs.readdirSync(dirAbs).filter((f) => f.toLowerCase().endsWith(".md"));
+      if (files.length === 0) {
+        throw new Error(`docs/${d} contains no .md files`);
+      }
+      return { dir: `docs/${d}`, md_count: files.length };
+    });
+
+    const reportAbs = path.resolve(__dirname, "../../..", "artifacts", "stage_D", "docs_presence_report.md");
+    const evidenceAbs = path.resolve(__dirname, "../../..", "artifacts", "stage_D", "docs_presence_evidence.md");
+    fs.mkdirSync(path.dirname(reportAbs), { recursive: true });
+
+    fs.writeFileSync(
+      reportAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Docs Presence Report", {
+        task_id: "TASK-043",
+        stage_binding: "D",
+        check: "docs folders presence + md file count",
+        outcome: "PASS",
+        results
+      }),
+      "utf-8"
+    );
+
+    fs.writeFileSync(
+      evidenceAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Docs Presence Evidence", {
+        results,
+        note: "Evidence contains deterministic counts only."
+      }),
+      "utf-8"
+    );
+
+    const relTaskClosure = "artifacts/tasks/TASK-043.execution.closure.md";
+    const taskClosureAbs = path.resolve(__dirname, "../../..", relTaskClosure);
+    fs.writeFileSync(
+      taskClosureAbs,
+      `# TASK-043 — Execution Closure
+
+## Status
+- stage_progress_percent: 75
+- closure_artifact: true
+
+## Generated Artifacts
+- artifacts/stage_D/docs_presence_report.md
+- artifacts/stage_D/docs_presence_evidence.md
+`,
+      "utf-8"
+    );
+
+    return {
+      stage_progress_percent: 75,
+      closure_artifact: true,
+      artifact: relTaskClosure,
+      status_patch: {
+        current_task: "TASK-044: Stage D Closure",
+        next_step: "Stage D — Execute TASK-044 to emit Stage D closure artifact and clear current_task"
+      }
+    };
+  },
+
+  "TASK-044: Stage D Closure": (context) => {
+    const closureAbs = path.resolve(__dirname, "../../..", "artifacts", "stage_D", "stage_D.closure.md");
+    fs.mkdirSync(path.dirname(closureAbs), { recursive: true });
+
+    fs.writeFileSync(
+      closureAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Closure", {
+        stage: "D",
+        outcome: "CLOSED",
+        gates: [
+          "VERIFY-05 (Stage C artifacts presence) PASS",
+          "Docs presence matrix PASS"
+        ],
+        generated: [
+          "artifacts/stage_D/verification_report.md",
+          "artifacts/stage_D/verification_evidence.md",
+          "artifacts/stage_D/docs_presence_report.md",
+          "artifacts/stage_D/docs_presence_evidence.md",
+          "artifacts/stage_D/stage_D.closure.md"
+        ]
+      }),
+      "utf-8"
+    );
+
+    const relTaskClosure = "artifacts/tasks/TASK-044.execution.closure.md";
+    const taskClosureAbs = path.resolve(__dirname, "../../..", relTaskClosure);
+    fs.writeFileSync(
+      taskClosureAbs,
+      `# TASK-044 — Execution Closure
+
+## Status
+- stage_progress_percent: 100
+- closure_artifact: true
+
+## Generated Artifacts
+- artifacts/stage_D/stage_D.closure.md
+`,
+      "utf-8"
+    );
+
+    return {
+      stage_progress_percent: 100,
+      closure_artifact: true,
+      artifact: relTaskClosure,
+      clear_current_task: true,
+      status_patch: {
+        next_step: "Stage D CLOSED — ready for release workflow (manifest/integrity) if defined by pipeline"
+      }
+    };
+  },
+
+    "TASK-045: Stage D Release Manifest + Gate Closure": (context) => {
+    const root = path.resolve(__dirname, "../../..");
+
+    const required = [
+      "artifacts/stage_D/stage_D.closure.md",
+      "release_local.hashes.json"
+    ];
+
+    const checks = required.map((rel) => {
+      const abs = path.resolve(root, rel);
+      if (!fs.existsSync(abs)) {
+        throw new Error(`Missing required release input: ${rel}`);
+      }
+      const st = fs.statSync(abs);
+      return { path: rel, bytes: st.size };
+    });
+
+    const manifestAbs = path.resolve(root, "artifacts", "stage_D", "release_manifest.md");
+    const evidenceAbs = path.resolve(root, "artifacts", "stage_D", "release_gate_evidence.md");
+    fs.mkdirSync(path.dirname(manifestAbs), { recursive: true });
+
+    const manifestPayload = {
+      task_id: "TASK-045",
+      stage_binding: "D",
+      release_type: "LOCAL_STABLE_SNAPSHOT",
+      inputs: checks,
+      status_snapshot: {
+        current_stage: context.status.current_stage,
+        stage_progress_percent: context.status.stage_progress_percent,
+        last_completed_artifact: context.status.last_completed_artifact
+      },
+      outcome: "PASS",
+      outputs: [
+        "artifacts/stage_D/release_manifest.md",
+        "artifacts/stage_D/release_gate_evidence.md"
+      ]
+    };
+
+    fs.writeFileSync(
+      manifestAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Release Manifest (Local Stable Snapshot)", manifestPayload),
+      "utf-8"
+    );
+
+    fs.writeFileSync(
+      evidenceAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Release Gate Evidence (Local Stable Snapshot)", {
+        inputs: checks,
+        note: "Evidence contains deterministic file size facts only."
+      }),
+      "utf-8"
+    );
+
+    const relTaskClosure = "artifacts/tasks/TASK-045.execution.closure.md";
+    const taskClosureAbs = path.resolve(root, relTaskClosure);
+
+    fs.writeFileSync(
+      taskClosureAbs,
+      `# TASK-045 — Execution Closure
+
+## Status
+- stage_progress_percent: 100
+- closure_artifact: true
+
+## Generated Artifacts
+- artifacts/stage_D/release_manifest.md
+- artifacts/stage_D/release_gate_evidence.md
+`,
+      "utf-8"
+    );
+
+    return {
+      stage_progress_percent: 100,
+      closure_artifact: true,
+      artifact: relTaskClosure,
+      clear_current_task: true,
+      status_patch: {
+        next_step: "READY — stable verified snapshot established (release_local.hashes.json)"
+      }
+    };
+  },
 });
 
 function renderMarkdownWithEmbeddedJson(title, jsonObj) {

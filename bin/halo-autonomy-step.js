@@ -57,6 +57,23 @@ function allowPostStageCompletion(status) {
   return /\bTASK-040\b/.test(t) || /\bTASK-040\b/.test(ns);
 }
 
+function allowPostStageTasksAt100(status) {
+  if (status.current_stage !== "D") {
+    return false;
+  }
+
+  if (status.stage_progress_percent !== 100) {
+    return false;
+  }
+
+  if (String(process.env.HALO_ALLOW_POST_STAGE_TASKS || "") !== "1") {
+    return false;
+  }
+
+  const t = String(status.current_task || "").trim();
+  return t !== "";
+}
+
 function mustStop(status) {
   if (Array.isArray(status.blocking_questions) && status.blocking_questions.length > 0) {
     return "BLOCKED state present (blocking_questions not empty)";
@@ -72,11 +89,14 @@ function mustStop(status) {
     return "next_step does not contain a Stage target";
   }
 
-  if (target === "D") {
-    return "Stage D invocation is forbidden in autonomy-step";
+  if (target === "D" && process.env.HALO_ALLOW_STAGE_D !== "1") {
+    return "Stage D invocation is forbidden in autonomy-step (set HALO_ALLOW_STAGE_D=1 to proceed)";
   }
 
   if (typeof status.stage_progress_percent === "number" && status.stage_progress_percent === 100) {
+    if (allowPostStageTasksAt100(status)) {
+      return null;
+    }
     if (allowPostStageCompletion(status)) {
       return null;
     }

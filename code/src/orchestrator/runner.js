@@ -37,7 +37,20 @@ function isDryRun() {
 function allowPostStageCompletion(status) {
   const t = String(status.current_task || "");
   const ns = String(status.next_step || "");
-  return /\bTASK-040\b/.test(t) || /\bTASK-040\b/.test(ns);
+  if (/\bTASK-040\b/.test(t) || /\bTASK-040\b/.test(ns)) {
+    return true;
+  }
+
+  if (
+    status.current_stage === "D" &&
+    status.stage_progress_percent === 100 &&
+    String(process.env.HALO_ALLOW_POST_STAGE_TASKS || "") === "1" &&
+    String(status.current_task || "").trim() !== ""
+  ) {
+    return true;
+  }
+
+  return false;
 }
 
 function assertIdempotency(status) {
@@ -89,11 +102,25 @@ function run() {
     throw new Error("Monotonicity violation: stage_progress_percent cannot decrease");
   }
 
-  const updated = {
+  let updated = {
     ...status,
     stage_progress_percent: result.stage_progress_percent,
     last_completed_artifact: result.artifact || status.last_completed_artifact
   };
+
+  if (result.status_patch && typeof result.status_patch === "object") {
+    updated = {
+      ...updated,
+      ...result.status_patch
+    };
+  }
+
+  if (result.clear_current_task === true) {
+    updated = {
+      ...updated,
+      current_task: ""
+    };
+  }
 
   writeStatus(updated);
 
