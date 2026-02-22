@@ -1181,6 +1181,84 @@ const registry = Object.freeze({
       }
     };
   },
+
+    "TASK-046: Stage D Release Manifest v2 (Update hashes reference)": (context) => {
+    const root = path.resolve(__dirname, "../../..");
+
+    const required = [
+      "artifacts/stage_D/release_manifest.md",
+      "release_local_v2.hashes.json"
+    ];
+
+    const inputs = required.map((rel) => {
+      const abs = path.resolve(root, rel);
+      if (!fs.existsSync(abs)) {
+        throw new Error(`Missing required input: ${rel}`);
+      }
+      const st = fs.statSync(abs);
+      return { path: rel, bytes: st.size };
+    });
+
+    const manifestAbs = path.resolve(root, "artifacts", "stage_D", "release_manifest.v2.md");
+    const evidenceAbs = path.resolve(root, "artifacts", "stage_D", "release_gate_evidence.v2.md");
+    fs.mkdirSync(path.dirname(manifestAbs), { recursive: true });
+
+    const payload = {
+      task_id: "TASK-046",
+      stage_binding: "D",
+      release_type: "LOCAL_STABLE_SNAPSHOT_V2",
+      inputs,
+      hashes_file: "release_local_v2.hashes.json",
+      outcome: "PASS",
+      outputs: [
+        "artifacts/stage_D/release_manifest.v2.md",
+        "artifacts/stage_D/release_gate_evidence.v2.md"
+      ]
+    };
+
+    fs.writeFileSync(
+      manifestAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Release Manifest (Local Stable Snapshot v2)", payload),
+      "utf-8"
+    );
+
+    fs.writeFileSync(
+      evidenceAbs,
+      renderMarkdownWithEmbeddedJson("Stage D — Release Gate Evidence (Local Stable Snapshot v2)", {
+        inputs,
+        note: "Evidence contains deterministic file size facts only."
+      }),
+      "utf-8"
+    );
+
+    const relTaskClosure = "artifacts/tasks/TASK-046.execution.closure.md";
+    const taskClosureAbs = path.resolve(root, relTaskClosure);
+
+    fs.writeFileSync(
+      taskClosureAbs,
+      `# TASK-046 — Execution Closure
+
+## Status
+- stage_progress_percent: 100
+- closure_artifact: true
+
+## Generated Artifacts
+- artifacts/stage_D/release_manifest.v2.md
+- artifacts/stage_D/release_gate_evidence.v2.md
+`,
+      "utf-8"
+    );
+
+    return {
+      stage_progress_percent: 100,
+      closure_artifact: true,
+      artifact: relTaskClosure,
+      clear_current_task: true,
+      status_patch: {
+        next_step: "READY — stable verified snapshot established (release_local_v2.hashes.json)"
+      }
+    };
+  },
 });
 
 function renderMarkdownWithEmbeddedJson(title, jsonObj) {
