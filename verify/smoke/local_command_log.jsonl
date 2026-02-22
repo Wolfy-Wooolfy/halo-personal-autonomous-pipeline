@@ -1,0 +1,1 @@
+{"ts":"2026-02-22T13:28:36.307Z","cwd":"D:\\S\\Halo\\Tech\\halo-personal-autonomous-pipeline","node":"v22.17.1","script":"verify/smoke/local_command_logger.js","argv":["TEST_RUN","123"],"env":{"HALO_AUTONOMY":"","HALO_MAX_STEPS":""}}
