@@ -1,6 +1,6 @@
 {
   "report_id": "DOCS_GAP_VALIDATION_REPORT_v1",
-  "generated_at": "2026-02-22T13:18:31.946Z",
+  "generated_at": "2026-02-23T10:45:14.619Z",
   "inputs": {
     "docs_root": "docs",
     "code_roots": [
@@ -12,47 +12,16 @@
   },
   "summary": {
     "docs_file_count": 49,
-    "code_file_count": 16,
-    "missing_expected_verify_outputs": 6,
+    "code_file_count": 27,
+    "missing_expected_verify_outputs": 0,
     "missing_required_verify_schemas_in_docs": 0,
     "runtime_docs_coverage_files_present": 2,
     "likely_undocumented_code_count": 0,
     "must_issues": 0,
-    "should_issues": 6,
+    "should_issues": 0,
     "info_issues": 0
   },
-  "issues": [
-    {
-      "severity": "SHOULD",
-      "code": "VERIFY-EXPECTED-OUTPUT-MISSING",
-      "message": "Expected verify output not implemented as file: verify/unit/docs_gap_validation_report.json"
-    },
-    {
-      "severity": "SHOULD",
-      "code": "VERIFY-EXPECTED-OUTPUT-MISSING",
-      "message": "Expected verify output not implemented as file: verify/unit/cross_document_consistency_report.json"
-    },
-    {
-      "severity": "SHOULD",
-      "code": "VERIFY-EXPECTED-OUTPUT-MISSING",
-      "message": "Expected verify output not implemented as file: verify/unit/mismatch_report.json"
-    },
-    {
-      "severity": "SHOULD",
-      "code": "VERIFY-EXPECTED-OUTPUT-MISSING",
-      "message": "Expected verify output not implemented as file: verify/audit/audit_log.jsonl"
-    },
-    {
-      "severity": "SHOULD",
-      "code": "VERIFY-EXPECTED-OUTPUT-MISSING",
-      "message": "Expected verify output not implemented as file: verify/smoke/local_command_log.jsonl"
-    },
-    {
-      "severity": "SHOULD",
-      "code": "VERIFY-EXPECTED-OUTPUT-MISSING",
-      "message": "Expected verify output not implemented as file: verify/smoke/smoke_check.sh"
-    }
-  ],
+  "issues": [],
   "docs": {
     "missing_required_verify_schemas": [],
     "runtime_docs_coverage_files_present": [
@@ -61,14 +30,7 @@
     ]
   },
   "gaps": {
-    "docs_imply_but_code_missing": [
-      "verify/unit/docs_gap_validation_report.json",
-      "verify/unit/cross_document_consistency_report.json",
-      "verify/unit/mismatch_report.json",
-      "verify/audit/audit_log.jsonl",
-      "verify/smoke/local_command_log.jsonl",
-      "verify/smoke/smoke_check.sh"
-    ],
+    "docs_imply_but_code_missing": [],
     "code_present_but_docs_coverage_uncertain": []
   }
 }

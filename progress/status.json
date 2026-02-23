@@ -7,5 +7,5 @@
   "current_task": "",
   "issues": [],
   "blocking_questions": [],
-  "next_step": "READY — stable verified snapshot established (release_local_v2.hashes.json)"
+  "next_step": "READY — stable verified snapshot established (release_local_v4.hashes.json); Gap Audit=0; Mismatch Report=0"
 }

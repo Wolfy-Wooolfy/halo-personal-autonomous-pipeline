@@ -220,6 +220,16 @@ Then:
 
 ---
 
+### 2.2.1 Smoke Check Entrypoint (Windows-Compatible)
+
+On Windows local execution, Smoke Check MUST be executed via Node:
+
+- `node verify/smoke/smoke_check.js`
+
+Any reference to a `.sh` smoke check script is considered non-authoritative for Windows local runs.
+
+---
+
 ## 3. Failure Handling
 
 Failure handling is strictly classified
