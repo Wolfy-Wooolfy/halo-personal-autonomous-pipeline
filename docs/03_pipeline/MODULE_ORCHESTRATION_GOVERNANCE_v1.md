@@ -215,6 +215,24 @@ artifacts/backfill/
 artifacts/execute/
 artifacts/closure/
 
+In addition, the following namespaces are permitted as IMMUTABLE-LEGACY
+(GRANDFATHERED) for historical evidence only:
+
+- artifacts/tasks/
+- artifacts/stage_A/
+- artifacts/stage_B/
+- artifacts/stage_C/
+- artifacts/stage_D/
+- artifacts/reports/
+- artifacts/release/
+
+IMMUTABLE-LEGACY Rules:
+
+- Legacy namespaces MAY exist and remain unchanged.
+- Forge runtime MUST treat them as READ-ONLY.
+- No module may write new artifacts into any IMMUTABLE-LEGACY namespace.
+- Any attempt to write into IMMUTABLE-LEGACY is a CRITICAL violation and MUST halt execution.
+
 No module may write outside its designated namespace.
 
 ---

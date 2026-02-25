@@ -1,18 +1,20 @@
 # Audit Report
 
-- execution_id: EXEC-724563529367
+- execution_id: EXEC-5DF395C207B1
 - blocked: true
 
 ## Summary
-Audit detected CRITICAL governance violations under Artifact Namespace Integrity.
+Audit detected CRITICAL violations under Artifact Namespace Integrity due to pre-existing legacy artifact namespaces.
 
 ## CRITICAL Violations
-- artifacts/reports/ is not an allowed namespace under current DOC-38 rule.
-- artifacts/stage_C/ is not an allowed namespace under current DOC-38 rule.
-- artifacts/tasks/ is not an allowed namespace under current DOC-38 rule.
+- artifacts/reports/
+- artifacts/tasks/
+- artifacts/stage_A/
+- artifacts/stage_B/
+- artifacts/stage_C/
+- artifacts/stage_D/
 
 ## Warnings
-- Deprecated naming references exist in immutable historical artifacts.
-- Unexpected root-level file: C
+- Deprecated historical name references exist in legacy artifacts (e.g., release manifests/runbooks).
 
 FAIL-CLOSED RESULT: BLOCKED

@@ -148,6 +148,27 @@ Any violation → BLOCKED.
 
 ---
 
+## 7.1 IMMUTABLE-LEGACY (GRANDFATHERED) Namespaces
+
+The following artifact namespaces are permitted as IMMUTABLE-LEGACY:
+
+- artifacts/tasks/
+- artifacts/stage_A/
+- artifacts/stage_B/
+- artifacts/stage_C/
+- artifacts/stage_D/
+- artifacts/reports/
+- artifacts/release/
+
+Rules:
+
+- These namespaces MAY exist for historical evidence only.
+- They are READ-ONLY.
+- Any new artifact written into IMMUTABLE-LEGACY is a CRITICAL violation and MUST halt execution.
+- Audit MUST NOT fail solely due to the existence of IMMUTABLE-LEGACY namespaces.
+
+---
+
 # 8. Naming Authority Compliance
 
 Audit MUST verify:
