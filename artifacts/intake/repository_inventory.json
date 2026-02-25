@@ -1,0 +1,21 @@
+[
+  {
+    "path": "C",
+    "size_bytes": 0,
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "INSTRUCTIONS.md",
+    "size_bytes": 3587,
+    "hash": "6c29eb71d742afb66c780fc510252d6a0d7b1c692e06bcd6d251a59fae1189c0",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "README.md",
+    "size_bytes": 1337,
+    "hash": "38bd682b15d5ca9cc85a9707c59f768919cec85065e5978822976dcf84032b89",
+    "captured_at": "SNAPSHOT_LOCKED"
+  }
+  /* ... 194 entries omitted here (keep lexicographic order exactly) ... */
+]

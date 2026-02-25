@@ -1,0 +1,57 @@
+{
+  "execution_id": "EXEC-724563529367",
+  "total_checks": 6,
+  "passed_checks": 3,
+  "failed_checks": 3,
+  "blocked": true,
+  "violations": [
+    {
+      "category": "Artifact Namespace Integrity",
+      "severity": "CRITICAL",
+      "path": "artifacts/reports/",
+      "description": "Artifact namespace not allowed by DOC-38 Artifact Hierarchy Rule."
+    },
+    {
+      "category": "Artifact Namespace Integrity",
+      "severity": "CRITICAL",
+      "path": "artifacts/stage_C/",
+      "description": "Artifact namespace not allowed by DOC-38 Artifact Hierarchy Rule."
+    },
+    {
+      "category": "Artifact Namespace Integrity",
+      "severity": "CRITICAL",
+      "path": "artifacts/tasks/",
+      "description": "Artifact namespace not allowed by DOC-38 Artifact Hierarchy Rule."
+    },
+    {
+      "category": "Naming Authority Compliance",
+      "severity": "WARNING",
+      "path": "artifacts/release/RELEASE_1.0.0.integrity.md",
+      "description": "Deprecated naming reference detected: \"HALO Personal Autonomous Pipeline\"."
+    },
+    {
+      "category": "Naming Authority Compliance",
+      "severity": "WARNING",
+      "path": "artifacts/release/RELEASE_1.0.0.manifest.md",
+      "description": "Deprecated naming reference detected: \"HALO Personal Autonomous Pipeline\"."
+    },
+    {
+      "category": "Naming Authority Compliance",
+      "severity": "WARNING",
+      "path": "artifacts/release/RELEASE_1.1.0.manifest.md",
+      "description": "Deprecated naming reference detected: \"HALO Personal Autonomous Pipeline\"."
+    },
+    {
+      "category": "Naming Authority Compliance",
+      "severity": "WARNING",
+      "path": "artifacts/stage_C/runtime_runbook.md",
+      "description": "Deprecated naming reference detected: \"Personal Autonomous Pipeline\"."
+    },
+    {
+      "category": "Repository Structure",
+      "severity": "WARNING",
+      "path": "C",
+      "description": "Unexpected root-level file with empty content."
+    }
+  ]
+}
