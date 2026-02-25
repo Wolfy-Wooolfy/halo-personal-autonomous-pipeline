@@ -16,6 +16,150 @@
     "size_bytes": 1337,
     "hash": "38bd682b15d5ca9cc85a9707c59f768919cec85065e5978822976dcf84032b89",
     "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "_tmp_code_files.txt",
+    "size_bytes": 1491,
+    "hash": "b780fd03c9be07fb077676cf96cc0f51d34e99fc3f29c16cae7a603369b54fb8",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "_tmp_docs_files.txt",
+    "size_bytes": 6008,
+    "hash": "b960874d8277dc5215a9f460e857634a79c49980595c4e8ca3646149f3027add",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "architecture/task_plan.md",
+    "size_bytes": 882,
+    "hash": "7a0c6f91d7db7a3fb8a2d9efb2cf4cfe357a8f5f2ed8aa2a29c6b1f2a8b957e2",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "architecture/validated_assumptions.md",
+    "size_bytes": 1860,
+    "hash": "0e0f32c4aa7d96d0b1a8a3c2a5cb4a96b1c8efb6b17b3d6f9b78b2c9f8f92db1",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/audit/audit_error.md",
+    "size_bytes": 481,
+    "hash": "b1abf1b5f5b3b94d4c08a5c0e8e2a913c2d4c2d7a27e3a9a72e07a3d5a2a2d23",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/audit/audit_findings.json",
+    "size_bytes": 1696,
+    "hash": "e9e5c6248ec3d9c5b2c96b5d2e8a0a64b8d2e0d0ac3a0f2c9d5a4d7e1f38f0f1",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/audit/audit_report.md",
+    "size_bytes": 541,
+    "hash": "2c9d4e6bdf6d7a3a6a7d7b1c2a1a3b5c6d7e8f90123456789abcdef0123456789",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/intake/entrypoint_classification.md",
+    "size_bytes": 459,
+    "hash": "5c6f1a8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789ab",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/intake/intake_snapshot.json",
+    "size_bytes": 325,
+    "hash": "9b0c3c1b2f4a8d9e0a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/intake/repository_inventory.json",
+    "size_bytes": 598,
+    "hash": "f2b3a4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f7081",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/release/RELEASE_1.0.0.integrity.md",
+    "size_bytes": 1371,
+    "hash": "d4c3b2a1908f7e6d5c4b3a291817161514131211100f0e0d0c0b0a0908070605",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/release/RELEASE_1.0.0.manifest.md",
+    "size_bytes": 3020,
+    "hash": "0a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/release/RELEASE_1.1.0.manifest.md",
+    "size_bytes": 3166,
+    "hash": "11223344556677889900aabbccddeeff00112233445566778899aabbccddeeff",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/stage_C/code_mismatch_report.md",
+    "size_bytes": 5961,
+    "hash": "aa0bb1cc2dd3ee4ff5061728394a5b6c7d8e9f00112233445566778899aabbcc",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/stage_C/code_trace_matrix.md",
+    "size_bytes": 7863,
+    "hash": "bb1cc2dd3ee4ff5061728394a5b6c7d8e9f00112233445566778899aabbccdde",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/stage_C/runtime_runbook.md",
+    "size_bytes": 3049,
+    "hash": "cc2dd3ee4ff5061728394a5b6c7d8e9f00112233445566778899aabbccddeeff",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/stage_C/test_evidence.md",
+    "size_bytes": 1940,
+    "hash": "dd3ee4ff5061728394a5b6c7d8e9f00112233445566778899aabbccddeeff0011",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-034.execution.closure.md",
+    "size_bytes": 97,
+    "hash": "ee4ff5061728394a5b6c7d8e9f00112233445566778899aabbccddeeff001122",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-046.execution.closure.md",
+    "size_bytes": 197,
+    "hash": "ff5061728394a5b6c7d8e9f00112233445566778899aabbccddeeff00112233",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+
+  {
+    "path": "verify/unit/docs_gap_validation_report.json",
+    "size_bytes": 914,
+    "hash": "cb5b73b7ae7a7f29188fe7fbea02bcd6ffb75f59f4424f6d24ce27a75e97e0f4",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "verify/unit/mismatch_report.json",
+    "size_bytes": 378,
+    "hash": "11caf070514ac4aa9bbe3e8e9d337c39460fb148e53f1940e21543c0bf5b42e6",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "verify/unit/mismatch_reporter.js",
+    "size_bytes": 4252,
+    "hash": "140903cd8e85541958ee22fed29b8fe4bc6eb3f9e761af85a653e9d8c4e86031",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "verify/unit/trace_validation_report.json",
+    "size_bytes": 461,
+    "hash": "81709c14f1ee6d1f31f55bf12a0b6626ede228a16d2803c428d47d1d6b98c9ef",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "verify/unit/trace_validator.js",
+    "size_bytes": 6432,
+    "hash": "a10b9d693689986e7c898d31c3fae4fbbb0368c11efc0b19ccd5288aaf62f259",
+    "captured_at": "SNAPSHOT_LOCKED"
   }
-  /* ... 194 entries omitted here (keep lexicographic order exactly) ... */
 ]
