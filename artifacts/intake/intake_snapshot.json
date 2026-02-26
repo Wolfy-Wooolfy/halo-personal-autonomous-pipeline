@@ -1,9 +1,9 @@
 {
-  "execution_id": "EXEC-5DF395C207B1",
-  "snapshot_timestamp": "SNAPSHOT_LOCKED",
-  "total_files": 207,
-  "total_directories": 36,
+  "module": "INTAKE",
+  "generated_at": "2026-02-26T12:36:32.294Z",
+  "total_files": 219,
+  "total_directories": 40,
   "classification": "FULL_PIPELINE_STATE",
-  "repository_root_hash": "5df395c207b18a64a69ffb38ee2861a3b60f119a6369b2bf332d9d514b3d1d2b",
+  "repository_root_hash": "ab4ccc38243b522d40855acf5d34b72a5d2aa953009ffb08a3520419d19fd86f",
   "locked_snapshot_flag": true
 }

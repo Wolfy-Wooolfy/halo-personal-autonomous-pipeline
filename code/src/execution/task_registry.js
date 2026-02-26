@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+const { runIntake } = require("../modules/intakeEngine");
+
 const TASKS_PATH = path.resolve(__dirname, "../../..", "artifacts", "tasks");
 
 const registry = Object.freeze({
@@ -9,6 +11,10 @@ const registry = Object.freeze({
     return {
       stage_progress_percent: 0
     };
+  },
+
+  "TASK-047: MODULE FLOW — Intake": (context) => {
+    return runIntake(context);
   },
 
   "TASK-028: Runtime Hardening": (context) => {

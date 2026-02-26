@@ -1,23 +1,28 @@
-# Entry Classification Result
+# entrypoint_classification
 
-- execution_id: EXEC-5DF395C207B1
-- classification: FULL_PIPELINE_STATE
+## Classification
+- result: FULL_PIPELINE_STATE
 
-## Triggered Rules
-- docs/ exists
-- code/ exists
-- artifacts/ exists
-- progress/status.json exists and is valid
+## Rules Triggered
+- docs/ present
+- code/ present
+- artifacts/ present
+- progress/status.json present
 
-## Observed Structural Components
-- docs/: present
-- code/: present
-- artifacts/: present
-- progress/status.json: present
+## Observed Components
+- docs/
+- code/
+- artifacts/
+- progress/status.json
 
 ## Intake Validation Summary
-- locked_snapshot_flag: true
-- deterministic ordering: enforced (lexicographic)
-- repository_root_hash: 5df395c207b18a64a69ffb38ee2861a3b60f119a6369b2bf332d9d514b3d1d2b
+- repository readable
+- inventory generated
+- inventory sorted lexicographically by path
+- artifacts written under artifacts/intake/
+- locked_snapshot_flag true
 
-DETERMINISTIC CONFIRMATION: PASS
+## Deterministic Confirmation
+- SNAPSHOT_LOCKED: true
+- inventory_sorted: true
+- hash_algorithm: sha256
