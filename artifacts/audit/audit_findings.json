@@ -1,57 +1,15 @@
 {
-  "execution_id": "EXEC-5DF395C207B1",
-  "total_checks": 6,
-  "passed_checks": 3,
-  "failed_checks": 3,
+  "execution_id": "AUDIT-2026-03-01T12:01:08.916Z",
+  "total_checks": 130,
+  "passed_checks": 129,
+  "failed_checks": 1,
   "blocked": true,
   "violations": [
     {
-      "category": "Artifact Namespace Integrity",
+      "category": "NamingAuthority",
       "severity": "CRITICAL",
-      "path": "artifacts/reports/",
-      "description": "Namespace not allowed by DOC-38 Artifact Hierarchy Rule (expected artifacts/<module_name>/ or artifacts/release/)."
-    },
-    {
-      "category": "Artifact Namespace Integrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/tasks/",
-      "description": "Namespace not allowed by DOC-38 Artifact Hierarchy Rule (legacy task artifacts)."
-    },
-    {
-      "category": "Artifact Namespace Integrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/stage_A/",
-      "description": "Namespace not allowed by DOC-38 Artifact Hierarchy Rule (legacy stage artifacts)."
-    },
-    {
-      "category": "Artifact Namespace Integrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/stage_B/",
-      "description": "Namespace not allowed by DOC-38 Artifact Hierarchy Rule (legacy stage artifacts)."
-    },
-    {
-      "category": "Artifact Namespace Integrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/stage_C/",
-      "description": "Namespace not allowed by DOC-38 Artifact Hierarchy Rule (legacy stage artifacts)."
-    },
-    {
-      "category": "Artifact Namespace Integrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/stage_D/",
-      "description": "Namespace not allowed by DOC-38 Artifact Hierarchy Rule (legacy stage artifacts)."
-    },
-    {
-      "category": "Naming Authority Compliance",
-      "severity": "WARNING",
-      "path": "artifacts/release/RELEASE_1.0.0.manifest.md",
-      "description": "Contains deprecated historical name reference."
-    },
-    {
-      "category": "Naming Authority Compliance",
-      "severity": "WARNING",
-      "path": "artifacts/stage_C/runtime_runbook.md",
-      "description": "Contains deprecated historical name reference."
+      "path": "code/src/modules/auditEngine.js",
+      "description": "Deprecated system name detected: Deprecated system name pattern: Personal Autonomous Pipeline"
     }
   ]
 }

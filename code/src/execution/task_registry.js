@@ -3,6 +3,8 @@ const path = require("path");
 
 const { runIntake } = require("../modules/intakeEngine");
 
+const { runAudit } = require("../modules/auditEngine");
+
 const TASKS_PATH = path.resolve(__dirname, "../../..", "artifacts", "tasks");
 
 const registry = Object.freeze({
@@ -15,6 +17,43 @@ const registry = Object.freeze({
 
   "TASK-047: MODULE FLOW — Intake": (context) => {
     return runIntake(context);
+  },
+
+    "TASK-048: MODULE FLOW — Audit": (context) => {
+    const result = runAudit(context);
+
+    const relTaskClosure = "artifacts/tasks/TASK-048.execution.closure.md";
+    const taskClosureAbs = path.resolve(__dirname, "../../..", relTaskClosure);
+
+    const reportRef = result && result.artifact ? String(result.artifact) : "artifacts/audit/audit_report.md";
+
+    fs.writeFileSync(
+      taskClosureAbs,
+      `# TASK-048 — Execution Closure
+
+## Task
+- Task ID: TASK-048
+- Stage Binding: D
+- Closure Type: EXECUTION
+
+## Status
+- stage_progress_percent: 100
+- closure_artifact: true
+
+## Generated Artifacts
+- ${reportRef}
+- artifacts/audit/audit_findings.json
+- artifacts/audit/audit_error.md (ONLY if BLOCKED)
+`,
+      "utf-8"
+    );
+
+    return {
+      stage_progress_percent: 100,
+      closure_artifact: true,
+      artifact: relTaskClosure,
+      status_patch: result && result.status_patch ? result.status_patch : {}
+    };
   },
 
   "TASK-028: Runtime Hardening": (context) => {
