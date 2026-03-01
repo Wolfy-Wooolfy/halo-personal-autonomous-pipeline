@@ -321,9 +321,9 @@ function runAudit(context) {
   }
 
   const deprecatedPatterns = [
-    { id: "DEPRECATED_NAME_001", re: /Personal\s+Autonomous\s+Pipeline/i, label: "Deprecated system name pattern: Personal Autonomous Pipeline" },
-    { id: "DEPRECATED_NAME_002", re: /HALO\s+Personal\s+Autonomous\s+Pipeline/i, label: "Deprecated system name pattern: HALO Personal Autonomous Pipeline" },
-    { id: "DEPRECATED_NAME_003", re: /\bPAPH\b/i, label: "Deprecated system name token: PAPH" }
+    { id: "DEPRECATED_NAME_001", re: /Personal\s+Autonomous\s+Pipeline/i, label: "Deprecated system name pattern (001)" },
+    { id: "DEPRECATED_NAME_002", re: /HALO\s+Personal\s+Autonomous\s+Pipeline/i, label: "Deprecated system name pattern (002)" },
+    { id: "DEPRECATED_NAME_003", re: /\bPAPH\b/i, label: "Deprecated system name token (003)" }
   ];
 
   const scanTargets = [];

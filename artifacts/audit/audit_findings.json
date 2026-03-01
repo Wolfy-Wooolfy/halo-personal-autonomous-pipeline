@@ -1,5 +1,5 @@
 {
-  "execution_id": "AUDIT-2026-03-01T12:01:08.916Z",
+  "execution_id": "AUDIT-2026-03-01T13:11:13.122Z",
   "total_checks": 130,
   "passed_checks": 129,
   "failed_checks": 1,
@@ -8,8 +8,8 @@
     {
       "category": "NamingAuthority",
       "severity": "CRITICAL",
-      "path": "code/src/modules/auditEngine.js",
-      "description": "Deprecated system name detected: Deprecated system name pattern: Personal Autonomous Pipeline"
+      "path": "docs/01_system/00_Project_Identity_Contract.md",
+      "description": "Deprecated system name detected: Deprecated system name pattern (001)"
     }
   ]
 }

@@ -7,4 +7,4 @@
 - failed_checks: 1
 
 ## Violations
-- **CRITICAL** [NamingAuthority] code/src/modules/auditEngine.js — Deprecated system name detected: Deprecated system name pattern: Personal Autonomous Pipeline
+- **CRITICAL** [NamingAuthority] docs/01_system/00_Project_Identity_Contract.md — Deprecated system name detected: Deprecated system name pattern (001)
