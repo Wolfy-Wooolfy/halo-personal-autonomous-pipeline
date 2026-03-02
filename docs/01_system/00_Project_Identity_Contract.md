@@ -22,9 +22,12 @@ Forge is a deterministic, fail-closed, artifact-governed autonomous project engi
 
 The system was previously referred to as:
 
-"Personal Autonomous Pipeline for HALO"
+The system was previously referred to by a deprecated legacy name.
 
-This name is now deprecated and must not be used in any new document,
+That legacy name is intentionally NOT written here to prevent documentation drift
+and to ensure the NamingAuthority audit cannot be bypassed by “historical reference”.
+
+The legacy name is now deprecated and must not be used in any document,
 artifact, code reference, or runtime output.
 
 ---
