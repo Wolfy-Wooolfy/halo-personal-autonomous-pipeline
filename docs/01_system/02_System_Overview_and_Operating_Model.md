@@ -731,4 +731,175 @@ not entry points.
 
 ---
 
+## Workspace & Project Isolation Model (Hard)
+
+Forge operates in Personal Local Mode by default.
+
+However, architectural isolation MUST exist at the project boundary level.
+
+### 1. Workspace Concept (Architectural Layer)
+
+A Workspace represents:
+
+- A logical ownership boundary
+- A container for one or more projects
+- An isolation boundary for execution state
+
+In v1 (Personal Mode):
+
+- Only one workspace MAY exist.
+- The workspace MAY be implicit.
+- Multi-workspace runtime switching is OUT-OF-SCOPE.
+
+However:
+
+The Core MUST be designed as if workspace separation exists,
+even if only one workspace is active.
+
+### 2. Project Isolation (Mandatory)
+
+Each project MUST:
+
+- Have isolated artifacts
+- Have isolated execution state
+- Have isolated decision logs
+- Have deterministic state transitions independent of other projects
+
+No cross-project mutation is permitted.
+
+If execution of one project can mutate another project's state:
+
+- Runtime readiness MUST FAIL.
+
+### 3. Isolation Guarantee (Hard)
+
+Isolation MUST exist at:
+
+- Artifact level
+- State level
+- Decision level
+- Execution level
+
+No global mutable state is permitted inside Forge Core.
+
+If any execution logic relies on implicit global state:
+
+- Runtime readiness MUST FAIL.
+- Execution MUST NOT start.
+
+---
+
+## Cognitive Provider Independence Contract (Hard)
+
+Forge Core MUST remain provider-agnostic.
+
+### 1. Provider Abstraction Rule
+
+All cognitive execution MUST occur exclusively through:
+
+- The Cognitive Adapter Layer
+- Provider Drivers implementing the Provider Driver Interface Contract
+
+No direct provider calls are permitted inside:
+
+- Core logic
+- Stage engines
+- Orchestrator
+- Verification layer
+
+If any component calls a provider SDK directly:
+
+- Runtime readiness MUST FAIL.
+- Execution MUST NOT start.
+
+### 2. Replaceability Guarantee
+
+It MUST be possible to:
+
+- Replace OpenAI with another provider
+- Replace Gemini with another provider
+- Add a new provider driver
+
+Without modifying:
+
+- Stage governance logic
+- Artifact schema
+- Execution state machine
+
+If provider replacement requires Core modification:
+
+- The architecture is considered defective.
+
+### 3. Deterministic Boundary Rule
+
+Provider output:
+
+- Has ZERO authority
+- Is treated as candidate material
+- Becomes authoritative ONLY when:
+  - Bound to an artifact
+  - Validated by stage rules
+  - Persisted deterministically
+
+Provider output MUST NOT:
+
+- Mutate state directly
+- Trigger stage transitions
+- Bypass validation logic
+
+### 4. Lock-In Prohibition
+
+No document, contract, or implementation MAY:
+
+- Require a specific provider permanently
+- Assume provider-specific capabilities
+- Embed provider-specific assumptions in artifact schemas
+
+Forge MUST remain portable across cognitive providers.
+
+---
+
+## Operating Interfaces (Non-Authoritative Shells)
+
+Forge Core MUST be operable through multiple shells.
+
+Shells provide usability only and have ZERO execution authority.
+
+### 1) CLI Shell (v1 Default)
+
+- Primary interface for local execution
+- Supports single-command start
+- Supports status query (lossless rendering of status.json)
+- Supports BLOCKED interaction via authorized control path
+
+### 2) Local Dashboard Shell (v2 Candidate)
+
+- Optional UI for monitoring
+- Read-only by default
+- May expose:
+  - live status
+  - artifact index
+  - decision queue
+- Must not mutate state directly
+
+### 3) Remote Control Shell (Future)
+
+- Optional API layer for product hosting
+- Must enforce:
+  - authenticated control artifacts
+  - rate limiting
+  - audit trails
+- Must not bypass Core governance
+
+### Shell Replacement Guarantee (Hard)
+
+Adding or replacing a shell MUST NOT require any change to:
+
+- stage logic
+- artifact rules
+- authority contracts
+- execution determinism
+
+---
+
 **End of Document**

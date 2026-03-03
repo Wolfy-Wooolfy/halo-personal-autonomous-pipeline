@@ -698,21 +698,27 @@ Disallowed:
 
 ## 9. Security Assumptions
 
-- This is a **personal system**, not multi-tenant
-- Security focus is on:
+- Default operation is **Personal Local Mode** (single active user, local-first).
+- This is a **runtime mode**, not an architectural limitation.
+- Forge Core MUST remain compatible with future productization:
+  - Workspace-addressable execution
+  - Project state isolation
+  - Clear authorization boundaries (when introduced by new scope)
+- Security focus in Mode A is on:
   - Data loss prevention
   - Accidental overwrite prevention
   - Traceability
-- No external exposure by default
+- No external exposure by default.
+- Any multi-tenant / SaaS operation is OUT-OF-SCOPE unless introduced as a new task with a new scope contract.
 
 ---
 
 ## 10. Non-Goals
 
 This system does NOT aim to:
-- Be a SaaS
-- Support multiple users
-- Provide real-time collaboration
+- Be a SaaS (Mode C operation) in v1
+- Support multiple concurrent users in v1 runtime
+- Provide real-time collaboration in v1
 - Replace formal CI/CD systems
 
 ---

@@ -169,7 +169,7 @@ constitutes a system violation.
 
 Every project or task MUST follow the directory structure below:
 
-/<project-root>
+/<repo-root>
 │
 ├── docs/
 │ ├── 01_system/
@@ -183,34 +183,39 @@ Every project or task MUST follow the directory structure below:
 │ ├── 09_verify/
 │ └── 10_runtime/
 │
-├── artifacts/
-│ ├── admission/
-│ ├── llm/
-│ ├── stage_A/
-│ ├── stage_B/
-│ ├── stage_C/
-│ └── stage_D/
-│
-├── code/
-│ ├── src/
-│ └── tests/
-│
-├── verify/
-│ ├── smoke/
-│ ├── unit/
-│ └── audit/
-│
-├── decisions/
-│ └── DEC-YYYYMMDD-XXX.md
-│
-├── progress/
-│ ├── status.json
-│ └── history/
-│     └── YYYY-MM-DD[_event].md
+├── projects/
+│ └── <project_id>/
+│     ├── artifacts/
+│     │ ├── admission/
+│     │ ├── llm/
+│     │ ├── stage_A/
+│     │ ├── stage_B/
+│     │ ├── stage_C/
+│     │ └── stage_D/
+│     │
+│     ├── code/
+│     │ ├── src/
+│     │ └── tests/
+│     │
+│     ├── verify/
+│     │ ├── smoke/
+│     │ ├── unit/
+│     │ └── audit/
+│     │
+│     ├── decisions/
+│     │ └── DEC-YYYYMMDD-XXX.md
+│     │
+│     └── progress/
+│         ├── status.json
+│         └── history/
+│             └── YYYY-MM-DD[_event].md
 │
 └── README.md
 
 Any deviation from this layout is a hard failure.
+
+In v1 (Personal Local Mode), only one <project_id> MAY be active at a time.
+However, repository layout MUST remain multi-project compatible.
 
 ---
 
@@ -304,7 +309,7 @@ Purpose:
 - Record authoritative, irreversible, or impactful choices
 
 All decision artifacts:
-- MUST live exclusively under `/decisions`
+- MUST live exclusively under `projects/<project_id>/decisions/`
 - MUST NOT be duplicated or summarized inside `/docs`
 - MUST follow the Decision Logging & Change Traceability Specification
 
@@ -341,7 +346,7 @@ and MUST NOT be read by any pipeline component.
 The live execution state is represented by
 ONE file and ONE file only:
 
-`progress/status.json`
+`projects/<project_id>/progress/status.json`
 
 Rules:
 - JSON format ONLY
@@ -464,9 +469,9 @@ is a system violation.
 All interactions with the external Cognitive Engine
 MUST be persisted as artifacts under the following structure:
 
-artifacts/llm/prompts/<task_id>.prompt.txt  
-artifacts/llm/responses/<task_id>.response.txt  
-artifacts/llm/metadata/<task_id>.json  
+projects/<project_id>/artifacts/llm/prompts/<task_id>.prompt.txt  
+projects/<project_id>/artifacts/llm/responses/<task_id>.response.txt  
+projects/<project_id>/artifacts/llm/metadata/<task_id>.json  
 
 ### Metadata Requirements
 
@@ -600,6 +605,7 @@ Rules:
 - no free text filenames
 
 Bad:
+
 ```
 
 final doc.md
@@ -607,7 +613,9 @@ test!!!.js
 
 ```
 
+
 Good:
+
 ```
 
 05_artifact_schema.md
@@ -766,6 +774,17 @@ Authority precedence is as follows:
 12. Code  
 13. Runtime behavior  
 14. Chat output (ZERO execution authority)
+
+Authority Scope Clarification:
+
+This document governs structural layout ONLY.
+
+It MUST NOT reinterpret, override, or alter
+project-scoping, decision authority boundaries,
+or execution isolation rules defined in higher-authority contracts.
+
+If layout interpretation conflicts with project isolation,
+project isolation prevails.
 
 This document governs:
 - Artifact structure

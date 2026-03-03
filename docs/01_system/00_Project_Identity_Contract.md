@@ -18,6 +18,63 @@ Forge is a deterministic, fail-closed, artifact-governed autonomous project engi
 
 ---
 
+## Core vs Interface Separation Rule (Hard)
+
+Forge consists of:
+
+- **Forge Core (Authoritative Engine)**
+- **Execution Shells (Non-Authoritative Interfaces)**
+
+### Core Definition (Binding)
+
+Forge Core:
+
+- Contains pipeline logic
+- Enforces stage governance
+- Validates runtime readiness
+- Controls state machine transitions
+- Owns execution authority
+
+Forge Core MUST:
+
+- Remain independent of any specific interface
+- Contain ZERO UI logic
+- Contain ZERO CLI formatting logic
+- Contain ZERO HTTP routing logic
+- Be executable without any presentation layer
+
+### Execution Shells (Non-Authoritative)
+
+Execution Shells MAY include:
+
+- CLI wrapper
+- Local dashboard
+- Web interface
+- Remote control API
+
+Shells:
+
+- Have ZERO execution authority
+- Cannot mutate pipeline state directly
+- Cannot bypass stage validation
+- Must call Forge Core via explicit interface boundary
+
+### Architectural Guarantee (Hard)
+
+Replacing or removing any Shell MUST NOT:
+
+- Break pipeline logic
+- Affect stage governance
+- Modify artifact generation rules
+- Change execution determinism
+
+If Core behavior depends on a specific Shell:
+
+- Runtime readiness MUST FAIL
+- Execution MUST NOT start
+
+---
+
 ## 2. Historical Reference
 
 The system was previously referred to as:

@@ -316,13 +316,10 @@ is strictly forbidden.
 
 ## 5. Decision Log Structure
 
-All decisions are stored under:
+All decisions are stored under the active project boundary:
 
-```
+<project_root>/decisions/
 
-decisions/
-
-```
 
 Each decision is a **single immutable Markdown file**.
 
@@ -340,6 +337,20 @@ Example:
 DEC-20260206-004.md
 
 ```
+
+---
+
+### 5.0.1 Global Decision Folder Prohibition (Hard)
+
+A global `/decisions/` directory at repository root is FORBIDDEN.
+
+Decisions MUST exist inside the active project boundary only.
+
+If a Decision is created outside:
+
+- The Decision is INVALID
+- Execution MUST halt
+- Runtime readiness MUST FAIL
 
 ---
 
@@ -389,10 +400,10 @@ to resolve a selectable execution fork.
 No narrative sections are permitted.
 
 ```md
-# Decision: <Short Title>
-
 **Decision ID:** DEC-YYYYMMDD-XXX  
 **Date:** YYYY-MM-DD  
+**Workspace ID:** <string>  
+**Project ID:** <string>  
 **Stage:** A | B | C | D  
 **Type:** ARCH | SCOPE | EXEC | DATA | RISK | FIX | ROLLBACK  
 **Status:** OPEN | ACCEPTED | REJECTED | SUPERSEDED | CLOSED  
@@ -473,6 +484,27 @@ If any additional section exists
 - The Decision file is INVALID
 - Execution MUST halt
 - The Decision MUST be regenerated
+
+---
+
+## 6.1 Decision Context Binding Rule (Hard)
+
+Every Decision MUST be bound to exactly ONE project context.
+
+Rules:
+
+- `Workspace ID` MUST be present and non-empty.
+- `Project ID` MUST be present and non-empty.
+- A Decision MUST NOT apply across multiple projects.
+- If workspace/project context cannot be resolved deterministically:
+  - Execution MUST enter BLOCKED
+  - A single blocking question MUST request the missing identifier(s)
+
+In v1 (Personal Local Mode):
+
+- `Workspace ID` MAY be a stable constant (e.g., `personal`)
+- `Project ID` MUST still be explicitly declared
+- The context MAY be implicit at runtime, but MUST be explicit inside the Decision artifact.
 
 ---
 

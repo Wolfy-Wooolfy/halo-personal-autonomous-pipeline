@@ -151,7 +151,7 @@ Any value other than "LIVE" is INVALID and MUST Fail-Closed.
   "blocking_questions": [],
   "next_step": ""
 }
-````
+```
 
 ---
 
@@ -221,6 +221,37 @@ No other state inference is allowed.
 Any status report that implies
 multiple states simultaneously
 is invalid.
+
+---
+
+## 3.0.1 Project Addressability Contract (Hard)
+
+`progress/status.json` represents the authoritative execution state
+for exactly ONE active project context.
+
+Forge MUST treat execution state as project-addressable.
+
+Rules:
+
+- Execution state MUST belong to a single project boundary.
+- Multiple projects MUST NOT share a single execution state.
+- No global execution state spanning multiple projects is permitted.
+
+In v1 (Personal Mode):
+
+- Only one project MAY be active at a time.
+- The active project context MAY be implicit.
+
+However:
+
+The architecture MUST NOT assume permanent singleton execution.
+
+If future multi-project support requires redefining
+the authority model of `progress/status.json`:
+
+- The architecture is considered defective.
+
+No component may assume that Forge is permanently single-project.
 
 ---
 
