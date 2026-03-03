@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "HALO Personal Autonomous Pipeline - Status Schema v2",
+  "title": "Forge - Status Schema v2",
   "type": "object",
   "additionalProperties": false,
   "required": [

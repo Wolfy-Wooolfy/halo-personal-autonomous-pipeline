@@ -9,7 +9,7 @@
 
 ## 1. Purpose
 
-This document defines the **deterministic execution stages** of the Personal Autonomous Pipeline.
+This document defines the **deterministic execution stages** of Forge.
 
 It enforces:
 - Strict stage separation

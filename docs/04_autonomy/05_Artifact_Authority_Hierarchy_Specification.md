@@ -2,7 +2,7 @@
 **Document ID:** DOC-11  
 **Status:** EXECUTION-BOUND  
 **Scope:** Governance & Authority Resolution  
-**Applies To:** Entire Personal Autonomous Pipeline  
+**Applies To:** Entire Forge System  
 **Enforcement Level:** HARD (Fail-Closed)
 
 ---

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "HALO Personal Autonomous Pipeline - Stage Closure Artifact Schema v1",
+  "title": "Forge - Stage Closure Artifact Schema v1",
   "type": "object",
   "additionalProperties": false,
   "required": [
