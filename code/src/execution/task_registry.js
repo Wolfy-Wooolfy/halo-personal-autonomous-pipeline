@@ -56,6 +56,45 @@ const registry = Object.freeze({
     };
   },
 
+  "TASK-049": (status) => {
+    const { runAudit } = require("../modules/auditEngine");
+
+    const result = runAudit(status);
+
+    const relTaskClosure = "artifacts/tasks/TASK-049.execution.closure.md";
+    const absTaskClosure = path.resolve(ROOT, relTaskClosure);
+
+    if (fs.existsSync(absTaskClosure)) {
+      throw new Error("Idempotency violation: closure artifact already exists for TASK-049");
+    }
+
+    const stamp = new Date().toISOString();
+
+    const closure = [
+      "# Task Execution Closure",
+      "",
+      `- task: TASK-049`,
+      `- timestamp: ${stamp}`,
+      `- stage: ${String(status.current_stage || "").trim() || "UNKNOWN"}`,
+      `- stage_progress_percent: 100`,
+      "",
+      "## Notes",
+      "- TASK-049 executed: Audit Refresh (NamingAuthority + Deprecated term scan).",
+      ""
+    ].join("\n");
+
+    fs.mkdirSync(path.dirname(absTaskClosure), { recursive: true });
+    fs.writeFileSync(absTaskClosure, closure, { encoding: "utf8" });
+
+    return {
+      stage_progress_percent: 100,
+      artifact: relTaskClosure,
+      closure_artifact: relTaskClosure,
+      clear_current_task: true,
+      status_patch: result.status_patch || {}
+    };
+  },
+
   "TASK-028: Runtime Hardening": (context) => {
     const relArtifact = "artifacts/tasks/TASK-028.execution.closure.md";
     const closureFile = path.join(TASKS_PATH, "TASK-028.execution.closure.md");
