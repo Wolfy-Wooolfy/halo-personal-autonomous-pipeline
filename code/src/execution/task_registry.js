@@ -7,6 +7,8 @@ const { runAudit } = require("../modules/auditEngine");
 
 const TASKS_PATH = path.resolve(__dirname, "../../..", "artifacts", "tasks");
 
+const ROOT = path.resolve(__dirname, "../../..");
+
 const registry = Object.freeze({
 
   "SMOKE: prepare transition B -> C": (context) => {
@@ -89,7 +91,7 @@ const registry = Object.freeze({
     return {
       stage_progress_percent: 100,
       artifact: relTaskClosure,
-      closure_artifact: relTaskClosure,
+      closure_artifact: true,
       clear_current_task: true,
       status_patch: result.status_patch || {}
     };
