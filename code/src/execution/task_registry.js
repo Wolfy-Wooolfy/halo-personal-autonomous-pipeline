@@ -11,6 +11,8 @@ const { runGap } = require("../modules/gapEngine");
 
 const { runBackfill } = require("../modules/backfillEngine");
 
+const { runExecute } = require("../modules/executeEngine");
+
 const { runDecisionGate } = require("../modules/decisionGate");
 
 const TASKS_PATH = path.resolve(__dirname, "../../..", "artifacts", "tasks");
@@ -326,6 +328,61 @@ const registry = Object.freeze({
 ## Generated Artifacts
 - ${reportRef}
 - artifacts/backfill/backfill_tasks.json
+`,
+      "utf-8"
+    );
+
+    return {
+      stage_progress_percent: 100,
+      closure_artifact: true,
+      artifact: relTaskClosure,
+      clear_current_task: true,
+      status_patch: sp
+    };
+  },
+
+  "TASK-054: MODULE FLOW — Execute": (context) => {
+    const result = runExecute(context);
+
+    const sp = result && result.status_patch ? { ...result.status_patch } : {};
+
+    if (result && result.blocked === true) {
+      return {
+        stage_progress_percent: 100,
+        clear_current_task: false,
+        status_patch: sp
+      };
+    }
+
+    const relTaskClosure = "artifacts/tasks/TASK-054.execution.closure.md";
+    const taskClosureAbs = path.resolve(__dirname, "../../..", relTaskClosure);
+
+    if (fs.existsSync(taskClosureAbs)) {
+      throw new Error("Idempotency violation: closure artifact already exists for TASK-054");
+    }
+
+    const reportRef =
+      result && result.outputs && result.outputs.md
+        ? String(result.outputs.md)
+        : (result && result.artifact ? String(result.artifact) : "artifacts/execute/execute_report.md");
+
+    fs.mkdirSync(path.dirname(taskClosureAbs), { recursive: true });
+    fs.writeFileSync(
+      taskClosureAbs,
+      `# TASK-054 — Execution Closure
+
+## Task
+- Task ID: TASK-054
+- Stage Binding: D
+- Closure Type: EXECUTION
+
+## Status
+- stage_progress_percent: 100
+- closure_artifact: true
+
+## Generated Artifacts
+- ${reportRef}
+- artifacts/execute/execute_plan.json
 `,
       "utf-8"
     );
