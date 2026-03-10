@@ -50,13 +50,13 @@
   {
     "path": "artifacts/audit/audit_findings.json",
     "size_bytes": 163,
-    "hash": "df1b3721f0a71bfeaf371c921638eb2df044244328e135ef764b8c989a41411a",
+    "hash": "eb13652a1f4fe11d9da99fb899f93eb22dfecc6b9b87443aad1ff3aa03e933d0",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "artifacts/audit/audit_report.md",
     "size_bytes": 126,
-    "hash": "26c60d4bcb13e31167261ecbaf55075ea11d7b3e72f6576eeced6e0ecb032192",
+    "hash": "70246857aae65d282878044f3eee59891fccad6e69510d9bf65c98a5a9158309",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -66,15 +66,33 @@
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
+    "path": "artifacts/backfill/backfill_created_files.json",
+    "size_bytes": 71,
+    "hash": "3d5394dff1b12fcc73403f1b9450a9693b314957af42501f805d619f5b6529d5",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/backfill/backfill_execution_log.md",
+    "size_bytes": 51973,
+    "hash": "2ab20fb7df8db0d132c1735edb6c0198662c978998535e3375563b481a6670b5",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/backfill/backfill_plan.json",
+    "size_bytes": 54566,
+    "hash": "c477a69f99a688f326362e94fdb2d758062c01169e09fe98d0a69ef0d885975d",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
     "path": "artifacts/backfill/backfill_report.md",
-    "size_bytes": 287,
-    "hash": "df0b7fde76a71de2157b9243e37acfd232b18f0bcd71892f457a1b2d20827aa6",
+    "size_bytes": 543,
+    "hash": "19c5d24a7b4cdce65aa88e19d460c3f2510a6655e780593478b1f9a025626284",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "artifacts/backfill/backfill_tasks.json",
-    "size_bytes": 238818,
-    "hash": "55212bc1b4a904cd644b333b605aa00f5f44390563d07ef9414c9c94f033d23f",
+    "size_bytes": 132630,
+    "hash": "077ee8f27650b345b2e8c2a0b946452ec922b07bca8c6dc189500f46623828d8",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -85,8 +103,8 @@
   },
   {
     "path": "artifacts/closure/closure_report.md",
-    "size_bytes": 668,
-    "hash": "3c21b034e0f55c210b445cc65db9185ab7ef151485e4302ba4d3ae85ffd44289",
+    "size_bytes": 930,
+    "hash": "357f8f536d8f025bf5cefa488b3dd804b1b88f39adb064d04c3a6eeb2359d99a",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -97,14 +115,14 @@
   },
   {
     "path": "artifacts/decisions/module_flow_decision_gate.json",
-    "size_bytes": 351,
-    "hash": "dc4eed4765c1b5ab3a9e4a8b0159107d633eb789ca4c35db3cc05790203fa940",
+    "size_bytes": 135010,
+    "hash": "a857e16409df0c66ec67023a6760e6a766de3e20d52d359b67aa809da7f761b2",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "artifacts/decisions/module_flow_decision_gate.md",
-    "size_bytes": 446,
-    "hash": "90955bff791a0c4db2437a5c989e7107e435e5e88eb35e8dcce121ef80e9d882",
+    "size_bytes": 58146,
+    "hash": "4ffc3cf0eeed8713140fd0875923ee92129e8f45723897f50aca32a534b8e274",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -115,14 +133,14 @@
   },
   {
     "path": "artifacts/execute/execute_plan.json",
-    "size_bytes": 243860,
-    "hash": "dd5bda49948c3232cc0be34f39b95aa81849c17bbe01ffcc9267cd9e0356baca",
+    "size_bytes": 54198,
+    "hash": "10b9235f461dd1406ffb447edd2de22a49c3c160fa23786ba6ee219626ca3199",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "artifacts/execute/execute_report.md",
-    "size_bytes": 398,
-    "hash": "0a0dc5c2b1b8a0e545bf36fd199307a59f6f5a4713d12a85a24d35a90d39f47f",
+    "size_bytes": 20584,
+    "hash": "bfa924f42725a7f03a53631c2e3ba27804c98711f9e29ce00b536013323a0564",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -133,14 +151,14 @@
   },
   {
     "path": "artifacts/gap/gap_actions.json",
-    "size_bytes": 258614,
-    "hash": "a775f30229f1839aa3f2bb6dcb8c41d6e175662053295634c26d1d16924dc79b",
+    "size_bytes": 166795,
+    "hash": "57bf801433f43431a6f55ee9fb716bf577b3a97ce5de447a94aeeb3b972d97d4",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "artifacts/gap/gap_report.md",
-    "size_bytes": 155427,
-    "hash": "5d15cd7b0fbcd9e4ef43caac767b43a6a327c7e659bfae261d5f1e6f9ca9f8a3",
+    "size_bytes": 99994,
+    "hash": "5906228f2c572bd9fa9d50cdf87f0ca6f93a80aff6a104ebfea10db5c3b3b1da",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -187,14 +205,14 @@
   },
   {
     "path": "artifacts/release/RELEASE_MANIFEST_v1.json",
-    "size_bytes": 819,
-    "hash": "e13d0fee817945acfd5e01ef8b3b3ad8c050875e313323fd62f97e648fba66e6",
+    "size_bytes": 435,
+    "hash": "22e6bfdd890ac2b8d25c5c1ef1e7a8e9fce3c8c638840e4681ea4c31dca9ce2b",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "artifacts/release/repository_hash_snapshot.json",
-    "size_bytes": 590,
-    "hash": "fe9dcddaf80cf84ada79206935151faaa2b6169817a85f703ff3eb5a0d30ff93",
+    "size_bytes": 242,
+    "hash": "c8db05f7703ebd9797469c92fd73a7e00dde9805bf7815948c4b2f39a7aa98af",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -834,12 +852,6 @@
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
-    "path": "artifacts/tasks/TASK-053.execution.closure.md",
-    "size_bytes": 278,
-    "hash": "ce28d4056abe950b6dc68dc8e7cc560e00da2474290d250bc45287321bc23d8c",
-    "captured_at": "SNAPSHOT_LOCKED"
-  },
-  {
     "path": "artifacts/tasks/TASK-053.stageA.module-flow-backfill.md",
     "size_bytes": 905,
     "hash": "3618d2368350465efb54d7748481215c4521f766aa7040492837d9cd5cd7c955",
@@ -888,6 +900,66 @@
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
+    "path": "artifacts/tasks/TASK-059.execution.closure.md",
+    "size_bytes": 357,
+    "hash": "104eacb5b1e1d1a1e031cb85f9032b8648acce165422f924b7849caa15946099",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-060.execution.closure.md",
+    "size_bytes": 1189,
+    "hash": "eacf877c32b8216c2b134808f2cbfe9aea26e3a393b079fd6eb60879544b84b2",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-060.stageA.closure-realignment-contract.md",
+    "size_bytes": 4659,
+    "hash": "5b1fe2ab148e1b8f0608716cee425ad55991a9ce873e9b16fd8fd5d260ce354d",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-061.execution.closure.md",
+    "size_bytes": 284,
+    "hash": "3578555170e21cc1ad22fa0c3893436e44e5542bb61d000a92ad28d212e02e4a",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-061.stageA.verification-layer-contract.md",
+    "size_bytes": 1261,
+    "hash": "7f9c4e3a0368ea47af0de39557932599c458f5545eeee525084c608c2a4d46f5",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-061.stageB.verification-gap-analysis.md",
+    "size_bytes": 1504,
+    "hash": "8fcd0a7489ece5ce2cd67675f7b4a55e8452adf0a9d7c197f2225f18735ba701",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-061.stageC.verification-design.md",
+    "size_bytes": 1985,
+    "hash": "4e3ce361cdc8a0d6f5b8cb96cb6a9e96c68f27c724ca2cd237ead67f0046d68a",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-062.stageA.autonomous-orchestrator-contract.md",
+    "size_bytes": 14103,
+    "hash": "e04ad4734cb18a6371837fc6232b88e531c3bdd8a56e56b2d129c148b4be1cc6",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-062.stageB.orchestrator-gap-analysis.md",
+    "size_bytes": 4724,
+    "hash": "71a8f5f59dfe45cb0fdb2118b5ebd416949b756938e04a62a37855cfa2ae9406",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/tasks/TASK-062.stageC.orchestrator-architecture-design.md",
+    "size_bytes": 13281,
+    "hash": "f528a1df7e0555ee6cc97e27e1ace6f2e084d51093f778b5b30a51743018b0a0",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
     "path": "artifacts/trace/",
     "size_bytes": 0,
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -895,20 +967,44 @@
   },
   {
     "path": "artifacts/trace/trace_matrix.json",
-    "size_bytes": 97390,
-    "hash": "68f0d6d4768304526418efb0fc10e374333928c80fc19b81ada3bf85e543ac15",
+    "size_bytes": 287480,
+    "hash": "a8236e81db823b63ba468c74116b07ff9813673bb219d96f1a9c19d068720cd0",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "artifacts/trace/trace_matrix.md",
-    "size_bytes": 97419,
-    "hash": "d7e43ffa63e54215cbd9bf24bd2c353a771d392540dd22c1726306a4f1dfa714",
+    "size_bytes": 287509,
+    "hash": "780d2b7e8f34f4467479ea3656b9327fcbdc3f817af79305d65e294faa45abc4",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/verify/",
+    "size_bytes": 0,
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/verify/verification_report.md",
+    "size_bytes": 139,
+    "hash": "fa3873b57f1e9f21cc3a681c3838c2819eb4908ff858fa563975a1cf9840f5e1",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/verify/verification_results.json",
+    "size_bytes": 345,
+    "hash": "0a36d4376c5bbc68e07bd3af4c49f973a86a0526f9da270d205291cb3514b503",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "bin/",
     "size_bytes": 0,
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "bin/forge-autonomous-run.js",
+    "size_bytes": 335,
+    "hash": "616008063402c01d85a3339ceccdc68e3b17cccca48dca1048c8edb2c8ca03df",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -973,8 +1069,8 @@
   },
   {
     "path": "code/src/execution/task_registry.js",
-    "size_bytes": 62013,
-    "hash": "36740de70f8e0f8d97ee7b71230e8ac371ba6cbaaa629639c99eb80be4d3ac25",
+    "size_bytes": 63518,
+    "hash": "ede49abdd0dd94ad9e64ce7d41d8c663305a093585761fbcbe620bd07b2e23cf",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -985,38 +1081,38 @@
   },
   {
     "path": "code/src/modules/auditEngine.js",
-    "size_bytes": 16008,
-    "hash": "4151be95e0aa649d3714c164a62f1e0e3588230bcb6d3cd4db0afe32f25d49aa",
+    "size_bytes": 19220,
+    "hash": "89bf7314f141c2e4435b516a049a2fa8800aab1191ac0593067d68016088335c",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "code/src/modules/backfillEngine.js",
-    "size_bytes": 4486,
-    "hash": "07393510a39405bbe45b68a76d4c97a3498975544d857a78703eb643c3fea265",
+    "size_bytes": 11898,
+    "hash": "cfb08f111794e0326f83a7df8d123f16c3b0c2dbc2e894fa1c297b35ca5d9ba2",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "code/src/modules/closureEngine.js",
-    "size_bytes": 3460,
-    "hash": "e1bbd2d794525bac483214de97d78be8eb22916712e2e2e300bfb3b342472d89",
+    "size_bytes": 20729,
+    "hash": "c3c407e8dec58db4c393a21aa7c258285e86403ad93cbdb0a4a82acc28acdd28",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "code/src/modules/decisionGate.js",
-    "size_bytes": 4472,
-    "hash": "c854076175046f12b7fd10ebea0fde1a08c661b2dbe91320414206c20673a8a4",
+    "size_bytes": 12461,
+    "hash": "5444eb837cdc7702a1c69b3ff67054685f0be2408878dc3b743fc9eabb9eabad",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "code/src/modules/executeEngine.js",
-    "size_bytes": 4072,
-    "hash": "5092336b5e3abc4a5baa7814112cf88a31427ad8e03b9d03db0e691a5bc2a019",
+    "size_bytes": 4814,
+    "hash": "30e90322721f1259be4e819426dfbad5ce84575a2b9184d7de219b814b34a0cb",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "code/src/modules/gapEngine.js",
-    "size_bytes": 10544,
-    "hash": "d5e35827e622cb00c20d39dab3a64e851d4a0d7c6c013d71bf7042e91b5899ee",
+    "size_bytes": 12163,
+    "hash": "9effa41de592ad6387d9b66ebb102c64ebc7dbf2c6cbec4885c0e58aecf5ccfc",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -1027,14 +1123,38 @@
   },
   {
     "path": "code/src/modules/traceEngine.js",
-    "size_bytes": 11140,
-    "hash": "f524e59603ddbf74bc0af70b55bad14ac6fb6eeda1434283a2e1653b2b636374",
+    "size_bytes": 20742,
+    "hash": "814d3678aee42cf43fd44eaa19b55c2b4499b41a6756e6385d06700ff24fca8f",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "code/src/modules/verifyEngine.js",
+    "size_bytes": 3441,
+    "hash": "e658881543ee512a9f3bd72c55ee579b1aa6c3dd5bc55dbf99020f1fb3e7fb9d",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "code/src/orchestrator/",
     "size_bytes": 0,
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "code/src/orchestrator/autonomous_runner.js",
+    "size_bytes": 1899,
+    "hash": "e173f914c5a162596c7865ade26488459a11751a748f90dcaf36a1ce110a7faa",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "code/src/orchestrator/entry_resolver.js",
+    "size_bytes": 2149,
+    "hash": "7992de7249689b736d56d1327a6f89bc5c5e9e1ef02bc5792fcff91dd30693b6",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "code/src/orchestrator/pipeline_definition.js",
+    "size_bytes": 2245,
+    "hash": "59db95a4ff011146693bd693e7cce034c630a153c4bdfddd8fa19aae412e7b37",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -1567,8 +1687,8 @@
   },
   {
     "path": "progress/status.json",
-    "size_bytes": 319,
-    "hash": "4b2fee76e2d870e7ad4fbc735894bc3627f07cc50a40e071f302785d3237d46c",
+    "size_bytes": 324,
+    "hash": "39fb429c0cd7981f0bed4dfd6646b699b639c15c6af08ab60e4e400df654c963",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -1701,6 +1821,12 @@
     "path": "tools/pre_run_check.js",
     "size_bytes": 863,
     "hash": "766198324964b888bad755238a57387f890ccc7a8306226184961655f2fe77b8",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "trace_output.txt",
+    "size_bytes": 259785,
+    "hash": "ce4dfb0944f7ce7ff6209501f71654eecc8b1b37828e7dea6af1a4ab2717e96f",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {

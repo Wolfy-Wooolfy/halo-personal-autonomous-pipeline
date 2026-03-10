@@ -20,16 +20,20 @@ function getClosureFiles() {
   return files.filter((f) => f.endsWith(".execution.closure.md"));
 }
 
+function extractTaskId(taskName) {
+  const match = String(taskName || "").match(/TASK-\d+/i);
+  return match ? match[0].toUpperCase() : "";
+}
+
 function isTaskClosed(taskName, closureFiles) {
-  const normalized = taskName
-    .replace(/:/g, "")
-    .replace(/—/g, "")
-    .replace(/\s+/g, "")
-    .toLowerCase();
+  const taskId = extractTaskId(taskName);
+
+  if (!taskId) {
+    return false;
+  }
 
   return closureFiles.some((f) => {
-    const n = f.replace(/\s+/g, "").toLowerCase();
-    return n.includes(normalized);
+    return String(f || "").toUpperCase() === `${taskId}.EXECUTION.CLOSURE.MD`;
   });
 }
 

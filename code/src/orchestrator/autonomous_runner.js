@@ -1,7 +1,15 @@
+const fs = require("fs");
+const path = require("path");
 const { resolveEntry } = require("./entry_resolver");
 const { getNextModule, getModuleByTask } = require("./pipeline_definition");
 const statusWriter = require("./status_writer");
 const runner = require("./runner");
+const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
+
+function loadStatus() {
+  const raw = fs.readFileSync(STATUS_PATH, { encoding: "utf8" });
+  return JSON.parse(raw);
+}
 
 async function runAutonomous() {
   const entry = resolveEntry();
@@ -22,7 +30,10 @@ async function runAutonomous() {
   while (currentTask) {
     console.log("AUTONOMOUS RUN →", currentTask);
 
+    const beforeRunStatus = loadStatus();
+
     await statusWriter.writeStatus({
+      ...beforeRunStatus,
       current_task: currentTask,
       next_step: "AUTONOMOUS EXECUTION"
     });
@@ -38,7 +49,10 @@ async function runAutonomous() {
 
     if (module.terminal_flag) {
       console.log("AUTONOMOUS COMPLETE: Pipeline finished.");
+      const finalStatus = loadStatus();
+
       await statusWriter.writeStatus({
+        ...finalStatus,
         current_task: "",
         next_step: "READY — Autonomous pipeline complete"
       });
