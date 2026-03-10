@@ -4,6 +4,18 @@ const { resolveEntry } = require("./entry_resolver");
 const { getNextModule, getModuleByTask } = require("./pipeline_definition");
 const statusWriter = require("./status_writer");
 const runner = require("./runner");
+
+const ORCH_STATE = path.join(process.cwd(), "artifacts", "orchestration", "orchestration_state.json");
+
+function ensureOrchestrationDir() {
+  fs.mkdirSync(path.dirname(ORCH_STATE), { recursive: true });
+}
+
+function writeOrchestrationState(payload) {
+  ensureOrchestrationDir();
+  fs.writeFileSync(ORCH_STATE, JSON.stringify(payload, null, 2), "utf8");
+}
+
 const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
 
 function loadStatus() {
@@ -14,7 +26,22 @@ function loadStatus() {
 async function runAutonomous() {
   const entry = resolveEntry();
 
+  writeOrchestrationState({
+  started_at: new Date().toISOString(),
+  entry_type: entry.entry_type,
+  next_task: entry.next_task,
+  status: "RUNNING"
+  });
+
   if (entry.blocked) {
+    writeOrchestrationState({
+      started_at: new Date().toISOString(),
+      entry_type: entry.entry_type,
+      next_task: entry.next_task,
+      status: "BLOCKED",
+      reason: entry.reason
+    });
+
     console.log("FORGE AUTONOMOUS STOPPED: BLOCKED");
     console.log(entry.reason);
     return;
@@ -48,6 +75,13 @@ async function runAutonomous() {
     }
 
     if (module.terminal_flag) {
+    
+      writeOrchestrationState({
+        finished_at: new Date().toISOString(),
+        last_task: currentTask,
+        status: "COMPLETE"
+      });
+
       console.log("AUTONOMOUS COMPLETE: Pipeline finished.");
       const finalStatus = loadStatus();
 

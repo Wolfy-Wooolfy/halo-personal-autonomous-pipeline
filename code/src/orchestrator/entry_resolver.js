@@ -42,19 +42,15 @@ function resolveEntry() {
   const pipeline = getPipeline();
   const closureFiles = getClosureFiles();
 
-  const completedModules = [];
+  let lastClosedIndex = -1;
 
-  for (const module of pipeline) {
-    const closed = isTaskClosed(module.task_name, closureFiles);
-
-    if (closed) {
-      completedModules.push(module.module_id);
-    } else {
-      break;
+  pipeline.forEach((module, index) => {
+    if (isTaskClosed(module.task_name, closureFiles)) {
+      lastClosedIndex = index;
     }
-  }
+  });
 
-  if (completedModules.length === pipeline.length) {
+  if (lastClosedIndex === pipeline.length - 1) {
     return {
       entry_type: "COMPLETE",
       next_module: null,
@@ -64,7 +60,7 @@ function resolveEntry() {
     };
   }
 
-  if (completedModules.length === 0) {
+  if (lastClosedIndex === -1) {
     return {
       entry_type: "FRESH",
       next_module: pipeline[0].module_id,
@@ -74,7 +70,7 @@ function resolveEntry() {
     };
   }
 
-  const nextModule = pipeline[completedModules.length];
+  const nextModule = pipeline[lastClosedIndex + 1];
 
   return {
     entry_type: "RESUME",
