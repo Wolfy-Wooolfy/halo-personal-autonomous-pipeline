@@ -1,0 +1,1148 @@
+{
+  "approved_actions": [
+    {
+      "gap_id": "GAP-02d227388bb7",
+      "action_id": "ACT-5620e11c1aeb",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/intake/entrypoint_classification.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-04af48f2511d",
+      "action_id": "ACT-2a6b54c9d6d7",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-022.stageC.verify.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-05a0d4fe38ca",
+      "action_id": "ACT-fe5e9d09a809",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-051.stageA.module-flow-gap.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-08a8c6a194d7",
+      "action_id": "ACT-48e5d61dba0b",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-054.stageA.module-flow-execute.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-09934d191d91",
+      "action_id": "ACT-4cc3b33371b0",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-032.stageA.idempotency-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-0b808c9ecfd2",
+      "action_id": "ACT-72e142d7fe5e",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/release/RELEASE_1.2.0.manifest.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-0c73f815121b",
+      "action_id": "ACT-ddd4022af543",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-023.stageA.autonomy-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-118bc3ac277b",
+      "action_id": "ACT-56a06f84323f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/stage_C.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-1a1ee609ceb0",
+      "action_id": "ACT-4929c7f43641",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/verify05_advance.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-1bb184da83d8",
+      "action_id": "ACT-3e389458a2df",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-026.stageA.autonomy-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-1f5fe212ebd7",
+      "action_id": "ACT-16772d77fd9f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-058.stageA.intake-engine-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-233ad5dcaefb",
+      "action_id": "ACT-e8e041f80923",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-035.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-24878c292a4e",
+      "action_id": "ACT-7b4c2afd8977",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-053.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-26697e4c109a",
+      "action_id": "ACT-d951db8ff8d1",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-034.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-27205fccc1a9",
+      "action_id": "ACT-d40ae03f40cc",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-029.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-289be639a50c",
+      "action_id": "ACT-a80d109afb1c",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-032.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-28b0f0a66684",
+      "action_id": "ACT-a0351bce833c",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/release/RELEASE_1.2.1.manifest.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-2c4822fef96b",
+      "action_id": "ACT-0762e5f36268",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/core_runtime.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-2f945a7bb1d8",
+      "action_id": "ACT-49c80134d1d3",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-040.stageA.encoding-normalization-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-30d0f1b43461",
+      "action_id": "ACT-8b11fdfc7240",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-035.stageA.trace-by-clause-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-32eaa59cfb6a",
+      "action_id": "ACT-4b6c77a28d2a",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-043.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-34f62212ecdc",
+      "action_id": "ACT-bc1920b100be",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-039.stageA.stageC-closure-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-35e2d3ea2538",
+      "action_id": "ACT-4e892c476f44",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-029.stageA.multi-step-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-386a5efb0498",
+      "action_id": "ACT-d2c85b3105f9",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_B/orchestrator_stage_transitions.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-3b7a40b14646",
+      "action_id": "ACT-5df142c9d642",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-024.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-403d554f9268",
+      "action_id": "ACT-4f8e55e2a4e3",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_A/contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4306532f308b",
+      "action_id": "ACT-1d0fef204f18",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/release/RELEASE_1.1.1.manifest.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4378e082910f",
+      "action_id": "ACT-adc6120e2052",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-027.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-439eb03b8cd5",
+      "action_id": "ACT-ce4b41acea6b",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-026.stageC.verify.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-43f2f9b9fe09",
+      "action_id": "ACT-4fbe111b4a06",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-033.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-45ab61174fa6",
+      "action_id": "ACT-9609c6a56e4e",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-042.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-461b3fc1944f",
+      "action_id": "ACT-55ae7ab1ce90",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-028.stageA.runtime-hardening.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-463468e40671",
+      "action_id": "ACT-2ad8c7b6bde8",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-028.stageC.verify.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-478a2d11fc8b",
+      "action_id": "ACT-860211a764eb",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-044.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4b8c2fdbff7c",
+      "action_id": "ACT-1cacc5278288",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/release_manifest.v2.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4b8e2f742f6d",
+      "action_id": "ACT-14f480770c53",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-023.stageC.verify.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4c3c7cc131e9",
+      "action_id": "ACT-a5ca2defa3ff",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/code_mismatch_report.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4c94a3e6aa23",
+      "action_id": "ACT-486776f5d99a",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_A/io_map.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4ebbd217561e",
+      "action_id": "ACT-8a3cc8070485",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-046.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-4f7fa748aee3",
+      "action_id": "ACT-b4d8e541320d",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-029.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-501da651a035",
+      "action_id": "ACT-e9f826990283",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-022.stageA.plan.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-5108d3497195",
+      "action_id": "ACT-1f122dc9b67f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-044.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-532a19dbc9c3",
+      "action_id": "ACT-a07859b0d5bd",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-049.stageA.audit-refresh-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-5b345c0c6094",
+      "action_id": "ACT-e163f8c57c37",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/release_gate_evidence.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-5daede5d4827",
+      "action_id": "ACT-f0c3cbed3d6c",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-027.stageC.verify.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-5e1ba8017612",
+      "action_id": "ACT-16cc3d682e95",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-041.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-61bddae98402",
+      "action_id": "ACT-0a2414926b1e",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/runtime_runbook.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-6375565fed70",
+      "action_id": "ACT-9cf7639137ad",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-053.stageA.module-flow-backfill.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-66568c4a13ae",
+      "action_id": "ACT-090b3297f943",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-030.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-67f1a8af3ac3",
+      "action_id": "ACT-57107829ea69",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/release_gate_evidence.v2.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-6834b95e909f",
+      "action_id": "ACT-50d49e3711b1",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-031.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-69b182a54822",
+      "action_id": "ACT-dbf6457bf727",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-047.stageA.module-flow-intake.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-6c7a1fe77ff4",
+      "action_id": "ACT-44120215ac6e",
+      "category": "ORPHAN_CODE",
+      "description": "Remove or relocate code unit CODE::code/src/execution/task_executor.js::FILE if it is not part of Forge scope/contracts.",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-6c7a1fe77ff4",
+      "action_id": "ACT-9068516863f0",
+      "category": "ORPHAN_CODE",
+      "description": "Map code unit CODE::code/src/execution/task_executor.js::FILE to an existing requirement by adding deterministic mapping rules in Trace (if valid).",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-72daa3e1b739",
+      "action_id": "ACT-30f58ca7e64b",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_B/stage_B.reclosure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-748596c3fe74",
+      "action_id": "ACT-047f616b4290",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/docs_presence_report.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-758277e3f972",
+      "action_id": "ACT-e9305036758d",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-054.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-76ecad290d90",
+      "action_id": "ACT-6cf8bb74b110",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-055.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-77c43eb721f0",
+      "action_id": "ACT-94e31bf392f5",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/release/repository_hash_snapshot.json to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-7cac10612ce3",
+      "action_id": "ACT-f8f721ee808f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/verification_report.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-7e083652c662",
+      "action_id": "ACT-e86f917249d6",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-048.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-82c7301526d5",
+      "action_id": "ACT-01f9863b54bb",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/reports/autonomy/execution_report_index.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-835929aa44ab",
+      "action_id": "ACT-5ba4d938a55e",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-040.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-84b601e8c1fe",
+      "action_id": "ACT-83b84a82aa5f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-038.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-85829b269e60",
+      "action_id": "ACT-402e4bccb78a",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-033.stageA.trace-engine-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-877ddf9a4e23",
+      "action_id": "ACT-25fb3be9c183",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_B/orchestrator_runner.spec.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-88d4c2fd9708",
+      "action_id": "ACT-7eec27bd8040",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-027.stageA.report-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-895f14ef0d56",
+      "action_id": "ACT-2038a76edb72",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-049.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-89a966b18177",
+      "action_id": "ACT-202fa98231d0",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-030.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-8c2880728d41",
+      "action_id": "ACT-1c15d5310f63",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-045.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-8f6cbfefee27",
+      "action_id": "ACT-906e9db7dbe4",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-055.stageA.module-flow-closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-910a1d3386cb",
+      "action_id": "ACT-2a084e6c6945",
+      "category": "ORPHAN_CODE",
+      "description": "Remove or relocate code unit CODE::code/src/orchestrator/stage_transitions.js::FILE if it is not part of Forge scope/contracts.",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-910a1d3386cb",
+      "action_id": "ACT-f02a2ecf1dbb",
+      "category": "ORPHAN_CODE",
+      "description": "Map code unit CODE::code/src/orchestrator/stage_transitions.js::FILE to an existing requirement by adding deterministic mapping rules in Trace (if valid).",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9484f85cc937",
+      "action_id": "ACT-14381131054f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-034.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9509169a6770",
+      "action_id": "ACT-a2f8120f8c7f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-025.stageA.decision-logging-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-98d6dca8e473",
+      "action_id": "ACT-05cd74c80d75",
+      "category": "ORPHAN_CODE",
+      "description": "Remove or relocate code unit CODE::code/src/orchestrator/status_writer.js::FILE if it is not part of Forge scope/contracts.",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-98d6dca8e473",
+      "action_id": "ACT-e985ee7db8ca",
+      "category": "ORPHAN_CODE",
+      "description": "Map code unit CODE::code/src/orchestrator/status_writer.js::FILE to an existing requirement by adding deterministic mapping rules in Trace (if valid).",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-98fa19e0d83c",
+      "action_id": "ACT-cb70de456e19",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-050.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9a37949b51a7",
+      "action_id": "ACT-10fb6b877bc2",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_B/documentation_audit.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9c3d19daa468",
+      "action_id": "ACT-71eeb2ab9fff",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/release_manifest.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9cb85556f404",
+      "action_id": "ACT-a054aa1ef36d",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/reports/autonomy/execution_report_schema.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9e6fdeb80c5b",
+      "action_id": "ACT-1c27cd857bae",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-051.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9e8d676ccef1",
+      "action_id": "ACT-e66723322499",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_B/orchestrator_status_writer.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-9f551a27f150",
+      "action_id": "ACT-498a5cb2407b",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/release/RELEASE_1.0.0.manifest.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-a02014bb55e0",
+      "action_id": "ACT-5f4778dff955",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-028.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-a123bce92684",
+      "action_id": "ACT-8ccc03e30943",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/docs_presence_evidence.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-a38dfb6ac9d0",
+      "action_id": "ACT-e2c419b7b83b",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-024.stageC.verify.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-a82fba3561fd",
+      "action_id": "ACT-ff3eb44b49db",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/release/RELEASE_1.1.0.manifest.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-ae25dcc46ed7",
+      "action_id": "ACT-c90724be71b8",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/code_trace_matrix.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-af94a36b4b09",
+      "action_id": "ACT-b26ee885e58c",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-043.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-b169e4524de2",
+      "action_id": "ACT-053b16ae1a37",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-041.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-b1e3b6f74334",
+      "action_id": "ACT-a75c67de08f8",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-046.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-b51845b1b10b",
+      "action_id": "ACT-9f3919d1bc2d",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-052.stageA.module-flow-decision-gate.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-b79731a5a144",
+      "action_id": "ACT-39c7f3611617",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-059.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-be2ca5173597",
+      "action_id": "ACT-5e6e557b987d",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/stage_D.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-bf9baaff290b",
+      "action_id": "ACT-aeaa78c4938c",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_A/pass_fail.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c06049816b13",
+      "action_id": "ACT-9356cf76ecf8",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-028.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c2a9eecf1dfb",
+      "action_id": "ACT-935f01744c8c",
+      "category": "ORPHAN_CODE",
+      "description": "Map code unit CODE::code/src/orchestrator/runner.js::FILE to an existing requirement by adding deterministic mapping rules in Trace (if valid).",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c2a9eecf1dfb",
+      "action_id": "ACT-ea577280e9e9",
+      "category": "ORPHAN_CODE",
+      "description": "Remove or relocate code unit CODE::code/src/orchestrator/runner.js::FILE if it is not part of Forge scope/contracts.",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c3b362cac856",
+      "action_id": "ACT-06dd1bec4b52",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_B/rollback_C_to_B.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c483088d0c8f",
+      "action_id": "ACT-ca436828f2f9",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-025.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c5feec58fff0",
+      "action_id": "ACT-18d3139a5dd3",
+      "category": "ORPHAN_CODE",
+      "description": "Remove or relocate code unit CODE::code/src/execution/task_registry.js::getTaskHandler if it is not part of Forge scope/contracts.",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c5feec58fff0",
+      "action_id": "ACT-ba0220a18ada",
+      "category": "ORPHAN_CODE",
+      "description": "Map code unit CODE::code/src/execution/task_registry.js::getTaskHandler to an existing requirement by adding deterministic mapping rules in Trace (if valid).",
+      "target_path": "(auto-generated)",
+      "action_type": "CREATE_PLACEHOLDER_CODE",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c799602426f8",
+      "action_id": "ACT-b328fd97e8e0",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-056.stageA.operating-modes-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-c9afaaef1f8c",
+      "action_id": "ACT-b87bd5fe4b89",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-025.stageC.verify.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-cdcdaaf21eeb",
+      "action_id": "ACT-74ef6ff96e0d",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-038.stageA.trace-rebuild-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-cee12d61d219",
+      "action_id": "ACT-da2db630ed3f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-031.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-cf120207943e",
+      "action_id": "ACT-7b17e81e5aec",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-024.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-d29ad34687be",
+      "action_id": "ACT-20fbcf536200",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-050.stageA.module-flow-trace.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-d3a5df51c05c",
+      "action_id": "ACT-c54757e82a60",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_A/assumptions.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-d5aff1e6069c",
+      "action_id": "ACT-b54fe1166a7f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-031.stageA.first-handler-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-d5d29dd51eaa",
+      "action_id": "ACT-6859c46f7956",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-023.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-d7b0a0fab79e",
+      "action_id": "ACT-f3de5dafa778",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-057.stageA.intake-classification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-d9926a5e7c3f",
+      "action_id": "ACT-7fec843b2c1c",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-022.stageB.skeleton.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-dd3e83106b21",
+      "action_id": "ACT-24e06442e50b",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/dry_run_extension.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-dd4bc4352c6c",
+      "action_id": "ACT-6f7d2754e445",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-039.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-dd7f036bbcd8",
+      "action_id": "ACT-a74069429066",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/release/RELEASE_1.0.0.integrity.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-df4e917dbbae",
+      "action_id": "ACT-08365e0435df",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-052.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-df7023aae81a",
+      "action_id": "ACT-e7954062f3aa",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-030.stageA.execution-engine-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-e014730ba9e7",
+      "action_id": "ACT-d044cb96dc45",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/intake/repository_inventory.json to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-e0203dabfc2d",
+      "action_id": "ACT-93a88daa1e3f",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/test_evidence.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-e76f0c1087b3",
+      "action_id": "ACT-c46e1f277c0b",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-045.stageA.verification-contract.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-ed06e63b292f",
+      "action_id": "ACT-d5ae3e0a5bf9",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-048.stageA.module-flow-audit.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-ef0be6d3c318",
+      "action_id": "ACT-40815032b6bd",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/tasks/TASK-042.execution.closure.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-f1000dfa1177",
+      "action_id": "ACT-85c71350a128",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_D/verification_evidence.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-fa331112c851",
+      "action_id": "ACT-9b8acc60c65e",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_B/orchestrator_runner.dry_run.spec.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    },
+    {
+      "gap_id": "GAP-fb61d0866bd4",
+      "action_id": "ACT-1157ad5175e9",
+      "category": "ORPHAN_ARTIFACT",
+      "description": "Either map artifact artifacts/stage_C/stage_C.closure.v2.md to a requirement (if valid) or remove it if it violates namespace/scope rules.",
+      "target_path": "(auto-generated)",
+      "action_type": "GENERATE_ARTIFACT",
+      "deterministic_template_used": true
+    }
+  ],
+  "generated_at": "2026-03-10T09:18:41.897Z"
+}

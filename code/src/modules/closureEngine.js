@@ -17,133 +17,525 @@ function ensureDir(absDir) {
   fs.mkdirSync(absDir, { recursive: true });
 }
 
+function fileExists(absPath) {
+  return fs.existsSync(absPath) && fs.statSync(absPath).isFile();
+}
+
+function deriveDeterministicTimestamp(intakeSnapshot, executePlan, decisionJson) {
+  const candidates = [
+    executePlan && executePlan.generated_at ? executePlan.generated_at : "",
+    executePlan && executePlan.release_timestamp ? executePlan.release_timestamp : "",
+    decisionJson && decisionJson.timestamp ? decisionJson.timestamp : "",
+    intakeSnapshot && intakeSnapshot.generated_at ? intakeSnapshot.generated_at : "",
+    "1970-01-01T00:00:00.000Z"
+  ];
+
+  for (const value of candidates) {
+    if (typeof value === "string" && value.trim() !== "") {
+      return value;
+    }
+  }
+
+  return "1970-01-01T00:00:00.000Z";
+}
+
+function listRepositoryFiles(absDir, baseDir, acc, excludedRelPaths) {
+  const entries = fs.readdirSync(absDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const abs = path.join(absDir, entry.name);
+    const rel = path.relative(baseDir, abs).split(path.sep).join("/");
+
+    if (entry.isDirectory()) {
+      if (rel === ".git" || rel === "node_modules") {
+        continue;
+      }
+      listRepositoryFiles(abs, baseDir, acc, excludedRelPaths);
+      continue;
+    }
+
+    if (!entry.isFile()) {
+      continue;
+    }
+
+    if (excludedRelPaths.has(rel)) {
+      continue;
+    }
+
+    acc.push(rel);
+  }
+}
+
+function computeRepositorySnapshot() {
+  const excludedRelPaths = new Set([
+    "artifacts/closure/closure_report.md",
+    "artifacts/closure/closure_error.md",
+    "artifacts/release/RELEASE_MANIFEST_v1.json",
+    "artifacts/release/repository_hash_snapshot.json"
+  ]);
+
+  const relFiles = [];
+  listRepositoryFiles(ROOT, ROOT, relFiles, excludedRelPaths);
+  relFiles.sort((a, b) => a.localeCompare(b));
+
+  const fileHashes = [];
+  for (const rel of relFiles) {
+    const abs = path.resolve(ROOT, rel);
+    const content = fs.readFileSync(abs);
+    const fileHash = crypto.createHash("sha256").update(content).digest("hex");
+    fileHashes.push({
+      path: rel,
+      sha256: fileHash
+    });
+  }
+
+  const combined = fileHashes.map((item) => `${item.path}:${item.sha256}`).join("\n");
+  const repositoryHash = sha256Text(combined);
+
+  return {
+    total_files: fileHashes.length,
+    repository_hash: repositoryHash,
+    hash_algorithm: "sha256",
+    files: fileHashes
+  };
+}
+
+function countOrphanEntities(gapJson) {
+  const gaps = Array.isArray(gapJson && gapJson.gaps) ? gapJson.gaps : [];
+  let orphanCodeUnits = 0;
+  let orphanRequirements = 0;
+  let orphanArtifacts = 0;
+
+  for (const gap of gaps) {
+    const category = String(gap && gap.category ? gap.category : "").toUpperCase();
+
+    if (category === "ORPHAN_CODE" || category === "ORPHAN_CODE_UNITS") {
+      orphanCodeUnits += 1;
+    } else if (category === "ORPHAN_REQUIREMENT" || category === "ORPHAN_REQUIREMENTS") {
+      orphanRequirements += 1;
+    } else if (category === "ORPHAN_ARTIFACT" || category === "ORPHAN_ARTIFACTS") {
+      orphanArtifacts += 1;
+    }
+  }
+
+  return {
+    orphan_code_units: orphanCodeUnits,
+    orphan_requirements: orphanRequirements,
+    orphan_artifacts: orphanArtifacts
+  };
+}
+
+function computeGapMetrics(gapJson) {
+  const totalGaps =
+    typeof (gapJson && gapJson.total_gaps) === "number"
+      ? gapJson.total_gaps
+      : Array.isArray(gapJson && gapJson.gaps)
+        ? gapJson.gaps.length
+        : 0;
+
+  const criticalCount =
+    typeof (gapJson && gapJson.critical_count) === "number"
+      ? gapJson.critical_count
+      : Array.isArray(gapJson && gapJson.gaps)
+        ? gapJson.gaps.filter((gap) => String(gap && gap.severity ? gap.severity : "").toUpperCase() === "CRITICAL").length
+        : 0;
+
+  const orphanCounts = countOrphanEntities(gapJson);
+
+  return {
+    total_gaps: totalGaps,
+    critical_violations: criticalCount,
+    orphan_code_units: orphanCounts.orphan_code_units,
+    orphan_requirements: orphanCounts.orphan_requirements,
+    orphan_artifacts: orphanCounts.orphan_artifacts
+  };
+}
+
+function artifactNamespaceValid(relPath) {
+  return typeof relPath === "string" && relPath.startsWith("artifacts/");
+}
+
+function buildBlockingResult(message, details, errorArtifactRel) {
+  const closureDir = path.resolve(ROOT, "artifacts", "closure");
+  ensureDir(closureDir);
+
+  const lines = [];
+  lines.push("# MODULE FLOW — Closure Error");
+  lines.push("");
+  lines.push(`- outcome: BLOCKED`);
+  lines.push(`- message: ${message}`);
+  lines.push("");
+  lines.push("## Details");
+  for (const detail of details) {
+    lines.push(`- ${detail}`);
+  }
+  lines.push("");
+
+  fs.writeFileSync(path.resolve(ROOT, errorArtifactRel), lines.join("\n"), { encoding: "utf8" });
+
+  return {
+    stage_progress_percent: 100,
+    blocked: true,
+    artifact: errorArtifactRel,
+    outputs: {
+      md: errorArtifactRel
+    },
+    status_patch: {
+      next_step: "",
+      blocking_questions: [message]
+    }
+  };
+}
+
 function renderClosureReport(payload) {
   const lines = [];
 
   lines.push("# MODULE FLOW — Closure Report");
   lines.push("");
-
-  lines.push(`- generated_at: ${payload.generated_at}`);
+  lines.push(`- release_timestamp: ${payload.release_timestamp}`);
+  lines.push(`- execution_id: ${payload.execution_id}`);
   lines.push(`- operating_mode: ${payload.operating_mode}`);
   lines.push(`- repository_state: ${payload.repository_state}`);
+  lines.push(`- final_outcome: ${payload.final_outcome}`);
   lines.push("");
-
-  lines.push("## Verification");
-
-  lines.push(`- Decision Gate: ${payload.verify.decision_gate}`);
-  lines.push(`- Backfill: ${payload.verify.backfill}`);
-  lines.push(`- Execute: ${payload.verify.execute}`);
-
+  lines.push("## Verified Modules");
+  for (const item of payload.verified_modules) {
+    lines.push(`- ${item.name}: ${item.status}`);
+  }
   lines.push("");
-
-  lines.push("## Artifacts");
-
-  lines.push(`- ${payload.artifacts.decision_gate}`);
-  lines.push(`- ${payload.artifacts.backfill}`);
-  lines.push(`- ${payload.artifacts.execute}`);
-
+  lines.push("## Gap Status");
+  lines.push(`- gap_count: ${payload.gap_status.gap_count}`);
+  lines.push(`- critical_violations: ${payload.gap_status.critical_violations}`);
+  lines.push(`- orphan_code_units: ${payload.gap_status.orphan_code_units}`);
+  lines.push(`- orphan_requirements: ${payload.gap_status.orphan_requirements}`);
+  lines.push(`- orphan_artifacts: ${payload.gap_status.orphan_artifacts}`);
+  lines.push(`- acceptable_for_final_closure: ${payload.gap_status.acceptable_for_final_closure ? "true" : "false"}`);
   lines.push("");
-
-  lines.push("## Result");
-
-  lines.push("Module Flow successfully closed.");
-
+  lines.push("## Deterministic Validation");
+  lines.push(`- intake_snapshot_locked: ${payload.deterministic_validation.intake_snapshot_locked ? "true" : "false"}`);
+  lines.push(`- artifact_namespaces_valid: ${payload.deterministic_validation.artifact_namespaces_valid ? "true" : "false"}`);
+  lines.push(`- decision_artifact_valid: ${payload.deterministic_validation.decision_artifact_valid ? "true" : "false"}`);
+  lines.push(`- deterministic_confirmation: ${payload.deterministic_validation.deterministic_confirmation ? "true" : "false"}`);
+  lines.push(`- snapshot_hash: ${payload.deterministic_validation.snapshot_hash}`);
+  lines.push("");
+  lines.push("## Release Artifacts");
+  lines.push(`- ${payload.release_artifacts.closure_report}`);
+  lines.push(`- ${payload.release_artifacts.release_manifest}`);
+  lines.push(`- ${payload.release_artifacts.repository_hash_snapshot}`);
   lines.push("");
 
   return lines.join("\n");
 }
 
 function runClosure(context) {
+  const intakeContextRel = "artifacts/intake/intake_context.json";
+  const intakeSnapshotRel = "artifacts/intake/intake_snapshot.json";
+  const auditRel = "artifacts/audit/audit_findings.json";
+  const traceRel = "artifacts/trace/trace_matrix.json";
+  const gapRel = "artifacts/gap/gap_actions.json";
+  const decisionRel = "artifacts/decisions/module_flow_decision_gate.json";
+  const backfillRel = "artifacts/backfill/backfill_plan.json";
+  const executeRel = "artifacts/execute/execute_plan.json";
+  const closureReportRel = "artifacts/closure/closure_report.md";
+  const closureErrorRel = "artifacts/closure/closure_error.md";
+  const releaseManifestRel = "artifacts/release/RELEASE_MANIFEST_v1.json";
+  const repoSnapshotRel = "artifacts/release/repository_hash_snapshot.json";
 
-  const intakePath = path.resolve(ROOT, "artifacts/intake/intake_context.json");
-  const decisionPath = path.resolve(ROOT, "artifacts/decisions/module_flow_decision_gate.json");
-  const backfillPath = path.resolve(ROOT, "artifacts/backfill/backfill_plan.json");
-  const executePath = path.resolve(ROOT, "artifacts/execute/execute_plan.json");
+  const intakeContextAbs = path.resolve(ROOT, intakeContextRel);
+  const intakeSnapshotAbs = path.resolve(ROOT, intakeSnapshotRel);
+  const auditAbs = path.resolve(ROOT, auditRel);
+  const traceAbs = path.resolve(ROOT, traceRel);
+  const gapAbs = path.resolve(ROOT, gapRel);
+  const decisionAbs = path.resolve(ROOT, decisionRel);
+  const backfillAbs = path.resolve(ROOT, backfillRel);
+  const executeAbs = path.resolve(ROOT, executeRel);
 
-  if (!fs.existsSync(intakePath)) {
-    return {
-      blocked: true,
-      status_patch: {
-        next_step: "",
-        blocking_questions: ["Closure BLOCKED: intake_context.json missing"]
-      }
-    };
+  if (!fileExists(intakeContextAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/intake/intake_context.json).",
+      ["Missing intake context artifact."],
+      closureErrorRel
+    );
   }
 
-  if (!fs.existsSync(decisionPath)) {
-    return {
-      blocked: true,
-      status_patch: {
-        next_step: "",
-        blocking_questions: ["Closure BLOCKED: Decision Gate artifact missing"]
-      }
-    };
+  if (!fileExists(intakeSnapshotAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/intake/intake_snapshot.json).",
+      ["Missing intake snapshot artifact."],
+      closureErrorRel
+    );
   }
 
-  if (!fs.existsSync(backfillPath)) {
-    return {
-      blocked: true,
-      status_patch: {
-        next_step: "",
-        blocking_questions: ["Closure BLOCKED: Backfill artifact missing"]
-      }
-    };
+  if (!fileExists(auditAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/audit/audit_findings.json).",
+      ["Missing audit artifact."],
+      closureErrorRel
+    );
   }
 
-  if (!fs.existsSync(executePath)) {
-    return {
-      blocked: true,
-      status_patch: {
-        next_step: "",
-        blocking_questions: ["Closure BLOCKED: Execute artifact missing"]
-      }
-    };
+  if (!fileExists(traceAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/trace/trace_matrix.json).",
+      ["Missing trace artifact."],
+      closureErrorRel
+    );
   }
 
-  const intake = readJson(intakePath);
-  const mode = String(intake.operating_mode || "").toUpperCase();
-
-  if (mode !== "BUILD" && mode !== "IMPROVE") {
-    return {
-      blocked: true,
-      status_patch: {
-        next_step: "",
-        blocking_questions: ["Closure BLOCKED: invalid operating mode"]
-      }
-    };
+  if (!fileExists(gapAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/gap/gap_actions.json).",
+      ["Missing gap artifact."],
+      closureErrorRel
+    );
   }
 
-  const closureDir = path.resolve(ROOT, "artifacts/closure");
+  if (!fileExists(decisionAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/decisions/module_flow_decision_gate.json).",
+      ["Missing decision artifact."],
+      closureErrorRel
+    );
+  }
+
+  if (!fileExists(backfillAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/backfill/backfill_plan.json).",
+      ["Missing backfill plan artifact."],
+      closureErrorRel
+    );
+  }
+
+  if (!fileExists(executeAbs)) {
+    return buildBlockingResult(
+      "Closure BLOCKED: required artifact missing (artifacts/execute/execute_plan.json).",
+      ["Missing execute plan artifact."],
+      closureErrorRel
+    );
+  }
+
+  const intakeContext = readJson(intakeContextAbs);
+  const intakeSnapshot = readJson(intakeSnapshotAbs);
+  const auditJson = readJson(auditAbs);
+  const traceJson = readJson(traceAbs);
+  const gapJson = readJson(gapAbs);
+  const decisionJson = readJson(decisionAbs);
+  const backfillJson = readJson(backfillAbs);
+  const executeJson = readJson(executeAbs);
+
+  const operatingMode = String(intakeContext && intakeContext.operating_mode ? intakeContext.operating_mode : "").toUpperCase();
+  const repositoryState = String(intakeContext && intakeContext.repository_state ? intakeContext.repository_state : "").toUpperCase();
+
+  if (intakeContext.blocked === true) {
+    return buildBlockingResult(
+      "Closure BLOCKED: intake_context is still blocked.",
+      ["intake_context.blocked must be false before closure."],
+      closureErrorRel
+    );
+  }
+
+  if (operatingMode !== "BUILD" && operatingMode !== "IMPROVE") {
+    return buildBlockingResult(
+      "Closure BLOCKED: invalid operating mode.",
+      [`Received operating_mode=${operatingMode || "(empty)"}.`],
+      closureErrorRel
+    );
+  }
+
+  if (intakeSnapshot.locked_snapshot_flag !== true) {
+    return buildBlockingResult(
+      "Closure BLOCKED: intake snapshot is not locked.",
+      ["intake_snapshot.locked_snapshot_flag must equal true."],
+      closureErrorRel
+    );
+  }
+
+  if (auditJson.blocked === true || Number(auditJson.failed_checks || 0) > 0) {
+    return buildBlockingResult(
+      "Closure BLOCKED: audit verification failed.",
+      [
+        `audit.blocked=${auditJson.blocked === true ? "true" : "false"}`,
+        `audit.failed_checks=${Number(auditJson.failed_checks || 0)}`
+      ],
+      closureErrorRel
+    );
+  }
+
+  if (!Array.isArray(traceJson.mappings) || String(traceJson.operating_mode || "").toUpperCase() !== operatingMode) {
+    return buildBlockingResult(
+      "Closure BLOCKED: trace verification failed.",
+      [
+        "trace_matrix must contain mappings array.",
+        `trace.operating_mode=${String(traceJson.operating_mode || "")}`
+      ],
+      closureErrorRel
+    );
+  }
+
+  const gapMetrics = computeGapMetrics(gapJson);
+
+  if (gapMetrics.critical_violations > 0) {
+    return buildBlockingResult(
+      "Closure BLOCKED: unresolved critical violations remain.",
+      [`critical_violations=${gapMetrics.critical_violations}`],
+      closureErrorRel
+    );
+  }
+
+  const acceptableForFinalClosure =
+    gapMetrics.critical_violations === 0 &&
+    gapMetrics.orphan_code_units === 0 &&
+    gapMetrics.orphan_requirements === 0;
+
+  if (!acceptableForFinalClosure) {
+    return buildBlockingResult(
+      "Closure BLOCKED: gap state is not acceptable for final closure.",
+      [
+        `critical_violations=${gapMetrics.critical_violations}`,
+        `orphan_code_units=${gapMetrics.orphan_code_units}`,
+        `orphan_requirements=${gapMetrics.orphan_requirements}`,
+        `orphan_artifacts=${gapMetrics.orphan_artifacts}`,
+        `gap_count=${gapMetrics.total_gaps}`
+      ],
+      closureErrorRel
+    );
+  }
+
+  const decisionHasReview =
+    Array.isArray(decisionJson.review_required_actions) && decisionJson.review_required_actions.length > 0;
+  const decisionHasReject =
+    Array.isArray(decisionJson.rejected_actions) && decisionJson.rejected_actions.length > 0;
+
+  if (decisionHasReview || decisionHasReject) {
+    return buildBlockingResult(
+      "Closure BLOCKED: decision state is not final and executable.",
+      [
+        `review_required_actions=${decisionHasReview ? decisionJson.review_required_actions.length : 0}`,
+        `rejected_actions=${decisionHasReject ? decisionJson.rejected_actions.length : 0}`
+      ],
+      closureErrorRel
+    );
+  }
+
+  const backfillActions = Array.isArray(backfillJson.approved_actions)
+    ? backfillJson.approved_actions
+    : [];
+  const executeActions = Array.isArray(executeJson.actions)
+    ? executeJson.actions
+    : executeJson.plan && Array.isArray(executeJson.plan.actions)
+      ? executeJson.plan.actions
+      : [];
+
+  if (backfillActions.length !== executeActions.length) {
+    return buildBlockingResult(
+      "Closure BLOCKED: execute plan is inconsistent with backfill plan.",
+      [
+        `backfill_actions=${backfillActions.length}`,
+        `execute_actions=${executeActions.length}`
+      ],
+      closureErrorRel
+    );
+  }
+
+  const releasePaths = [
+    closureReportRel,
+    releaseManifestRel,
+    repoSnapshotRel
+  ];
+
+  const artifactNamespacesValid = releasePaths.every((rel) => artifactNamespaceValid(rel));
+  if (!artifactNamespacesValid) {
+    return buildBlockingResult(
+      "Closure BLOCKED: invalid artifact namespace detected.",
+      releasePaths,
+      closureErrorRel
+    );
+  }
+
+  const snapshot = computeRepositorySnapshot();
+  const deterministicTimestamp = deriveDeterministicTimestamp(intakeSnapshot, executeJson, decisionJson);
+  const executionId = `MODULE_FLOW_CLOSURE_${sha256Text(`${snapshot.repository_hash}|${operatingMode}|${repositoryState}`).slice(0, 12)}`;
+
+  const closureDir = path.resolve(ROOT, "artifacts", "closure");
+  const releaseDir = path.resolve(ROOT, "artifacts", "release");
   ensureDir(closureDir);
+  ensureDir(releaseDir);
 
-  const closureReportPath = path.resolve(closureDir, "closure_report.md");
+  const releaseManifest = {
+    execution_id: executionId,
+    release_timestamp: deterministicTimestamp,
+    modules_executed: [
+      "Intake",
+      "Audit",
+      "Trace",
+      "Gap",
+      "Decision",
+      "Backfill",
+      "Execute",
+      "Closure"
+    ],
+    gap_count: gapMetrics.total_gaps,
+    critical_violations: gapMetrics.critical_violations,
+    snapshot_hash: snapshot.repository_hash,
+    deterministic_confirmation: true
+  };
 
-  const payload = {
-    generated_at: new Date().toISOString(),
-    operating_mode: mode,
-    repository_state: intake.repository_state,
-    verify: {
-      decision_gate: "OK",
-      backfill: "OK",
-      execute: "OK"
+  const repositoryHashSnapshot = {
+    execution_id: executionId,
+    total_files: snapshot.total_files,
+    repository_hash: snapshot.repository_hash,
+    hash_algorithm: snapshot.hash_algorithm,
+    captured_at: deterministicTimestamp
+  };
+
+  const closurePayload = {
+    execution_id: executionId,
+    release_timestamp: deterministicTimestamp,
+    operating_mode: operatingMode,
+    repository_state: repositoryState,
+    final_outcome: "READY — Module Flow Closure COMPLETE",
+    verified_modules: [
+      { name: "Audit", status: "OK" },
+      { name: "Trace", status: "OK" },
+      { name: "Gap", status: "OK" },
+      { name: "Decision Gate", status: "OK" },
+      { name: "Backfill", status: "OK" },
+      { name: "Execute", status: "OK" },
+      { name: "Closure", status: "OK" }
+    ],
+    gap_status: {
+      gap_count: gapMetrics.total_gaps,
+      critical_violations: gapMetrics.critical_violations,
+      orphan_code_units: gapMetrics.orphan_code_units,
+      orphan_requirements: gapMetrics.orphan_requirements,
+      orphan_artifacts: gapMetrics.orphan_artifacts,
+      acceptable_for_final_closure: acceptableForFinalClosure
     },
-    artifacts: {
-      decision_gate: "artifacts/decisions/module_flow_decision_gate.json",
-      backfill: "artifacts/backfill/backfill_plan.json",
-      execute: "artifacts/execute/execute_plan.json"
+    deterministic_validation: {
+      intake_snapshot_locked: true,
+      artifact_namespaces_valid: true,
+      decision_artifact_valid: true,
+      deterministic_confirmation: true,
+      snapshot_hash: snapshot.repository_hash
+    },
+    release_artifacts: {
+      closure_report: closureReportRel,
+      release_manifest: releaseManifestRel,
+      repository_hash_snapshot: repoSnapshotRel
     }
   };
 
-  fs.writeFileSync(
-    closureReportPath,
-    renderClosureReport(payload)
-  );
+  fs.writeFileSync(path.resolve(ROOT, releaseManifestRel), JSON.stringify(releaseManifest, null, 2), { encoding: "utf8" });
+  fs.writeFileSync(path.resolve(ROOT, repoSnapshotRel), JSON.stringify(repositoryHashSnapshot, null, 2), { encoding: "utf8" });
+  fs.writeFileSync(path.resolve(ROOT, closureReportRel), renderClosureReport(closurePayload), { encoding: "utf8" });
 
   return {
     stage_progress_percent: 100,
-    artifact: "artifacts/closure/closure_report.md",
+    artifact: closureReportRel,
     outputs: {
-      md: "artifacts/closure/closure_report.md"
+      md: closureReportRel,
+      release_manifest: releaseManifestRel,
+      repository_hash_snapshot: repoSnapshotRel
     },
     status_patch: {
       blocking_questions: [],

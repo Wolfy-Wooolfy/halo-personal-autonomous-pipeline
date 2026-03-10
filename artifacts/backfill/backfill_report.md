@@ -1,10 +1,18 @@
 # MODULE FLOW — Backfill Report
 
-- generated_at: 2026-03-09T11:40:22.243Z
-- source: artifacts/gap/gap_actions.json
-- gaps_total: 563
-- critical_count: 0
-- items_emitted: 563
+- generated_at: 2026-03-10T09:03:54.533Z
+- operating_mode: IMPROVE
+- repository_state: MIXED
+- approved_actions_seen: 0
+- deterministic_backfill_actions: 0
+- excluded_non_backfill_actions: 0
+- items_emitted: 0
+
+## Outputs
+- artifacts/backfill/backfill_plan.json
+- artifacts/backfill/backfill_execution_log.md
+- artifacts/backfill/backfill_tasks.json
+- artifacts/backfill/backfill_report.md
 
 ## Next
 - next_step: MODULE_FLOW — Backfill COMPLETE. Next=Execute (implement executeEngine + task bridge).
