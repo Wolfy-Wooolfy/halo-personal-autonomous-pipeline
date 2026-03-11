@@ -31,9 +31,51 @@ const registry = Object.freeze({
     };
   },
 
-  "TASK-047: MODULE FLOW — Intake": (context) => {
-    return runIntake(context);
-  },
+"TASK-047: MODULE FLOW — Intake": (context) => {
+  const result = runIntake(context);
+
+  const relTaskClosure = "artifacts/tasks/TASK-047.execution.closure.md";
+  const taskClosureAbs = path.resolve(__dirname, "../../..", relTaskClosure);
+
+  if (fs.existsSync(taskClosureAbs)) {
+    throw new Error("Idempotency violation: closure artifact already exists for TASK-047");
+  }
+
+  const reportRef =
+    result && result.artifact
+      ? String(result.artifact)
+      : "artifacts/intake/intake_report.md";
+
+  fs.mkdirSync(path.dirname(taskClosureAbs), { recursive: true });
+  fs.writeFileSync(
+    taskClosureAbs,
+    `# TASK-047 — Execution Closure
+
+## Task
+- Task ID: TASK-047
+- Stage Binding: D
+- Closure Type: EXECUTION
+
+## Status
+- stage_progress_percent: 100
+- closure_artifact: true
+
+## Generated Artifacts
+- ${reportRef}
+- artifacts/intake/intake_context.json
+- artifacts/intake/intake_snapshot.json
+- artifacts/intake/repository_inventory.json
+`,
+    "utf-8"
+  );
+
+  return {
+    stage_progress_percent: 100,
+    closure_artifact: true,
+    artifact: relTaskClosure,
+    status_patch: result && result.status_patch ? result.status_patch : {}
+  };
+},
 
     "TASK-048: MODULE FLOW — Audit": (context) => {
     const result = runAudit(context);

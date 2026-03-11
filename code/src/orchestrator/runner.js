@@ -12,6 +12,17 @@ function loadStatus() {
   return JSON.parse(raw);
 }
 
+function writeStatusAndRun(taskName) {
+  const current = loadStatus();
+
+  writeStatus({
+    ...current,
+    current_task: taskName
+  });
+
+  run();
+}
+
 function extractTargetStage(nextStep) {
   if (typeof nextStep !== "string") {
     return null;
@@ -145,5 +156,6 @@ function run() {
 }
 
 module.exports = {
-  run
+  run,
+  runTaskByName: writeStatusAndRun
 };

@@ -162,6 +162,24 @@
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
+    "path": "artifacts/orchestration/",
+    "size_bytes": 0,
+    "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/orchestration/orchestration_run_report.md",
+    "size_bytes": 607,
+    "hash": "4dbd884d509f82870ad716eebf8192e5651023e3d43b2406471b4fd1260af686",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
+    "path": "artifacts/orchestration/orchestration_state.json",
+    "size_bytes": 659,
+    "hash": "6b878835ea704ea2941445dc3725f03e68e118382b13622c3698d854bd8150fe",
+    "captured_at": "SNAPSHOT_LOCKED"
+  },
+  {
     "path": "artifacts/release/",
     "size_bytes": 0,
     "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -1069,8 +1087,8 @@
   },
   {
     "path": "code/src/execution/task_registry.js",
-    "size_bytes": 63518,
-    "hash": "ede49abdd0dd94ad9e64ce7d41d8c663305a093585761fbcbe620bd07b2e23cf",
+    "size_bytes": 64589,
+    "hash": "31fb08c7c8d552d12865b8764dbd4cccf7a1e06e9e2af8a78c7733fa42dcbeb9",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -1141,14 +1159,14 @@
   },
   {
     "path": "code/src/orchestrator/autonomous_runner.js",
-    "size_bytes": 1899,
-    "hash": "e173f914c5a162596c7865ade26488459a11751a748f90dcaf36a1ce110a7faa",
+    "size_bytes": 5973,
+    "hash": "8b3fc84a1674cb84aa6e8ce306f011b2315d4e8997ea4a0a60781b28a223aeed",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
     "path": "code/src/orchestrator/entry_resolver.js",
-    "size_bytes": 2149,
-    "hash": "7992de7249689b736d56d1327a6f89bc5c5e9e1ef02bc5792fcff91dd30693b6",
+    "size_bytes": 4901,
+    "hash": "b1d36ab75fa25b5a30e9f25ebdbbfddbc9d682f15b9dc847abb498e3259d2333",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {
@@ -1159,8 +1177,8 @@
   },
   {
     "path": "code/src/orchestrator/runner.js",
-    "size_bytes": 3814,
-    "hash": "ed729c8e9d8aa1341bb39f1eeb813e8e8b9096f0e35d909dc5fb61c02e5729f6",
+    "size_bytes": 4010,
+    "hash": "c23c8ab1e22600ab0920ce368b0435b92257ca701c9ecb81dd380bd9507f66d2",
     "captured_at": "SNAPSHOT_LOCKED"
   },
   {

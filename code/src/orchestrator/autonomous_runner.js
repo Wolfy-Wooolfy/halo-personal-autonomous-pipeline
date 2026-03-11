@@ -1,173 +1,202 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { resolveEntry } = require("./entry_resolver");
-const { getNextModule, getModuleByTask } = require("./pipeline_definition");
-const statusWriter = require("./status_writer");
-const runner = require("./runner");
+const { getPipeline } = require("./pipeline_definition");
+const { runTaskByName } = require("./runner");
 
-const ORCH_STATE = path.join(process.cwd(), "artifacts", "orchestration", "orchestration_state.json");
+const ORCHESTRATION_DIR = path.join(process.cwd(), "artifacts", "orchestration");
+const STATE_PATH = path.join(ORCHESTRATION_DIR, "orchestration_state.json");
+const REPORT_PATH = path.join(ORCHESTRATION_DIR, "orchestration_run_report.md");
 
-function ensureOrchestrationDir() {
-  fs.mkdirSync(path.dirname(ORCH_STATE), { recursive: true });
+function ensureDir(dirPath) {
+  fs.mkdirSync(dirPath, { recursive: true });
 }
 
-function writeOrchestrationState(payload) {
-  ensureOrchestrationDir();
-  fs.writeFileSync(ORCH_STATE, JSON.stringify(payload, null, 2), "utf8");
+function nowIso() {
+  return new Date().toISOString();
 }
 
-const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
-
-const ORCHESTRATION_STATE_PATH = path.resolve(__dirname, "../../..", "artifacts", "orchestration", "orchestration_state.json");
-
-function loadStatus() {
-  const raw = fs.readFileSync(STATUS_PATH, { encoding: "utf8" });
-  return JSON.parse(raw);
+function makeRunId() {
+  return `RUN-${crypto.randomBytes(6).toString("hex").toUpperCase()}`;
 }
 
-function ensureOrchestrationDir() {
-  fs.mkdirSync(path.dirname(ORCHESTRATION_STATE_PATH), { recursive: true });
+function normalizeEntryType(entryType) {
+  const value = String(entryType || "").toUpperCase();
+
+  if (value === "FRESH" || value === "RESUME" || value === "COMPLETE" || value === "BLOCKED") {
+    return value;
+  }
+
+  return "BLOCKED";
 }
 
-function writeOrchestrationState(payload) {
-  ensureOrchestrationDir();
-  fs.writeFileSync(ORCHESTRATION_STATE_PATH, JSON.stringify(payload, null, 2), { encoding: "utf8" });
+function buildStateBase(entry, runId) {
+  const pipeline = getPipeline();
+
+  return {
+    run_id: runId,
+    run_mode: normalizeEntryType(entry.entry_type),
+    started_at: nowIso(),
+    last_updated_at: nowIso(),
+    status: entry.blocked ? "BLOCKED" : entry.entry_type === "COMPLETE" ? "COMPLETE" : "RUNNING",
+    blocked: Boolean(entry.blocked),
+    blocking_reason: entry.blocked ? String(entry.reason || "Blocked") : "",
+    reason: String(entry.reason || ""),
+    entry_type: normalizeEntryType(entry.entry_type),
+    next_task: entry.next_task || null,
+    next_module: entry.next_module || null,
+    current_module: null,
+    completed_modules: [],
+    pending_modules: pipeline.map((item) => item.module_id),
+    final_outcome: null
+  };
 }
 
-const ORCHESTRATION_REPORT_PATH = path.resolve(__dirname, "../../..", "artifacts", "orchestration", "orchestration_run_report.md");
+function writeState(state) {
+  ensureDir(ORCHESTRATION_DIR);
+  state.last_updated_at = nowIso();
+  fs.writeFileSync(STATE_PATH, `${JSON.stringify(state, null, 2)}\n`, "utf8");
+}
 
-function writeOrchestrationReport(payload) {
-  ensureOrchestrationDir();
+function writeReport(state, executionLog) {
+  ensureDir(ORCHESTRATION_DIR);
 
-  const lines = [];
-  lines.push("# Forge Autonomous Orchestration Run Report");
+  const lines = [
+    "# Orchestration Run Report",
+    "",
+    `- Run ID: ${state.run_id}`,
+    `- Run Mode: ${state.run_mode}`,
+    `- Started At: ${state.started_at}`,
+    `- Last Updated At: ${state.last_updated_at}`,
+    `- Status: ${state.status}`,
+    `- Entry Type: ${state.entry_type}`,
+    `- Blocked: ${state.blocked ? "YES" : "NO"}`,
+    `- Blocking Reason: ${state.blocking_reason || "N/A"}`,
+    `- Reason: ${state.reason || "N/A"}`,
+    `- Current Module: ${state.current_module || "N/A"}`,
+    `- Next Task: ${state.next_task || "N/A"}`,
+    `- Final Outcome: ${state.final_outcome || "N/A"}`,
+    "",
+    "## Completed Modules",
+    ""
+  ];
+
+  if (state.completed_modules.length === 0) {
+    lines.push("- None");
+  } else {
+    state.completed_modules.forEach((item) => lines.push(`- ${item}`));
+  }
+
   lines.push("");
-  lines.push(`- started_at: ${payload.started_at || ""}`);
-  lines.push(`- entry_type: ${payload.entry_type || ""}`);
-  lines.push(`- next_task: ${payload.next_task || ""}`);
-  lines.push(`- status: ${payload.status || ""}`);
-  lines.push(`- reason: ${payload.reason || ""}`);
+  lines.push("## Pending Modules");
   lines.push("");
 
-  fs.writeFileSync(ORCHESTRATION_REPORT_PATH, lines.join("\n"), { encoding: "utf8" });
+  if (state.pending_modules.length === 0) {
+    lines.push("- None");
+  } else {
+    state.pending_modules.forEach((item) => lines.push(`- ${item}`));
+  }
+
+  lines.push("");
+  lines.push("## Execution Log");
+  lines.push("");
+
+  if (executionLog.length === 0) {
+    lines.push("- No module execution performed");
+  } else {
+    executionLog.forEach((item) => {
+      lines.push(`- ${item.timestamp} | ${item.module_id} | ${item.task_name} | ${item.outcome}`);
+    });
+  }
+
+  lines.push("");
+  fs.writeFileSync(REPORT_PATH, lines.join("\n"), "utf8");
 }
 
-async function runAutonomous() {
+function markModuleCompleted(state, moduleId) {
+  if (!state.completed_modules.includes(moduleId)) {
+    state.completed_modules.push(moduleId);
+  }
+
+  state.pending_modules = state.pending_modules.filter((item) => item !== moduleId);
+}
+
+function finalizeBlocked(state, reason, executionLog) {
+  state.status = "BLOCKED";
+  state.blocked = true;
+  state.blocking_reason = String(reason || "Blocked");
+  state.final_outcome = "BLOCKED";
+  writeState(state);
+  writeReport(state, executionLog);
+  return state;
+}
+
+function finalizeComplete(state, executionLog) {
+  state.status = "COMPLETE";
+  state.blocked = false;
+  state.blocking_reason = "";
+  state.current_module = null;
+  state.next_task = null;
+  state.next_module = null;
+  state.final_outcome = "COMPLETE";
+  writeState(state);
+  writeReport(state, executionLog);
+  return state;
+}
+
+function runAutonomous() {
   const entry = resolveEntry();
+  const executionLog = [];
+  const state = buildStateBase(entry, makeRunId());
 
-  writeOrchestrationState({
-    started_at: new Date().toISOString(),
-    entry_type: entry.entry_type,
-    next_task: entry.next_task,
-    status: "RUNNING"
-  });
-
-  writeOrchestrationReport({
-    started_at: new Date().toISOString(),
-    entry_type: entry.entry_type,
-    next_task: entry.next_task,
-    status: "RUNNING"
-  });
+  writeState(state);
+  writeReport(state, executionLog);
 
   if (entry.blocked) {
-    writeOrchestrationState({
-      started_at: new Date().toISOString(),
-      entry_type: entry.entry_type,
-      next_task: entry.next_task,
-      status: "BLOCKED",
-      reason: entry.reason
-    });
-
-    writeOrchestrationReport({
-      started_at: new Date().toISOString(),
-      entry_type: entry.entry_type,
-      next_task: entry.next_task,
-      status: "BLOCKED",
-      reason: entry.reason
-    });
-
-    console.log("FORGE AUTONOMOUS STOPPED: BLOCKED");
-    console.log(entry.reason);
-    return;
+    return finalizeBlocked(state, entry.reason, executionLog);
   }
 
   if (entry.entry_type === "COMPLETE") {
-    writeOrchestrationState({
-      started_at: new Date().toISOString(),
-      entry_type: entry.entry_type,
-      next_task: entry.next_task,
-      status: "COMPLETE",
-      reason: "Pipeline already complete"
-    });
-
-    writeOrchestrationReport({
-      started_at: new Date().toISOString(),
-      entry_type: entry.entry_type,
-      next_task: entry.next_task,
-      status: "COMPLETE",
-      reason: "Pipeline already complete"
-    });
-
-    console.log("FORGE AUTONOMOUS: Pipeline already complete.");
-    return;
+    return finalizeComplete(state, executionLog);
   }
 
-  let currentTask = entry.next_task;
+  const pipeline = getPipeline();
+  const startIndex = pipeline.findIndex((item) => item.task_name === entry.next_task);
 
-  while (currentTask) {
-    console.log("AUTONOMOUS RUN →", currentTask);
+  if (startIndex === -1) {
+    return finalizeBlocked(state, "Autonomous runner could not resolve start task inside pipeline", executionLog);
+  }
 
-    const beforeRunStatus = loadStatus();
+  for (let i = startIndex; i < pipeline.length; i += 1) {
+    const step = pipeline[i];
 
-    await statusWriter.writeStatus({
-      ...beforeRunStatus,
-      current_task: currentTask,
-      next_step: "AUTONOMOUS EXECUTION"
+    state.current_module = step.module_id;
+    state.next_task = step.task_name;
+    state.next_module = step.module_id;
+    writeState(state);
+    writeReport(state, executionLog);
+
+    runTaskByName(step.task_name);
+
+    executionLog.push({
+      timestamp: nowIso(),
+      module_id: step.module_id,
+      task_name: step.task_name,
+      outcome: "DONE"
     });
 
-    await runner.run();
+    markModuleCompleted(state, step.module_id);
 
-    const module = getModuleByTask(currentTask);
-
-    if (!module) {
-      console.log("AUTONOMOUS ERROR: module not found");
-      return;
-    }
-
-    if (module.terminal_flag) {
-    
-      writeOrchestrationState({
-        finished_at: new Date().toISOString(),
-        last_task: currentTask,
-        status: "COMPLETE"
-      });
-
-      writeOrchestrationReport({
-        finished_at: new Date().toISOString(),
-        last_task: currentTask,
-        status: "COMPLETE"
-      });
-
-      console.log("AUTONOMOUS COMPLETE: Pipeline finished.");
-      const finalStatus = loadStatus();
-
-      await statusWriter.writeStatus({
-        ...finalStatus,
-        current_task: "",
-        next_step: "READY — Autonomous pipeline complete"
-      });
-      return;
-    }
-
-    const nextModule = getNextModule(module.module_id);
-
-    if (!nextModule) {
-      console.log("AUTONOMOUS ERROR: next module missing");
-      return;
-    }
-
-    currentTask = nextModule.task_name;
+    const nextStep = pipeline[i + 1] || null;
+    state.current_module = null;
+    state.next_task = nextStep ? nextStep.task_name : null;
+    state.next_module = nextStep ? nextStep.module_id : null;
+    writeState(state);
+    writeReport(state, executionLog);
   }
+
+  return finalizeComplete(state, executionLog);
 }
 
 module.exports = {
