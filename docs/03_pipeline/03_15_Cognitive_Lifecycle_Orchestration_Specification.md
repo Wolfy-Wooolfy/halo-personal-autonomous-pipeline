@@ -39,6 +39,21 @@ D — Final Acceptance & Release Gate
 
 No additional lifecycle stages are permitted.
 
+Design Exploration is NOT a lifecycle stage.
+
+It is a bounded analytical sub-phase
+that may occur inside Stage A, Stage B, or Stage C
+when multiple valid, contract-compliant alternatives exist
+and objective-governed evaluation is required
+before deterministic continuation or decision escalation.
+
+Design Exploration MUST NOT:
+
+- create a fifth stage
+- alter stage ordering
+- grant transition authority
+- bypass Decision Gate or Human Interrupt
+
 ---
 
 ## 3. Stage Entry Conditions
@@ -55,6 +70,14 @@ Stage A MUST produce:
 - idea_evaluation_report
 - idea_final_spec
 - stage_A_closure_artifact
+
+Stage A MAY also produce, if required by a valid execution fork:
+
+- exploration artifacts
+- recommendation artifacts
+
+Such artifacts are analytical only
+and MUST NOT grant closure authority.
 
 Without closure artifact → Stage A not closed.
 
@@ -73,6 +96,14 @@ Stage B MUST produce:
 - gap_analysis_report
 - documentation_refinement_closure
 
+Stage B MAY also produce, if multiple valid documentation paths exist:
+
+- exploration artifacts
+- recommendation artifacts
+
+Such artifacts are analytical only
+and MUST NOT grant closure authority.
+
 Gap count MUST be zero before closure.
 
 ---
@@ -90,6 +121,14 @@ Stage C MUST produce:
 - code_mismatch_report
 - test_evidence
 - stage_C_closure_artifact
+
+Stage C MAY also produce, if multiple valid implementation paths exist:
+
+- exploration artifacts
+- recommendation artifacts
+
+Such artifacts are analytical only
+and MUST NOT grant closure authority.
 
 Trace mismatches MUST be zero before closure.
 
@@ -130,6 +169,16 @@ Stage transitions MUST NOT be triggered by:
 
 Only closure artifacts grant transition authority.
 
+Exploration artifacts and recommendation artifacts
+MUST NOT:
+
+- trigger stage transition
+- grant closure authority
+- justify implicit progression
+
+They may only support deterministic evaluation
+or decision escalation within the owning stage.
+
 ---
 
 ## 5. Loop Re-Entry Rules
@@ -149,6 +198,24 @@ Re-entry MUST:
 - Update progress/state via orchestrator only
 
 Implicit re-entry forbidden.
+
+---
+
+## 5.1 Exploration Escalation Rule
+
+If Design Exploration occurs inside a stage
+and evaluation still leaves more than one valid path:
+
+- the stage MUST NOT continue autonomously
+- a Decision or Human Interrupt escalation MUST occur
+  according to the governing contracts
+- execution MUST remain inside the owning stage
+  until the fork is resolved deterministically
+
+If exploration disqualifies all but one path
+through explicit constraint enforcement,
+the stage MAY continue deterministically
+without a Decision.
 
 ---
 

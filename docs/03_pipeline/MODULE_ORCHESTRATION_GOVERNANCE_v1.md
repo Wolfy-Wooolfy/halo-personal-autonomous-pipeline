@@ -63,14 +63,42 @@ Modules MUST execute strictly in this order:
 2. Audit
 3. Trace
 4. Gap
-5. Decision Gate
-6. Backfill
-7. Execute
-8. Closure
+5. Design Exploration
+6. Decision Gate
+7. Backfill
+8. Execute
+9. Closure
 
 No module may skip forward.
 No module may execute out of order.
 No parallel execution is permitted.
+
+---
+
+Design Exploration Module Definition
+
+Design Exploration is an analytical module executed
+between Gap analysis and Decision Gate escalation.
+
+Its purpose is to:
+
+- Analyze structural or architectural proposals
+- Compare deterministic alternative paths
+- Generate structured option comparison artifacts
+- Produce recommendation artifacts
+
+Design Exploration MUST NOT:
+
+- modify repository files
+- generate code
+- modify governance documents
+- advance stage progress
+- bypass Decision Gate
+
+Design Exploration is analysis-only.
+
+Its artifacts serve as contextual inputs
+for Decision Gate packet construction.
 
 ---
 
@@ -210,6 +238,7 @@ artifacts/intake/
 artifacts/audit/
 artifacts/trace/
 artifacts/gap/
+artifacts/exploration/
 artifacts/decisions/
 artifacts/backfill/
 artifacts/execute/

@@ -177,6 +177,35 @@ Only selectable, execution-unblocking forks qualify.
 
 ---
 
+### 3.0 Alternative Evaluation Before Decision (Hard Rule)
+
+If more than one valid, contract-compliant alternative exists,
+the pipeline MUST evaluate the alternatives
+against explicit objective authority
+BEFORE decision escalation occurs.
+
+This evaluation MUST:
+
+- remain inside accepted scope
+- remain bounded by declared constraints
+- avoid introducing new behavior
+- avoid modifying success criteria
+- avoid selecting a final option autonomously
+
+The purpose of this evaluation is ONLY to:
+
+- compare valid alternatives
+- detect tradeoffs
+- disqualify constraint-violating paths
+- prepare a recommendation artifact for human escalation
+
+If explicit objective authority is missing,
+alternative evaluation is forbidden
+and execution MUST escalate
+per the governing fail-closed contracts.
+
+---
+
 ### 3.0.1 Cognitive Engine Configuration Fork Clarification
 
 Changing Cognitive Engine configuration
@@ -236,6 +265,37 @@ If justification, reasoning, or context
 is required for understanding,
 it belongs in documentation,
 NOT in a Decision file.
+
+---
+
+### 3.1.1 Recommendation Artifact Is NOT a Decision (Hard Rule)
+
+A Recommendation Artifact is NOT a Decision.
+
+It MAY exist only when:
+
+- multiple valid alternatives exist
+- objective-governed evaluation is required before escalation
+
+A Recommendation Artifact MAY include:
+
+- evaluated alternatives
+- comparison against objective authority
+- constraint validation results
+- tradeoff analysis
+- recommended option
+
+A Recommendation Artifact MUST NOT:
+
+- select the final option
+- carry execution authority
+- replace the Decision artifact
+- justify execution beyond accepted scope
+
+The Recommendation Artifact exists only
+to support human decision escalation.
+
+Final execution authority remains with the Decision artifact only.
 
 ---
 
@@ -478,6 +538,12 @@ Links to:
 
 No additional sections are allowed.
 
+If a Recommendation Artifact exists,
+it MUST remain external to the Decision file.
+
+Its contents MUST NOT be copied into the Decision artifact
+as rationale, context, analysis, or justification.
+
 If any additional section exists
 (e.g., Context, Rationale, Consequences, Risk, Justification):
 
@@ -544,6 +610,21 @@ In v1 (Personal Local Mode):
 
 Decision traceability exists to control authority,
 not to narrate execution.
+
+---
+
+### 7.1 Pre-Decision Recommendation Trace Rule
+
+If a Recommendation Artifact exists before a Decision:
+
+- the Recommendation Artifact MUST reference the triggering artifact(s)
+- the resulting Decision MUST reference the same execution fork
+- the Recommendation Artifact MUST NOT be treated as a Decision substitute
+
+Recommendation traceability is analytical only.
+
+Decision traceability remains the sole authority-binding trace
+for human-selected execution forks.
 
 ---
 
@@ -676,6 +757,29 @@ Rule-driven, deterministic changes that are fully mandated by existing contracts
 - MUST NOT be artificially coupled to a Decision ID
 
 Failure to satisfy these gate rules = HARD STOP.
+
+---
+
+### 11.0.1 Decision Trigger — Multiple Valid Alternatives After Evaluation
+
+A Decision MUST be triggered when all of the following are true:
+
+- more than one contract-compliant execution path exists
+- objective-governed evaluation has been completed
+- no deterministic rule selects exactly one remaining path
+- exactly one human selection is required to unblock execution
+
+In such a case:
+
+- the pipeline MUST NOT choose autonomously
+- the pipeline MUST generate a Recommendation Artifact
+- the Recommendation Artifact MUST remain separate from the Decision file
+- the Decision file MUST remain minimal per this contract
+
+If evaluation reduces the fork to exactly one valid path
+through explicit constraint disqualification,
+then no Decision is required
+and execution MUST proceed deterministically.
 
 ---
 

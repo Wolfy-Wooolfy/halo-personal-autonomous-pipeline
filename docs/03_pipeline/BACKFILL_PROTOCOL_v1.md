@@ -32,6 +32,7 @@ Backfill only creates what is explicitly authorized.
 
 Backfill may execute ONLY IF:
 
+- Design Exploration phase completed (if applicable)
 - Decision Gate completed
 - BLOCKED state cleared
 - gap_actions.json exists
@@ -52,6 +53,10 @@ Backfill may act ONLY on gaps categorized as:
 
 Backfill MUST NOT act on:
 
+- Exploration artifacts
+- Proposal analysis outputs
+- Option comparison artifacts
+- Recommendation artifacts
 - Code refactoring
 - Code redesign
 - Architectural transformation
@@ -193,6 +198,9 @@ Backfill MUST NOT:
 - Edit existing governance docs
 - Alter progress/status.json
 - Rewrite artifacts produced earlier
+- Modify exploration artifacts
+- Modify option comparison outputs
+- Modify recommendation artifacts
 
 Backfill is additive-only.
 

@@ -110,6 +110,38 @@ If any conflict exists:
 
 ---
 
+### 2.1.0 Project Objective Binding Rule (Hard)
+
+Before Scope Freeze Point is reached,
+the active task MUST have an explicit objective authority
+that defines what outcome the system is trying to optimize for
+within the accepted task scope.
+
+This objective authority MUST include:
+
+- Primary objective
+- Secondary objectives (if any)
+- Declared constraints
+- Declared priority order for tradeoff evaluation
+
+This contract grants ZERO authority
+to infer project objective implicitly.
+
+If multiple valid implementation, documentation,
+or architectural paths exist
+and no explicit objective authority is available:
+
+- deterministic execution is forbidden
+- autonomous recommendation is forbidden
+- escalation is required per governing decision contracts
+
+Project objective authority governs evaluation only.
+It MUST NOT expand scope,
+modify success criteria,
+or override stage governance.
+
+---
+
 ### 2.1.1 Scope Freeze Point (Hard Constraint)
 
 The execution scope is considered **FINAL and NON-INTERPRETABLE**
@@ -119,6 +151,25 @@ ONLY when Stage A (Architecture & Task Decomposition) is:
 - has a Boundary Audit result of PASS.
 
 This moment is the **Scope Freeze Point**.
+
+Before the Scope Freeze Point,
+the pipeline MAY perform controlled Design Exploration
+for the sole purpose of:
+
+- comparing valid alternatives
+- analyzing proposal impact
+- detecting harmful tradeoffs
+- producing bounded recommendation artifacts
+
+Such exploration is permitted ONLY if:
+
+- it remains artifact-bound
+- it does not modify frozen scope
+- it does not introduce new goals
+- it does not add undocumented behavior
+
+Design Exploration is evaluation-only.
+It does NOT grant authority to implement changes.
 
 After scope freeze:
 - No new goals may be introduced
@@ -160,6 +211,19 @@ Any perceived lack of clarity after freeze
 is NOT a documentation problem,
 it is a scope violation.
 
+Post-freeze evaluation MAY compare
+already-authorized implementation paths only.
+
+Post-freeze evaluation MUST NOT:
+
+- introduce a new option
+- refine scope
+- reinterpret intent
+- generate improvement proposals outside frozen authority
+
+If evaluation requires a new option or changed objective,
+the request MUST be classified as a New Task.
+
 ---
 
 ### 2.1.3 Scope Freeze → Artifact Authority Invalidation (Hard Rule)
@@ -199,6 +263,27 @@ As long as:
 - No required information is missing
 - No multiple valid options exist
 - No HALO boundary is at risk
+
+---
+
+### 2.2.1 Controlled Alternative Evaluation
+
+The pipeline IS allowed to:
+
+- compare multiple valid paths
+- evaluate tradeoffs deterministically
+- produce recommendation artifacts
+- escalate one bounded decision packet for final human selection
+
+ONLY if:
+
+- the alternatives are inside accepted scope
+- project objective authority exists
+- no implicit scope expansion occurs
+- final selection remains outside autonomous authority when multiple valid paths remain
+
+Alternative evaluation is not an authority to optimize freely.
+It is a bounded analytical activity.
 
 ---
 
@@ -426,6 +511,21 @@ regardless of perceived benefit or correctness.
 
 Such changes MUST be treated as a **New Task**
 and MUST NOT proceed within the current execution.
+
+---
+
+Exception:
+
+Comparing already in-scope alternatives
+for the purpose of deterministic recommendation
+does NOT constitute optimization beyond the contract,
+provided that:
+
+- no new behavior is introduced
+- no scope is expanded
+- no success criteria are changed
+- evaluation is governed by explicit project objective authority
+- final implementation still follows approved decision flow
 
 ---
 
@@ -662,6 +762,10 @@ ONLY when ALL of the following are true simultaneously:
 - No unresolved risks, ambiguities,
   blocking questions,
   or pending authority conditions exist
+
+- If multiple valid alternatives existed during execution,
+  project objective authority was explicitly defined
+  and decision escalation was resolved through the governing decision flow
 
 Execution Abort is a terminal NOT SUCCESSFUL state.
 If execution state is ABORTED per the Progress Tracking Contract,

@@ -39,6 +39,9 @@ The Cognitive Layer is responsible ONLY for:
 - Gap detection
 - Artifact transformation
 - Loop execution within stage authority
+- Exploration analysis
+- Structured option comparison
+- Recommendation generation
 
 The Cognitive Layer MUST NOT:
 
@@ -49,6 +52,19 @@ The Cognitive Layer MUST NOT:
 
 It produces Candidates.
 Only deterministic validators grant authority.
+
+The Cognitive Layer MAY perform controlled proposal exploration
+when multiple architectural or structural paths exist.
+
+Exploration activities are limited to:
+
+- impact analysis
+- option generation
+- deterministic comparison
+- recommendation artifact production
+
+Exploration results MUST remain artifact-bound
+and MUST NOT alter execution state.
 
 ---
 
@@ -64,10 +80,12 @@ into a frozen, approval-bound final specification.
 1. Parse idea input
 2. Generate structured evaluation artifact
 3. Identify ambiguities
-4. Resolve deterministically if possible
-5. If ambiguity remains → Human Interrupt
-6. Generate idea_final_spec.md
-7. Require explicit approval record
+4. Perform proposal exploration if multiple valid interpretations exist
+5. Generate option_comparison artifact if alternatives detected
+6. Resolve deterministically if possible
+7. If ambiguity remains → Human Interrupt
+8. Generate idea_final_spec.md
+9. Require explicit approval record
 
 ### 3.3 Termination Condition
 
@@ -96,9 +114,11 @@ with ZERO MUST-level gaps.
 1. Generate documentation artifacts
 2. Generate docs_coverage_matrix.md
 3. Generate docs_gap_report.md
-4. Run Docs Gap Analyzer (Doc-19)
-5. If FAIL → regenerate documentation
-6. Repeat until PASS
+4. If multiple structural documentation strategies exist
+   → generate option_matrix.md
+5. Run Docs Gap Analyzer (Doc-19)
+6. If FAIL → regenerate documentation
+7. Repeat until PASS
 
 ### 4.3 Deterministic Termination Criteria
 
@@ -130,11 +150,13 @@ and enforce 1:1 traceability.
 1. Generate code from Stage B specs
 2. Produce code_trace_matrix.md
 3. Produce code_mismatch_report.md
-4. Run local build
-5. Run verification (Build & Verify Playbook)
-6. Run Code Trace Validator
-7. If mismatch → regenerate code
-8. If verification FAIL → classify:
+4. If multiple implementation strategies exist
+   → generate implementation_option_matrix.md
+5. Run local build
+6. Run verification (Build & Verify Playbook)
+7. Run Code Trace Validator
+8. If mismatch → regenerate code
+9. If verification FAIL → classify:
    - Retry
    - Rollback
    - Abort
@@ -216,6 +238,29 @@ Human:
 - Resolves selectable forks only
 
 No layer may absorb another layer's authority.
+
+---
+
+## 9.1 Exploration Artifacts
+
+When architectural alternatives are detected,
+the Cognitive Layer MUST generate structured comparison artifacts.
+
+Allowed artifacts include:
+
+- option_matrix.md
+- proposal_analysis.json
+- recommendation_report.md
+- implementation_option_matrix.md
+
+These artifacts serve analytical purposes only.
+
+They MUST NOT:
+
+- alter execution state
+- advance stages
+- modify artifacts outside the loop scope
+- bypass Decision Gate or Human Interrupt
 
 ---
 

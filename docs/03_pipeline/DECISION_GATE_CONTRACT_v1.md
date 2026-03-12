@@ -21,9 +21,21 @@ Its purpose is to:
 - Handle governance ambiguity
 - Enforce single-question escalation rule
 
-Decision Gate does NOT analyze.
-Decision Gate does NOT repair.
-Decision Gate only formalizes decision selection.
+Decision Gate does NOT analyze root problems.
+Decision Gate does NOT repair system state.
+
+Analytical activities such as:
+
+- proposal evaluation
+- impact comparison
+- alternative generation
+- recommendation logic
+
+MUST occur in upstream modules
+(e.g. Gap Module or Design Exploration Module).
+
+Decision Gate only formalizes final decision selection
+based on deterministic options already produced.
 
 ---
 
@@ -43,12 +55,42 @@ If none of the above → Decision Gate auto-pass.
 
 ---
 
+Exploration Artifacts Integration
+
+If upstream modules produce exploration artifacts such as:
+
+- option_matrix.md
+- proposal_analysis.json
+- recommendation_report.json
+- implementation_option_matrix.md
+
+Decision Gate MUST treat these artifacts as **context only**.
+
+Decision Gate MUST NOT:
+
+- modify exploration artifacts
+- reinterpret recommendation logic
+- generate new alternatives
+
+Decision Gate MAY only extract deterministic options
+from these artifacts when constructing the decision packet.
+
+---
+
 # 3. Single Question Law
 
 Decision Gate MUST:
 
 - Produce exactly ONE blocking question
 - Present deterministic options
+
+Options MUST originate from:
+- gap_actions.json
+OR
+- upstream exploration artifacts
+
+Decision Gate MUST NOT invent new options.
+
 - Avoid narrative persuasion
 - Avoid subjective language
 
@@ -95,6 +137,7 @@ Decision Packet MUST include:
       "downstream_effects": []
     }
   ],
+  "recommendation_reference": "",
   "confirmation_required_format": ""
 }
 

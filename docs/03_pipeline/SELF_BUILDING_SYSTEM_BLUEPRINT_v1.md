@@ -125,7 +125,47 @@ Output:
 
 ---
 
-## 3.5 Decision Gate Module
+## 3.5 Design Exploration Module
+
+Purpose:
+Allow structured architectural discussion and controlled proposal evaluation
+before final decision escalation.
+
+This module enables Forge to analyze improvement proposals,
+identify risks, generate alternatives, and produce a recommendation
+before invoking the Decision Gate.
+
+Responsibilities:
+
+- Analyze proposed architectural or structural changes
+- Evaluate impact on system objectives, constraints, and governance rules
+- Detect harmful or destabilizing proposals
+- Generate alternative solution paths
+- Produce structured comparison between available options
+- Generate recommendation artifact
+
+Outputs:
+
+- proposal_analysis.json
+- option_matrix.json
+- recommendation_report.json
+
+Authority Limits:
+
+The Design Exploration Module MUST NOT:
+
+- modify source code
+- modify governance documents
+- update execution status
+- close stages
+- bypass Decision Gate
+
+This module is analytical only and produces artifacts
+used by the Decision Gate for final decision escalation.
+
+---
+
+## 3.6 Decision Gate Module
 
 Purpose:
 Pause execution when multiple paths exist.
@@ -144,7 +184,7 @@ Execution MUST NOT continue without decision confirmation.
 
 ---
 
-## 3.6 Backfill Module
+## 3.7 Backfill Module
 
 Purpose:
 Auto-generate missing structured artifacts.
@@ -162,7 +202,7 @@ All generated content MUST be:
 
 ---
 
-## 3.7 Execute Module
+## 3.8 Execute Module
 
 Purpose:
 Implement approved changes.
@@ -176,7 +216,7 @@ No free-form modification allowed.
 
 ---
 
-## 3.8 Closure Module
+## 3.9 Closure Module
 
 Purpose:
 Finalize stage deterministically.
@@ -213,6 +253,7 @@ IDEA →
     Audit →
     Trace →
     Gap →
+    Design Exploration →
     Decision →
     Execute →
     Closure
@@ -222,6 +263,7 @@ DOCUMENTS →
     Audit →
     Trace →
     Gap →
+    Design Exploration →
     Decision →
     Backfill →
     Execute →
@@ -232,6 +274,7 @@ CODE →
     Reverse Trace →
     Docs Backfill →
     Gap →
+    Design Exploration →
     Decision →
     Execute →
     Closure
@@ -241,6 +284,7 @@ DOCUMENTS + CODE →
     Audit →
     Trace →
     Gap →
+    Design Exploration →
     Decision →
     Backfill →
     Execute →
