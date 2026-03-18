@@ -1,17 +1,18 @@
 {
-  "run_id": "RUN-8F897390AD4F",
-  "run_mode": "COMPLETE",
-  "started_at": "2026-03-11T12:05:52.114Z",
-  "last_updated_at": "2026-03-11T12:05:52.121Z",
-  "status": "COMPLETE",
+  "run_id": "RUN-A54533575EB3",
+  "run_mode": "RESUME",
+  "started_at": "2026-03-18T09:08:59.859Z",
+  "last_updated_at": "2026-03-18T09:08:59.863Z",
+  "status": "RUNNING",
   "blocked": false,
   "blocking_reason": "",
-  "reason": "Pipeline already complete",
-  "entry_type": "COMPLETE",
-  "next_task": null,
-  "next_module": null,
-  "current_module": null,
-  "completed_modules": [
+  "reason": "Resume from next incomplete module",
+  "entry_type": "RESUME",
+  "next_task": "TASK-055: MODULE FLOW — Closure",
+  "next_module": "CLOSURE",
+  "current_module": "CLOSURE",
+  "completed_modules": [],
+  "pending_modules": [
     "INTAKE",
     "AUDIT",
     "TRACE",
@@ -22,6 +23,5 @@
     "VERIFY",
     "CLOSURE"
   ],
-  "pending_modules": [],
-  "final_outcome": "COMPLETE"
+  "final_outcome": null
 }

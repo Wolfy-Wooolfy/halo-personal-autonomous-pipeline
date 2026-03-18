@@ -1,0 +1,18 @@
+{
+  "status_type": "FORGE_BUILD_STATE",
+  "current_stage": null,
+  "current_task": "",
+  "last_completed_artifact": "",
+  "closed_tasks": [],
+  "open_tasks": [],
+  "pending_gaps": [],
+  "build_progress_percent": 0,
+  "execution_integrity": "BLOCKED",
+  "next_allowed_step": "",
+  "reason": "NO TASKS FOUND IN TASK REGISTRY",
+  "derived_from": {
+    "registry": "code/src/execution/task_registry.js",
+    "task_artifacts_directory": "artifacts/tasks"
+  },
+  "derived_at": "2026-03-18T09:08:59.884Z"
+}
