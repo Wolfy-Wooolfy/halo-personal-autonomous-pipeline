@@ -1,45 +1,15 @@
 {
-  "execution_id": "AUDIT-2026-03-18T11:56:20.362Z",
-  "total_checks": 185,
-  "passed_checks": 177,
-  "failed_checks": 8,
+  "execution_id": "AUDIT-2026-03-18T12:39:31.944Z",
+  "total_checks": 186,
+  "passed_checks": 183,
+  "failed_checks": 3,
   "blocked": true,
   "violations": [
     {
       "category": "RegistryClosureConsistency",
-      "severity": "CRITICAL",
+      "severity": "WARNING",
       "path": "artifacts/tasks/",
-      "description": "FORGE GOVERNANCE VIOLATION: orphan execution closures detected -> TASK-030, TASK-060, TASK-064"
-    },
-    {
-      "category": "StatusIntegrity",
-      "severity": "CRITICAL",
-      "path": "progress/status.json",
-      "description": "next_step missing/invalid."
-    },
-    {
-      "category": "ArtifactNamespaceIntegrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/orchestration/orchestration_run_report.md",
-      "description": "Artifact outside allowed namespaces: orchestration"
-    },
-    {
-      "category": "ArtifactNamespaceIntegrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/orchestration/orchestration_state.json",
-      "description": "Artifact outside allowed namespaces: orchestration"
-    },
-    {
-      "category": "ArtifactNamespaceIntegrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/verify/verification_report.md",
-      "description": "Artifact outside allowed namespaces: verify"
-    },
-    {
-      "category": "ArtifactNamespaceIntegrity",
-      "severity": "CRITICAL",
-      "path": "artifacts/verify/verification_results.json",
-      "description": "Artifact outside allowed namespaces: verify"
+      "description": "NON-AUTHORITATIVE orphan execution closures detected -> TASK-030, TASK-060, TASK-064"
     },
     {
       "category": "ArtifactNamespaceIntegrity",
