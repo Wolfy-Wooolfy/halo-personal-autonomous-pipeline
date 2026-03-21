@@ -82,7 +82,6 @@ function resolveEntry() {
 
   const allClosed = contiguousClosedIndex === pipeline.length - 1;
   const statusTask = String(forgeState.current_task || "").trim();
-  const statusNextStep = String(status.next_step || "").trim();
 
   if (allClosed) {
     return {
@@ -101,7 +100,7 @@ function resolveEntry() {
         next_module: null,
         next_task: null,
         blocked: true,
-        reason: "Invalid pipeline state: status.json points to a mid-pipeline task without closure history"
+        reason: "Invalid pipeline state: forge_state points to a mid-pipeline task without closure history"
       };
     }
 
@@ -135,7 +134,7 @@ function resolveEntry() {
       next_module: null,
       next_task: null,
       blocked: true,
-      reason: "Invalid pipeline state: status.json current_task does not match next deterministic task"
+      reason: "Invalid pipeline state: forge_state current_task does not match next deterministic task"
     };
   }
 

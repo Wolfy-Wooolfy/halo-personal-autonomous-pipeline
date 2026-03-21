@@ -193,12 +193,16 @@ function readLiveStatus() {
 function syncLiveStatusToTask(taskName) {
   const current = readLiveStatus();
 
+  const currentNextStep = String(current.next_step || "");
+  const preserveExplicitOverride =
+    /\((APPROVE ALL|REJECT)\)\s*$/i.test(currentNextStep);
+
   writeStatus({
     ...current,
     current_task: taskName ? String(taskName) : "",
     issues: [],
     blocking_questions: [],
-    next_step: ""
+    next_step: preserveExplicitOverride ? currentNextStep : ""
   });
 }
 
