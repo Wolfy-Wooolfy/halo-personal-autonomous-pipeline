@@ -104,17 +104,15 @@ function resolveEntry() {
   const statusNextStep = String(status.next_step || "").trim();
 
   if (allClosed) {
-    const statusLooksComplete = statusTask === "" && statusNextStep === "";
-
-    if (!statusLooksComplete) {
-      return {
-        entry_type: "BLOCKED",
-        next_module: null,
-        next_task: null,
-        blocked: true,
-        reason: "Invalid pipeline state: pipeline closures indicate COMPLETE but status.json does not"
-      };
-    }
+  if (allClosed) {
+    return {
+      entry_type: "COMPLETE",
+      next_module: null,
+      next_task: null,
+      blocked: false,
+      reason: "Pipeline already complete"
+    };
+  }
 
     return {
       entry_type: "COMPLETE",
