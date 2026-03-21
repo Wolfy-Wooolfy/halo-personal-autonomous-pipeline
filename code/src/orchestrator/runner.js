@@ -33,7 +33,7 @@ function writeStatusAndRun(taskName) {
     next_step: ""
   });
 
-  run();
+  return run();
 }
 
 function extractTargetStage(nextStep) {
@@ -186,7 +186,17 @@ function run() {
     };
 
     writeStatus(stageUpdated);
+
+    return {
+      ...result,
+      updated_status: stageUpdated
+    };
   }
+
+  return {
+    ...result,
+    updated_status: updated
+  };
 }
 
 module.exports = {

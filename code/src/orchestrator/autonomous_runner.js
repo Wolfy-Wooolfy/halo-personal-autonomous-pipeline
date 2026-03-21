@@ -271,7 +271,43 @@ function runAutonomous() {
     writeState(state);
     writeReport(state, executionLog);
 
-    runTaskByName(step.task_name);
+    const taskResult = runTaskByName(step.task_name);
+
+    const taskBlocked =
+      taskResult &&
+      (
+        taskResult.blocked === true ||
+        (
+          taskResult.updated_status &&
+          Array.isArray(taskResult.updated_status.blocking_questions) &&
+          taskResult.updated_status.blocking_questions.length > 0
+        )
+      );
+
+    if (taskBlocked) {
+      state.current_module = step.module_id;
+      state.next_task = step.task_name;
+      state.next_module = step.module_id;
+
+      executionLog.push({
+        timestamp: nowIso(),
+        module_id: step.module_id,
+        task_name: step.task_name,
+        outcome: "BLOCKED"
+      });
+
+      return finalizeBlocked(
+        state,
+        (
+          taskResult.updated_status &&
+          Array.isArray(taskResult.updated_status.blocking_questions) &&
+          taskResult.updated_status.blocking_questions.length > 0
+        )
+          ? taskResult.updated_status.blocking_questions[0]
+          : `Task blocked: ${step.task_name}`,
+        executionLog
+      );
+    }
 
     executionLog.push({
       timestamp: nowIso(),
