@@ -56,9 +56,10 @@ function extractTaskId(value) {
 function assertForgeGovernanceGate(entry) {
   const forgeState = readForgeBuildState();
   const integrity = String(forgeState.execution_integrity || "").toUpperCase();
-  const nextAllowedStep = String(forgeState.next_allowed_step || "");
+  const nextAllowedStep = String(forgeState.next_allowed_step || "").trim().toUpperCase();
   const expectedTaskId = extractTaskId(nextAllowedStep);
   const entryTaskId = extractTaskId(entry && entry.next_task ? entry.next_task : "");
+  const entryType = normalizeEntryType(entry && entry.entry_type ? entry.entry_type : "");
 
   if (integrity !== "CONSISTENT") {
     throw new Error(
@@ -66,8 +67,22 @@ function assertForgeGovernanceGate(entry) {
     );
   }
 
+  if (entryType === "BLOCKED") {
+    return;
+  }
+
+  if (entryType === "COMPLETE") {
+    if (nextAllowedStep !== "COMPLETE") {
+      throw new Error(
+        `FORGE GOVERNANCE BLOCK: autonomous entry resolved COMPLETE but forge build state expects ${nextAllowedStep || "INVALID"}`
+      );
+    }
+
+    return;
+  }
+
   if (nextAllowedStep === "COMPLETE") {
-    throw new Error("FORGE GOVERNANCE BLOCK: forge build state is COMPLETE");
+    throw new Error("FORGE GOVERNANCE BLOCK: forge build state is COMPLETE but autonomous entry is not COMPLETE");
   }
 
   if (!expectedTaskId) {

@@ -4,6 +4,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "../..", "..");
 const TASKS_DIR = path.join(ROOT, "artifacts", "tasks");
 const REGISTRY_PATH = path.join(ROOT, "code", "src", "execution", "task_registry.js");
+const PIPELINE_PATH = path.join(ROOT, "code", "src", "orchestrator", "pipeline_definition.js");
 
 function loadRegistryModule() {
   delete require.cache[require.resolve(REGISTRY_PATH)];
@@ -20,15 +21,41 @@ function loadRegistryModule() {
   return registryModule.registry;
 }
 
-function extractOrderedTaskNamesFromRegistry() {
-  const registry = loadRegistryModule();
-  const taskNames = Object.keys(registry).filter((key) => key.startsWith("TASK-"));
+function loadPipelineModule() {
+  delete require.cache[require.resolve(PIPELINE_PATH)];
+  const pipelineModule = require(PIPELINE_PATH);
 
-  if (taskNames.length === 0) {
-    throw new Error("NO TASKS FOUND IN TASK REGISTRY");
+  if (!pipelineModule || typeof pipelineModule.getPipeline !== "function") {
+    throw new Error("INVALID PIPELINE MODULE EXPORT");
   }
 
-  return taskNames.sort((a, b) => extractTaskNumber(a) - extractTaskNumber(b));
+  const pipeline = pipelineModule.getPipeline();
+
+  if (!Array.isArray(pipeline) || pipeline.length === 0) {
+    throw new Error("INVALID PIPELINE DEFINITION");
+  }
+
+  return pipeline;
+}
+
+function extractOrderedTaskNamesFromRegistry() {
+  const registry = loadRegistryModule();
+  const pipeline = loadPipelineModule();
+
+  const pipelineTaskNames = pipeline.map((moduleDef) => String(moduleDef.task_name || "").trim());
+  const registryTaskNames = Object.keys(registry).filter((key) => key.startsWith("TASK-"));
+
+  if (pipelineTaskNames.length === 0) {
+    throw new Error("NO TASKS FOUND IN PIPELINE DEFINITION");
+  }
+
+  for (const taskName of pipelineTaskNames) {
+    if (!registryTaskNames.includes(taskName)) {
+      throw new Error(`PIPELINE TASK MISSING FROM REGISTRY: ${taskName}`);
+    }
+  }
+
+  return pipelineTaskNames;
 }
 
 function extractTaskNumber(value) {

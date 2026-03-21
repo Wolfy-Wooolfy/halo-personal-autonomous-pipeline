@@ -84,18 +84,10 @@ function resolveEntry() {
   const pipeline = getPipeline();
   const closureFiles = getClosureFiles();
 
-  if (isBlockedStatus(status)) {
-    return {
-      entry_type: "BLOCKED",
-      next_module: null,
-      next_task: null,
-      blocked: true,
-      reason: "Status is already BLOCKED"
-    };
-  }
-
   const contiguousClosedIndex = getContiguousClosedIndex(pipeline, closureFiles);
   const laterClosureAfterGap = hasLaterClosureAfterGap(pipeline, closureFiles, contiguousClosedIndex);
+
+
 
   if (laterClosureAfterGap) {
     return {
@@ -109,11 +101,10 @@ function resolveEntry() {
 
   const allClosed = contiguousClosedIndex === pipeline.length - 1;
   const statusTask = String(status.current_task || "").trim();
+  const statusNextStep = String(status.next_step || "").trim();
 
   if (allClosed) {
-    const statusLooksComplete =
-      statusTask === "" &&
-      /READY/i.test(String(status.next_step || ""));
+    const statusLooksComplete = statusTask === "" && statusNextStep === "";
 
     if (!statusLooksComplete) {
       return {
@@ -131,6 +122,16 @@ function resolveEntry() {
       next_task: null,
       blocked: false,
       reason: "Pipeline already complete"
+    };
+  }
+
+  if (isBlockedStatus(status)) {
+    return {
+      entry_type: "BLOCKED",
+      next_module: null,
+      next_task: null,
+      blocked: true,
+      reason: "Status is already BLOCKED"
     };
   }
 

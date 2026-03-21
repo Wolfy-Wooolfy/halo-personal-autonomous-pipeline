@@ -7,6 +7,18 @@ const { executeTask } = require("../execution/task_executor");
 
 const STATUS_PATH = path.resolve(__dirname, "../../..", "progress", "status.json");
 
+const TASKS_DIR = path.resolve(__dirname, "../../..", "artifacts", "tasks");
+
+function hasExecutionClosureForTask(taskName) {
+  if (typeof taskName !== "string" || !taskName.trim().startsWith("TASK-")) {
+    return false;
+  }
+
+  const taskId = taskName.split(":")[0].trim();
+  const closurePath = path.join(TASKS_DIR, `${taskId}.execution.closure.md`);
+  return fs.existsSync(closurePath);
+}
+
 function loadStatus() {
   const raw = fs.readFileSync(STATUS_PATH, { encoding: "utf8" });
   return JSON.parse(raw);
@@ -71,9 +83,9 @@ function assertIdempotency(status) {
   }
 
   if (
-    status.stage_progress_percent === 100 &&
     typeof status.current_task === "string" &&
-    status.current_task.trim() !== ""
+    status.current_task.trim() !== "" &&
+    hasExecutionClosureForTask(status.current_task)
   ) {
     throw new Error("Task already completed (idempotency guard)");
   }
