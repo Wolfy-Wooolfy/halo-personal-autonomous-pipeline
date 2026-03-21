@@ -165,7 +165,10 @@ function resolveEntry() {
     };
   }
 
-  if (statusTask !== "" && statusTask !== nextModule.task_name) {
+  if (
+    statusTask !== "" &&
+    extractTaskId(statusTask) !== extractTaskId(nextModule.task_name)
+  ) {
     return {
       entry_type: "BLOCKED",
       next_module: null,

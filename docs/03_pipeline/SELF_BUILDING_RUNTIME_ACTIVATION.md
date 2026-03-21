@@ -315,6 +315,74 @@ The Runtime Activation Protocol guarantees that:
 This protocol ensures safe startup
 for the Self-Building System.
 
+## Execution Authority Separation Rule (CRITICAL)
+
+### Rule Definition
+
+Forge execution MUST NOT depend on `progress/status.json` as a source of control.
+
+`progress/status.json` is defined as:
+
+- A project-level state artifact
+- An OUTPUT of execution
+- A human-readable snapshot of progress
+
+It MUST NOT be used for:
+
+- Determining current_task
+- Determining next_step
+- Blocking execution decisions
+- Driving orchestration flow
+
+---
+
+### Execution Source of Truth
+
+Forge runtime execution MUST be driven exclusively by:
+
+- `artifacts/forge/forge_state.json`
+- `artifacts/orchestration/orchestration_state.json`
+
+These artifacts define:
+
+- current_task
+- execution_integrity
+- next_allowed_step
+- pipeline continuity
+
+---
+
+### Enforcement
+
+Any logic that:
+
+- Reads `status.json` to decide execution
+- Blocks execution based on `status.json`
+- Validates pipeline transitions using `status.json`
+
+Is considered a VIOLATION of runtime determinism.
+
+---
+
+### Rationale
+
+This rule eliminates:
+
+- Circular dependency between execution and output state
+- Manual intervention loops
+- False BLOCKED states
+- Non-deterministic execution paths
+
+---
+
+### Expected Outcome
+
+After enforcement:
+
+- Forge becomes a fully autonomous deterministic pipeline
+- `status.json` becomes a pure reflection layer
+- Execution consistency is guaranteed by Forge state only
+
 ---
 
 **END OF SPECIFICATION**

@@ -49,12 +49,13 @@ function syncBlockedRuntimeStateFromForgeState(error) {
   const forgeState = JSON.parse(fs.readFileSync(FORGE_STATE_PATH, "utf8"));
   const pipeline = getPipeline();
 
-  const currentTask = String(forgeState.current_task || "");
+  const currentTaskId = String(forgeState.current_task || "");
   const currentModule =
     pipeline.find((item) => {
       const match = String(item.task_name || "").match(/TASK-\d+/);
-      return match && match[0] === currentTask;
+      return match && match[0] === currentTaskId;
     }) || null;
+  const currentTask = currentModule ? String(currentModule.task_name) : currentTaskId;
 
   const completedModules = pipeline
     .filter((item) => {
