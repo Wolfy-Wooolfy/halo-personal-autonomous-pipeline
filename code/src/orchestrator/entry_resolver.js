@@ -81,7 +81,7 @@ function resolveEntry() {
   }
 
   const allClosed = contiguousClosedIndex === pipeline.length - 1;
-  const statusTask = String(forgeState.current_task || "").trim();
+  const forgeTask = String(forgeState.current_task || "").trim();
 
   if (allClosed) {
     return {
@@ -94,13 +94,13 @@ function resolveEntry() {
   }
 
   if (contiguousClosedIndex === -1) {
-    if (statusTask !== "" && statusTask !== pipeline[0].task_name) {
+    if (forgeTask !== "" && forgeTask !== pipeline[0].task_name) {
       return {
         entry_type: "BLOCKED",
         next_module: null,
         next_task: null,
         blocked: true,
-        reason: "Invalid pipeline state: forge_state points to a mid-pipeline task without closure history"
+        reason: "Invalid pipeline state: forge_state current_task does not match fresh pipeline start"
       };
     }
 
@@ -126,8 +126,8 @@ function resolveEntry() {
   }
 
   if (
-    statusTask !== "" &&
-    extractTaskId(statusTask) !== extractTaskId(nextModule.task_name)
+    forgeTask !== "" &&
+    extractTaskId(forgeTask) !== extractTaskId(nextModule.task_name)
   ) {
     return {
       entry_type: "BLOCKED",

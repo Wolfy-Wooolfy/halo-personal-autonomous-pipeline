@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
+const { resolveEntry } = require("./entry_resolver");
 const { validateTransition } = require("./stage_transitions");
 const { writeStatus } = require("./status_writer");
 const { executeTask } = require("../execution/task_executor");
@@ -94,25 +95,34 @@ function assertIdempotency(status) {
 function run() {
   const status = loadStatus();
 
+  const entry = resolveEntry();
+
+  if (entry.blocked) {
+    throw new Error(`[ENTRY BLOCKED] ${entry.reason}`);
+  }
+
+  if (!entry.next_task) {
+    console.log("[FORGE] No task resolved from entry.");
+    return;
+  }
+
   if (typeof status.current_task !== "string") {
     throw new Error("current_task must be string");
   }
 
-  if (status.current_task.trim() === "") {
-    console.log("[FORGE] No task to execute.");
-    return;
-  }
-
-  assertIdempotency(status);
+  assertIdempotency({
+  ...status,
+  current_task: entry.next_task
+});
 
   if (isDryRun()) {
     console.log("[FORGE DRY-RUN]");
-    console.log(`Would execute task: ${status.current_task}`);
+    console.log(`Would execute task: ${entry.next_task}`);
     console.log("No state was written.");
     return;
   }
 
-  const result = executeTask(status.current_task, status);
+  const result = executeTask(entry.next_task, status);
 
   if (!result || typeof result !== "object") {
     throw new Error("Task handler must return execution result object");
@@ -184,13 +194,13 @@ function run() {
 
   writeStatus(updated);
 
-  console.log(`[FORGE] ${status.current_task} progressed stage to ${result.stage_progress_percent}%`);
+  console.log(`[FORGE] ${entry.next_task} progressed stage to ${result.stage_progress_percent}%`);
 
   if (result.closure_artifact) {
-    console.log(`[FORGE] ${status.current_task} execution closure artifact created.`);
+    console.log(`[FORGE] ${entry.next_task} execution closure artifact created.`);
   }
 
-  const targetStage = extractTargetStage(status.next_step);
+  const targetStage = extractTargetStage(updated.next_step);
   if (targetStage && targetStage !== status.current_stage) {
     validateTransition(status.current_stage, targetStage);
 
